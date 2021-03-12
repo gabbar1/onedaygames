@@ -27,6 +27,12 @@ class _WalletPageState extends State<WalletPage> {
   String phonenum;
   String status = "No request";
   String user_ac_name, user_ifsc, user_ac;
+
+  void afterBuildFunction(BuildContext context) {
+
+    Provider.of<API>(context, listen: false).userWallet(uid);
+
+  }
   @override
   void initState() {
     super.initState();
@@ -37,6 +43,8 @@ class _WalletPageState extends State<WalletPage> {
     Provider.of<API>(context, listen: false).userWallet(uid);
     Provider.of<API>(context, listen: false).userDetail(uid);
     Provider.of<Language>(context, listen: false).getLanguage(uid);
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => afterBuildFunction(context));
     setState(() {
       Provider.of<WalletPageProvider>(context, listen: false)
           .checkStatus(phoneNo: uid, context: context);
@@ -155,42 +163,47 @@ class _WalletPageState extends State<WalletPage> {
   }
 
   Widget _mybalance() {
+
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
-    return Column(
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Center(
-          child: Text(language.totalamnt,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        Center(
-          child: Text(
-              vm.total_amount1 == null ? "₹ 0" : "₹ " + vm.total_amount1,
-              style: GoogleFonts.barlowCondensed(
-                  textStyle: Theme.of(context).textTheme.headline5,
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold)),
-        ),
-        FlatButton(
-            color: Colors.green,
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => Money_Avidence()));
-            },
-            child: Text(language.addmoney,
+    vm.userWallet(uid);
+    return Consumer<API>(builder: (context,myBalance,child){
+      return Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Text(language.totalamnt,
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Center(
+            child: Text(
+                myBalance.total_amount1 == null ? "₹ 0" : "₹ " + myBalance.total_amount1,
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white))),
-      ],
-    );
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold)),
+          ),
+          FlatButton(
+              color: Colors.green,
+              onPressed: () {
+                var vm = Provider.of<API>(context, listen: false);
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => Money_Avidence()));
+              },
+              child: Text(language.addmoney,
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white))),
+        ],
+      );
+    });
   }
 
   Widget _details() {

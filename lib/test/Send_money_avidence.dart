@@ -217,7 +217,7 @@ class _Money_AvidencePageState extends State<Money_Avidence> {
                                         // return object of type Dialog
                                         return AlertDialog(
                                           title: new Text(
-                                            "G Gate",
+                                            "OneDay",
                                             style: TextStyle(fontWeight: FontWeight.w700),
                                           ),
                                           content:

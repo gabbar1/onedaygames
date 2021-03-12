@@ -49,7 +49,6 @@ class _TransactionViewState extends State<TransactionView> {
 
       return Align(alignment: Alignment.topCenter,child:  ListView.builder(
           itemCount: tm.transaction.length,
-          reverse: true,
           shrinkWrap: true,
           itemBuilder: (context, snapshot) {
             // vm.getremainingtime(vm.daily_ticket[snapshot].deadline);

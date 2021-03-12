@@ -16,7 +16,7 @@ class UserTransactionModel {
         this.transactionId,
         this.upi});
 
-  UserTransactionModel.fromJson(Map<String, dynamic> json) {
+  UserTransactionModel.fromJson(Map<dynamic, dynamic> json) {
     amount = json['amount'];
     email = json['email'];
     name = json['name'];

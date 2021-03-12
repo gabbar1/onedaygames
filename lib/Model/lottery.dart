@@ -22,18 +22,18 @@ class Lottery {
       return;
     }
     key = map["key"];
-    amount = map["amount"];
+    amount = map["amount"].toString();
     announced = map["announced"];
     deadline = map["deadline"];
     name = map["name"];
-    numberofshell = map["numberofshell"];
+    numberofshell = map["numberofsell"];
     people = map["people"];
     price = map["price"];
     result_date = map["result_date"];
     start_date = map["start_date"];
     status = map["status"];
     ticket_id = map["ticket_id"];
-    ticket_key = map['ticket_key'];
+    ticket_key = map['ticket_key'].toString();
     ticket_type = map["ticket_type"];
     type = map["type"];
   }

@@ -24,10 +24,10 @@ class API extends ChangeNotifier{
   var ticket_deadline1;
   String updated_deadline ;
   DatabaseReference transRef = FirebaseDatabase.instance.reference();
-  var daily_ticket = new List<Lottery>();
-  var weekly_ticket = new List<Lottery>();
-  var monthly_ticket = new List<Lottery>();
-  var special_ticket = new List<Lottery>();
+  var daily_ticket =  <Lottery>[];
+  var weekly_ticket =  <Lottery>[];
+  var monthly_ticket = <Lottery>[];
+  var special_ticket = <Lottery>[];
   var name;
   var total_amount1,added_amount1,winning_amount1;
   var user1;
@@ -37,36 +37,22 @@ class API extends ChangeNotifier{
   String userprofile;
   String user_ac;
   String phone,state,pincode;
-  getdailylottery( ) {
+  String type;
+  Future<void >getDailyLottery({String type}) async{
     transRef.child('Lottery').child("daily").once().then((DataSnapshot snapshot) {
       daily_ticket.clear();
-
-      var values= snapshot.value;
-      print("----------------------------------"+values.toString());
-      values.forEach((key, values) {
-        if(values["status"] == 1){
-
-          Lottery lottery = new Lottery(
-              key: key,
-              ticket_type: values["ticket_type"],
-              ticket_id: values["ticket_id"],
-              amount:  values["amount"].toString(),
-              announced:   values["announced"],
-              deadline:   values["deadline"],
-              name:   values["name"],
-              numberofshell :   values["numberofsell"],
-              people :   values["people"],
-              price :   values["price"],
-              result_date :   values["result_date"],
-              start_date :   values["start_date"],
-              status :   values["status"],
-              ticket_key :   values["ticket_key"].toString(),
-              type: values["type"]
-
-          );
-          daily_ticket.add(lottery);
-        }
-      });
+      if(snapshot!= null){
+        Map<dynamic, dynamic> lotteryList = snapshot.value;
+        lotteryList.forEach((key,value) {
+          Lottery sold = Lottery.fromJson(value);
+          print(sold.status.toString());
+          if(sold.status == 1){
+            daily_ticket.add(sold);
+            daily_ticket.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.start_date).compareTo(DateFormat('yyyy-MM-dd').parse(a.start_date)));
+            notifyListeners();
+          }
+        });
+      }
     });
 
   }
@@ -446,11 +432,14 @@ class API extends ChangeNotifier{
   }
   userWallet(String uid){
     transRef.child("Wallet").child(uid).once().then((DataSnapshot snapshot) {
+
       if (snapshot != null) {
         Map<dynamic, dynamic> values = snapshot.value;
         var wallet = Wallet.fromJson(values);
         total_amount1 = wallet.total_amount.toString();
+        print("-----------wallet-----------"+total_amount1.toString());
         added_amount1 = wallet.added_amount.toString();
+        print("-----------wallet-----------"+added_amount1.toString());
         winning_amount1 = wallet.winning_amount.toString();
         notifyListeners();
       }

@@ -114,40 +114,7 @@ class _TicketScreenState extends State<TicketScreen> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     this.uid = user.phoneNumber;
-    transRef = FirebaseDatabase.instance.reference();
-    transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
-      if(snapshot!= null){
-        Map<dynamic, dynamic> values= snapshot.value;
-        var user = User1.fromJson(values);
-        setState(() {
-          status2 = user.bool_lang;
-          if(status2 == true){
-            buy = "Buy & Win";
-            value = "Enter value";
-            ticket_num = "Enter valid Ticket Number";
-            confirm = ' Please Confirm ';
-            ticket_amount = 'You Ticket amount is ';
-            buy_ticket = 'Buy Ticket';
-            ticket_number = "Enter valid Ticket Number";
-            cancel = "Cancel";
-            ticket_amount1 = "Your Ticket Amount is ";
-            luck_number = "Enter Your Lucky Number";
-          }
-          else if (status2 == false){
-            buy = "खरीदें और जीतें";
-            value = "मूल्य दर्ज करें";
-            ticket_num = "वैध टिकट संख्या दर्ज करें";
-            confirm = 'कृपया पुष्टि करें';
-            ticket_amount = 'आप टिकट राशि है';
-            buy_ticket = 'टिकट खरीदें';
-            ticket_number = "वैध टिकट संख्या दर्ज करें";
-            cancel= "रद्द करें";
-            ticket_amount1= "आपकी टिकट राशि है";
-            luck_number = "अपना लकी नंबर दर्ज करें";
-          }
-        });
-      }
-    });
+
     // TODO: implement initState
     transRef.child("Bought_tickets").child(widget.phone).child(widget.ticket_type).child(widget.ticket_id).once().then((DataSnapshot snapshot){
       Map<dynamic, dynamic> values= snapshot.value;
@@ -237,8 +204,8 @@ class _TicketScreenState extends State<TicketScreen> {
     print('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH'+name);
   }
   final DBRef = FirebaseDatabase.instance.reference();
-
-
+  List<String> luckyChar = ['A', 'B', 'C','D','E','F','G']; // Option 2
+  String selectedchar;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -267,7 +234,6 @@ class _TicketScreenState extends State<TicketScreen> {
     );
 
   }
-
   buildNumberPad(){
     return Expanded(child: Container(
       color: Colors.grey,
@@ -396,8 +362,64 @@ class _TicketScreenState extends State<TicketScreen> {
                                       color: Colors.green,
                                       child: Text(buy_ticket,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold)),
                                       onPressed: () async {
+                                        if(selectedchar == null){
+
+                                          Navigator.pop(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              // return object of type Dialog
+                                              return AlertDialog(
+                                                title: new Text(
+                                                  "OneDay",
+                                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                                ),
+                                                content:
+                                                new Text("Please select your lucky character", style: TextStyle(fontWeight: FontWeight.w500)),
+                                                actions: <Widget>[
+                                                  // usually buttons at the bottom of the dialog
+                                                  new FlatButton(
+                                                    child: new Text(
+                                                      "Ok",
+                                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        } else
                                         if (strPin.length < 4){
-                                          Fluttertoast.showToast(msg: ticket_num);
+                                          Navigator.pop(context);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              // return object of type Dialog
+                                              return AlertDialog(
+                                                title: new Text(
+                                                  "OneDay",
+                                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                                ),
+                                                content:
+                                                new Text(ticket_num, style: TextStyle(fontWeight: FontWeight.w500)),
+                                                actions: <Widget>[
+                                                  // usually buttons at the bottom of the dialog
+                                                  new FlatButton(
+                                                    child: new Text(
+                                                      "Ok",
+                                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
                                         }
                                         else{
                                           // Fluttertoast.showToast(msg:"nss"+ widget.ticket_type.toString());
@@ -519,9 +541,14 @@ class _TicketScreenState extends State<TicketScreen> {
 
     }
     else if (pinIndex >4){
+      pinIndex--;
       setPin(pinIndex, "");
       currentpin[pinIndex -1] = "";
       pinIndex=0;
+      currentpin.forEach((element) {
+        strPin.replaceAll(element, "");
+      });
+      print("remove-------"+strPin);
 
     }
     else {
@@ -530,7 +557,6 @@ class _TicketScreenState extends State<TicketScreen> {
       pinIndex--;
     }
   }
-
   pinIndexSetup(String text){
     if(pinIndex ==0)
       pinIndex =1;
@@ -548,7 +574,6 @@ class _TicketScreenState extends State<TicketScreen> {
 
 
   }
-
   setPin(int n, String text){
     switch(n){
       case 1 :
@@ -565,27 +590,56 @@ class _TicketScreenState extends State<TicketScreen> {
     }
   }
   buildPinRow(){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        PINNumber(
-          outlineInputBorder : outlineInpurBorder,
-          textEditingController : pinOneController,
+    return Column(children: [
+      Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        width: 150,
+        decoration: BoxDecoration(
+          color: Colors.white,
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(5)),
+        child: DropdownButton(
+          underline: SizedBox(),
+          isExpanded: true,
+          hint: Text('My lucky '),
+          // Not necessary for Option 1
+          value: selectedchar,
+          onChanged: (newValue) {
+            setState(() {
+              selectedchar = newValue;
+            });
+          },
+          items: luckyChar.map((location) {
+            return DropdownMenuItem(
+              child: new Text(location),
+              value: location,
+            );
+          }).toList(),
         ),
-        PINNumber(
-          outlineInputBorder : outlineInpurBorder,
-          textEditingController : pinTwoController,
-        ),
-        PINNumber(
-          outlineInputBorder : outlineInpurBorder,
-          textEditingController : pinThreeController,
-        ),
-        PINNumber(
-          outlineInputBorder : outlineInpurBorder,
-          textEditingController : pinFourController,
-        ),
-      ],
-    );
+      ),
+      SizedBox(height: 50,),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          PINNumber(
+            outlineInputBorder : outlineInpurBorder,
+            textEditingController : pinOneController,
+          ),
+          PINNumber(
+            outlineInputBorder : outlineInpurBorder,
+            textEditingController : pinTwoController,
+          ),
+          PINNumber(
+            outlineInputBorder : outlineInpurBorder,
+            textEditingController : pinThreeController,
+          ),
+          PINNumber(
+            outlineInputBorder : outlineInpurBorder,
+            textEditingController : pinFourController,
+          ),
+        ],
+      )
+    ],);
 
   }
   buildSecurityText(){

@@ -53,7 +53,7 @@ class TransactionProvider extends ChangeNotifier {
         'upi': upi,
         'transaction_id': input,
         'status': "P",
-        'time':DateTime.now().toString(),
+        'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
         'name': name,
         'email': email
       });

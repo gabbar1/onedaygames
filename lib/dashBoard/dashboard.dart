@@ -32,10 +32,14 @@ class _DashboardPageState extends State<DashboardPage> {
   String uid;
   String uid1 = "";
   int index;
+  void afterBuildFunction(BuildContext context) {
 
+    var type= Provider.of<API>(context, listen: false);
+    Provider.of<API>(context, listen: false).getDailyLottery(type:type.type );
+
+  }
   @override
   void initState() {
-    Provider.of<API>(context, listen: false).getdailylottery();
     Provider.of<API>(context, listen: false).getweeklylottery();
     Provider.of<API>(context, listen: false).getmonthlylottery();
     Provider.of<API>(context, listen: false).getspaciallottery();
@@ -49,7 +53,8 @@ class _DashboardPageState extends State<DashboardPage> {
     Provider.of<API>(context, listen: false).userWallet(uid);
     Provider.of<API>(context, listen: false).userDetail(uid);
     Provider.of<Language>(context, listen: false).getLanguage(uid);
-    super.initState();
+    WidgetsBinding.instance
+       .addPostFrameCallback((_) => afterBuildFunction(context));
 
   }
 
@@ -180,7 +185,7 @@ class _DashboardPageState extends State<DashboardPage> {
         drawer: SidebarMenu(),
         body: TabBarView(
           children: [
-            _daily(),
+            _myTickets(),
             _weekly(),
             _monthly(),
             _special(),
@@ -191,7 +196,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _daily() {
+  Widget _myTickets() {
     var totalAmount = Provider.of<API>(context, listen: false).total_amount1;
     var winningAmount =
         Provider.of<API>(context, listen: false).winning_amount1;
