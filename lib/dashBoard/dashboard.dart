@@ -36,14 +36,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
     var type= Provider.of<API>(context, listen: false);
     Provider.of<API>(context, listen: false).getDailyLottery(type:type.type );
+    Provider.of<API>(context, listen: false).getWeeklyLottery(type:type.type );
+    Provider.of<API>(context, listen: false).getMonthlyLottery(type:type.type );
+    Provider.of<API>(context, listen: false).getSpecialLottery(type:type.type );
 
   }
   @override
   void initState() {
-    Provider.of<API>(context, listen: false).getweeklylottery();
-    Provider.of<API>(context, listen: false).getmonthlylottery();
-    Provider.of<API>(context, listen: false).getspaciallottery();
-
     this.uid = '';
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
@@ -58,6 +57,11 @@ class _DashboardPageState extends State<DashboardPage> {
 
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

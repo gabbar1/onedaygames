@@ -113,11 +113,12 @@ class _SendMoneyPageState  extends State<SendMoney>{
         body: Consumer<SendMoneyProvider>(builder: (context,sendMoney,child){
           return sendMoney.receiverPhone == null ?
               ListView.builder(itemCount: sendMoney.recieverList.length,itemBuilder: (context,snap){
-                sendMoney.getSearchedUser(senderPhone: "+91"+sendMoney.recieverList[snap].phone);
+               // sendMoney.getSearchedUser(senderPhone: "+91"+sendMoney.recieverList[snap].phone);
                 return InkWell(
                   onTap: (){
-
-                    sendMoney.sendMoneyPrevious(scaffoldKey: _scaffoldKey,senderPhone: uid,recieverPhone:  "+91"+sendMoney.recieverList[snap].phone,context: context);
+                    print(sendMoney.recieverList[snap].phone);
+                    sendMoney.getSentUserDetails(context: context,senderPhone: uid,scaffoldKey: _scaffoldKey,receiverPhone:sendMoney.recieverList[snap].phone );
+                  //  sendMoney.sendMoneyPrevious(scaffoldKey: _scaffoldKey,senderPhone: uid,recieverPhone:  "+91"+sendMoney.recieverList[snap].phone,context: context);
                   },
                   child: Card(
                     margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0,),

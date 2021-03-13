@@ -56,101 +56,61 @@ class API extends ChangeNotifier{
     });
 
   }
-  getweeklylottery() {
-    transRef.child('Lottery').child("weekly").orderByPriority().once().then((DataSnapshot snapshot) {
+  Future<void >getWeeklyLottery({String type}) async{
+    transRef.child('Lottery').child("weekly").once().then((DataSnapshot snapshot) {
       weekly_ticket.clear();
-      var values= snapshot.value;
-      values.forEach((key, values) {
-        if(values["status"] == 1){
-          Lottery lottery = new Lottery(
-              key: key,
-              ticket_type: values["ticket_type"],
-              ticket_id: values["ticket_id"],
-              amount:  values["amount"].toString(),
-              announced:   values["announced"],
-              deadline:   values["deadline"],
-              name:   values["name"],
-              numberofshell :   values["numberofsell"],
-              people :   values["people"],
-              price :   values["price"],
-              result_date :   values["result_date"],
-              start_date :   values["start_date"],
-              status :   values["status"],
-              ticket_key :   values["ticket_key"].toString(),
-              type: values["type"]
-
-          );
-          weekly_ticket.add(lottery);
-        }
-      });
-
+      if(snapshot!= null){
+        Map<dynamic, dynamic> lotteryList = snapshot.value;
+        lotteryList.forEach((key,value) {
+          Lottery sold = Lottery.fromJson(value);
+          print(sold.status.toString());
+          if(sold.status == 1){
+            weekly_ticket.add(sold);
+            weekly_ticket.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.start_date).compareTo(DateFormat('yyyy-MM-dd').parse(a.start_date)));
+            notifyListeners();
+          }
+        });
+      }
     });
 
-
   }
-  getmonthlylottery() {
+  Future<void >getMonthlyLottery({String type}) async{
     transRef.child('Lottery').child("monthly").once().then((DataSnapshot snapshot) {
       monthly_ticket.clear();
-      var values= snapshot.value;
-      values.forEach((key, values) {
-        if(values["status"] == 1){
-          Lottery lottery = new Lottery(
-              key: key,
-              ticket_type: values["ticket_type"],
-              ticket_id: values["ticket_id"],
-              amount:  values["amount"].toString(),
-              announced:   values["announced"],
-              deadline:   values["deadline"],
-              name:   values["name"],
-              numberofshell :   values["numberofsell"],
-              people :   values["people"],
-              price :   values["price"],
-              result_date :   values["result_date"],
-              start_date :   values["start_date"],
-              status :   values["status"],
-              ticket_key :   values["ticket_key"].toString(),
-              type: values["type"]
-
-          );
-          monthly_ticket.add(lottery);
-        }
-      });
+      if(snapshot!= null){
+        Map<dynamic, dynamic> lotteryList = snapshot.value;
+        lotteryList.forEach((key,value) {
+          Lottery sold = Lottery.fromJson(value);
+          print(sold.status.toString());
+          if(sold.status == 1){
+            monthly_ticket.add(sold);
+            monthly_ticket.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.start_date).compareTo(DateFormat('yyyy-MM-dd').parse(a.start_date)));
+            notifyListeners();
+          }
+        });
+      }
     });
 
-
   }
-  getspaciallottery( ) {
+  Future<void >getSpecialLottery({String type}) async{
     transRef.child('Lottery').child("special").once().then((DataSnapshot snapshot) {
       special_ticket.clear();
-      var values= snapshot.value;
-      values.forEach((key, values) {
-        if(values["status"] == 1){
-          Lottery lottery = new Lottery(
-              key: key,
-              ticket_type: values["ticket_type"],
-              ticket_id: values["ticket_id"],
-              amount:  values["amount"].toString(),
-              announced:   values["announced"],
-              deadline:   values["deadline"],
-              name:   values["name"],
-              numberofshell :   values["numberofsell"],
-              people :   values["people"],
-              price :   values["price"],
-              result_date :   values["result_date"],
-              start_date :   values["start_date"],
-              status :   values["status"],
-              ticket_key :   values["ticket_key"].toString(),
-              type: values["type"]
-
-          );
-          special_ticket.add(lottery);
-        }
-      });
-
+      if(snapshot!= null){
+        Map<dynamic, dynamic> lotteryList = snapshot.value;
+        lotteryList.forEach((key,value) {
+          Lottery sold = Lottery.fromJson(value);
+          print(sold.status.toString());
+          if(sold.status == 1){
+            special_ticket.add(sold);
+            special_ticket.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.start_date).compareTo(DateFormat('yyyy-MM-dd').parse(a.start_date)));
+            notifyListeners();
+          }
+        });
+      }
     });
 
-
   }
+
   getremainingtime(String deadline) async{
     DateFormat formatter = DateFormat('yyyy-MM-dd');
     var formated = DateTime.parse(formatter.format(DateTime.parse(deadline)));

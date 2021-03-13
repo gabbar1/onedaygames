@@ -52,12 +52,18 @@ class _WalletPageState extends State<WalletPage> {
 
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
-    vm.userWallet(uid);
+   // vm.userWallet(uid);
     return Consumer<API>(builder: (context, vm, child) {
       return Scaffold(
 

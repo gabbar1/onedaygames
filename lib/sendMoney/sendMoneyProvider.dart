@@ -273,6 +273,134 @@ class SendMoneyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getSentUserDetails({String receiverPhone,senderPhone,BuildContext context,GlobalKey<ScaffoldState> scaffoldKey}) async{
+    var language = Provider.of<Language>(context, listen: false);
+    getWalletDetails(senderPhone: senderPhone,recPhone: receiverPhone);
+    transRef.child("Users").child("+91"+receiverPhone).once().then((DataSnapshot snapshot) {
+      print("-------------reeeeeeeeeeeeeeee-----"+receiverPhone);
+      if (snapshot != null) {
+        Map<dynamic, dynamic> values = snapshot.value;
+        var sentUser = User1.fromJson(values);
+
+          return showDialog<void>(
+            context: context,
+            barrierDismissible: true, // user must tap button!
+            builder: (BuildContext context) {
+              return AlertDialog(
+                  title: Center(
+                    child: Text(language.send_msg + " " + sentUser.name),
+                  ),
+                  content: SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                        Center(
+                          child: CircleAvatar(
+                              radius: 20,
+                              backgroundImage: NetworkImage(sentUser.profile == null
+                                  ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDjXj1F8Ix-rRFgY_r3GerDoQwfiOMXVt-tZdv_Mcou_yIlUC&s"
+                                  : sentUser.profile)),
+                        ),
+                        Padding(
+                          padding:
+                          EdgeInsets.only(left: 25.0, right: 25.0, top: 8.0),
+                          child: new TextField(
+                            decoration:
+                            InputDecoration(hintText: language.amnt_msg),
+                            keyboardType: TextInputType.phone,
+                            onChanged: (val) {
+                              this.sending_amount = val;
+                            },
+                          ),
+                        ),
+                        RaisedButton(
+                            child: Text(language.send),
+                            onPressed: () {
+
+                              var now = new DateTime.now();
+                              if (int.parse(sending_amount) >
+                                  int.parse(sender_amount)) {
+                                Fluttertoast.showToast(msg: language.not_money_msg);
+                              } else {
+                                transRef
+                                    .child("Wallet")
+                                    .child("+91" + receiverPhone)
+                                    .update({
+                                  'total_amount': int.parse(receiverAmount) +
+                                      int.parse(sending_amount),
+                                  'added_amount': int.parse(receiverAddedAmount) +
+                                      int.parse(sending_amount),
+                                  'time': DateFormat('EEEE, d MMM, yyyy,h:mm:ss a')
+                                      .format(now),
+                                });
+                                transRef.child("Wallet").child(senderPhone).update({
+                                  'total_amount': int.parse(sender_amount) -
+                                      int.parse(sending_amount),
+                                  'added_amount': int.parse(senderAddedAmount) -
+                                      int.parse(sending_amount),
+                                  'time': DateFormat('EEEE, d MMM, yyyy,h:mm:ss a')
+                                      .format(now),
+                                });
+
+                                transRef
+                                    .child("Sent_money")
+                                    .child(receiverPhone)
+                                    .update({
+                                  'phone': receiverPhone,
+                                });
+                                transRef
+                                    .child('User_Transaction')
+                                    .child(senderPhone)
+                                    .push()
+                                    .set({
+                                  'name': sentUser.name,
+                                  'amount': sending_amount,
+                                  'status': "S",
+                                  'time': DateFormat('EEEE, d MMM, yyyy,h:mm:ss a')
+                                      .format(now),
+                                });
+
+                                transRef
+                                    .child('User_Transaction')
+                                    .child("+91" + receiverPhone)
+                                    .push()
+                                    .set({
+                                  'name': sentUser.name,
+                                  'amount': sending_amount,
+                                  'status': "R",
+                                  'time': DateFormat('EEEE, d MMM, yyyy,h:mm:ss a')
+                                      .format(now),
+                                });
+
+                                Future.delayed(Duration(seconds: 5));
+                                Navigator.pop(context);
+                                scaffoldKey.currentState.showSnackBar(SnackBar(
+                                  content: Text(language.money_sent,
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold)),
+                                ));
+                                sendNotification(
+                                    subject: "Hey " +
+                                        sentUser.name +
+                                        " has sent you " +
+                                        sending_amount +
+                                        " rupees in your wallet",
+                                    title:
+                                    sentUser.name.toUpperCase() + " sent you money",
+                                    topic: receiverPhone);
+                              }
+                            })
+                        //Text('You Needed '+(transaction["Amount"] - int.parse(amount1)).toString()+" ₹ to play"),
+                      ],
+                    ),
+                  ));
+            },
+          );
+
+
+      }
+    });
+  }
   sendMoneyPrevious(
       {String recieverPhone,
       String senderPhone,
@@ -412,7 +540,7 @@ class SendMoneyProvider extends ChangeNotifier {
 
     final postUrl = 'https://fcm.googleapis.com/fcm/send';
 
-    String toParams = "/topics/" + '91' + receiverPhone;
+    String toParams = "/topics/" + '91' + topic;
 
     final data = {
       "notification": {"body": subject, "title": title},
