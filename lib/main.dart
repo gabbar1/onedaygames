@@ -9,6 +9,7 @@ import 'package:oneday/authentication/SignIn/logInProvider.dart';
 import 'package:oneday/authentication/Signup/RegisterProvider.dart';
 import 'package:oneday/Language/Language.dart';
 import 'package:oneday/dashBoard/leaderBoardProvider.dart';
+import 'package:oneday/dashBoard/notficationProvider.dart';
 import 'package:oneday/sendMoney/sendMoneyProvider.dart';
 import 'package:oneday/test/TransactionProvider.dart';
 import 'Winner/winnerProvider.dart';
@@ -40,6 +41,7 @@ Future<void> main() async{
     ChangeNotifierProvider<TransactionProvider>(create: (_) => TransactionProvider()),
     ChangeNotifierProvider<MyLotteriesProvider>(create: (_) => MyLotteriesProvider()),
     ChangeNotifierProvider<LeaderBoardProvider>(create: (_) => LeaderBoardProvider()),
+    ChangeNotifierProvider<NotificationProvider>(create: (_) => NotificationProvider()),
   ],
       child: MaterialApp(
       debugShowCheckedModeBanner: false,

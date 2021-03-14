@@ -113,6 +113,7 @@ class SendMoneyProvider extends ChangeNotifier {
   }
 
   getSearchedUser({String senderPhone}) {
+
     transRef
         .child("Users")
         .child(senderPhone)
@@ -133,6 +134,18 @@ class SendMoneyProvider extends ChangeNotifier {
       BuildContext context,
       GlobalKey<ScaffoldState> scaffoldKey,
       String userNames}) {
+    transRef
+        .child("Users")
+        .once()
+        .then((DataSnapshot snapshot) {
+      if (snapshot != null) {
+        print("000000000000000"+snapshot.key.toString());
+        Map<dynamic, dynamic> values = snapshot.value;
+        var user = User1.fromJson(values);
+        userProfile = user.profile;
+        userName = user.name;
+      }
+    });
     var language = Provider.of<Language>(context, listen: false);
     if (username != null) {
       return showDialog<void>(

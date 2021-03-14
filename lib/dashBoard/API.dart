@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:oneday/Model/lottery.dart';
+import 'package:oneday/Model/notification.dart';
 import 'package:oneday/Model/number.dart';
 import 'package:oneday/Model/wallet.dart';
 import 'package:oneday/Model/winner_price.dart';
@@ -32,6 +33,7 @@ class API extends ChangeNotifier{
   var monthly_ticket = <Lottery>[];
   var special_ticket = <Lottery>[];
   var leaderBoardList = <Winner_price>[];
+  var notificationList = <NotificationModel>[];
   var name;
   var total_amount1,added_amount1,winning_amount1;
   var user1;
@@ -42,6 +44,7 @@ class API extends ChangeNotifier{
   String user_ac;
   String phone,state,pincode;
   String type;
+
   Future<void >getDailyLottery({BuildContext context}) async{
     onLoading(context: context,strMessage: "Loading");
     transRef.child('Lottery').child("daily").once().then((DataSnapshot snapshot) {

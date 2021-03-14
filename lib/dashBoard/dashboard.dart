@@ -8,6 +8,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Winner/Winners.dart';
+import 'package:oneday/dashBoard/notificationView.dart';
 import 'package:oneday/drawer/sidebar.dart';
 import 'package:oneday/profile/Profile.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
@@ -106,14 +107,14 @@ class _DashboardPageState extends State<DashboardPage> {
                             Text(language.balance + totalAmount == null
                                 ? " : ₹ 0"
                                 : language.balance +
-                                    " : ₹ " +
-                                    totalAmount.toString()),
+                                " : ₹ " +
+                                totalAmount.toString()),
                             Divider(),
                             Text(winningAmount == null
                                 ? " : 0"
                                 : language.you_won +
-                                    " : " +
-                                    winningAmount.toString()),
+                                " : " +
+                                winningAmount.toString()),
                             Divider(),
                             Text(num_of_game == null
                                 ? language.no_ticket + " : 0"
@@ -122,6 +123,14 @@ class _DashboardPageState extends State<DashboardPage> {
                         ));
                   },
                 );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.notification_important_outlined),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  return NotificationView(uid: uid,);
+                }));
               },
             ),
             SizedBox(
