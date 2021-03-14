@@ -35,7 +35,7 @@ class _DashboardPageState extends State<DashboardPage> {
   void afterBuildFunction(BuildContext context) {
 
     var type= Provider.of<API>(context, listen: false);
-    Provider.of<API>(context, listen: false).getDailyLottery(type:type.type );
+    Provider.of<API>(context, listen: false).getDailyLottery(context: context );
     Provider.of<API>(context, listen: false).getWeeklyLottery(type:type.type );
     Provider.of<API>(context, listen: false).getMonthlyLottery(type:type.type );
     Provider.of<API>(context, listen: false).getSpecialLottery(type:type.type );
@@ -729,7 +729,7 @@ class _DashboardPageState extends State<DashboardPage> {
                    deadline: vm.weekly_ticket[snapshot].deadline,
                    ticket_deadline:
                    vm.comparetimeleft(vm.weekly_ticket[snapshot].deadline),
-                   people: vm.weekly_ticket[snapshot].price,
+                   people: vm.weekly_ticket[snapshot].numberofshell,
                    index1: index,
                  );
                },

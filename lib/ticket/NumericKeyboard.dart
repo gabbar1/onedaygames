@@ -8,6 +8,7 @@ import 'package:mailer/smtp_server.dart';
 import 'package:mailer/smtp_server/hostinger.dart';
 import 'package:oneday/Model/number.dart';
 import 'package:oneday/Model/user.dart';
+import 'package:oneday/dashBoard/homeNavigator.dart';
 import 'package:oneday/main.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
 import 'package:intl/intl.dart';
@@ -82,25 +83,19 @@ class _TicketScreenState extends State<TicketScreen> {
         setState(() {
           to=  user.email.toString();
         });
-
-        Fluttertoast.showToast(msg: "msachin213@gmail.com");
-
       }
     });
-    //final smtpServer = gmail(username,password);
-    // final smtpServer = qq(username,password);
     final smtpServer = hostinger(username,password);
 
     final message = Message()
       ..from = Address(username)
       ..recipients.add("msachin213@gmail.com")
 
-      ..subject = "You Bought ${widget.typ} ticket on : ${DateTime.now()}"
-      ..html = "<h3>THANK YOU FOR CHOOSING ONEDAY \n\n Your Ticket number is ${strPin} \n\n Result will be announce at ${widget.deadline}</h3>";
+      ..subject = "You Bought ${widget.ticket_type} ticket on : ${DateTime.now()}"
+      ..html = "<h3>THANK YOU FOR CHOOSING ONEDAY \n\n Your Ticket number is ${selectedchar+strPin} \n\n Result will be announce at ${widget.deadline}</h3>";
 
     try {
       final sendReport = await send(message,smtpServer);
-      Fluttertoast.showToast(msg: "Mail Sent");
     } on MailerException catch(e){
       Fluttertoast.showToast(msg: e.message);
 
@@ -333,14 +328,62 @@ class _TicketScreenState extends State<TicketScreen> {
 
                   MaterialButton(
                       onPressed: (){
+                        if(selectedchar == null){
 
-                        if(strPin==null){
-                          Fluttertoast.showToast(msg: value);
-                        }
-                        else
-                        if (strPin.length < 4){
-                          Fluttertoast.showToast(msg: ticket_number);
-
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              // return object of type Dialog
+                              return AlertDialog(
+                                title: new Text(
+                                  "OneDay",
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
+                                content:
+                                new Text("Please select your lucky character", style: TextStyle(fontWeight: FontWeight.w500)),
+                                actions: <Widget>[
+                                  // usually buttons at the bottom of the dialog
+                                  new FlatButton(
+                                    child: new Text(
+                                      "Ok",
+                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        } else
+                        if (strPin == null ||strPin.length < 4){
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              // return object of type Dialog
+                              return AlertDialog(
+                                title: new Text(
+                                  "OneDay",
+                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                ),
+                                content:
+                                new Text(ticket_num, style: TextStyle(fontWeight: FontWeight.w500)),
+                                actions: <Widget>[
+                                  // usually buttons at the bottom of the dialog
+                                  new FlatButton(
+                                    child: new Text(
+                                      "Ok",
+                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         }
                         else if (strPin.length == 4){
                           return showDialog<void>(
@@ -362,66 +405,8 @@ class _TicketScreenState extends State<TicketScreen> {
                                       color: Colors.green,
                                       child: Text(buy_ticket,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold)),
                                       onPressed: () async {
-                                        if(selectedchar == null){
 
-                                          Navigator.pop(context);
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              // return object of type Dialog
-                                              return AlertDialog(
-                                                title: new Text(
-                                                  "OneDay",
-                                                  style: TextStyle(fontWeight: FontWeight.w700),
-                                                ),
-                                                content:
-                                                new Text("Please select your lucky character", style: TextStyle(fontWeight: FontWeight.w500)),
-                                                actions: <Widget>[
-                                                  // usually buttons at the bottom of the dialog
-                                                  new FlatButton(
-                                                    child: new Text(
-                                                      "Ok",
-                                                      style: TextStyle(fontWeight: FontWeight.w700),
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        } else
-                                        if (strPin.length < 4){
-                                          Navigator.pop(context);
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              // return object of type Dialog
-                                              return AlertDialog(
-                                                title: new Text(
-                                                  "OneDay",
-                                                  style: TextStyle(fontWeight: FontWeight.w700),
-                                                ),
-                                                content:
-                                                new Text(ticket_num, style: TextStyle(fontWeight: FontWeight.w500)),
-                                                actions: <Widget>[
-                                                  // usually buttons at the bottom of the dialog
-                                                  new FlatButton(
-                                                    child: new Text(
-                                                      "Ok",
-                                                      style: TextStyle(fontWeight: FontWeight.w700),
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        }
-                                        else{
+
                                           // Fluttertoast.showToast(msg:"nss"+ widget.ticket_type.toString());
                                           cutAmount();
                                           var now = new DateTime.now();
@@ -431,7 +416,7 @@ class _TicketScreenState extends State<TicketScreen> {
                                             'price':widget.price,
                                             'amount':widget.amt,
                                             'ticket_id': widget.ticket_id,
-                                            'ticket_no':strPin,
+                                            'ticket_no':selectedchar+strPin,
                                             'resultdate':widget.deadline,
                                             'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
                                             'deadline':widget.deadline
@@ -442,7 +427,7 @@ class _TicketScreenState extends State<TicketScreen> {
                                             'price':widget.price,
                                             'amount':widget.amt,
                                             'ticket_id': widget.ticket_id,
-                                            'ticket_no':strPin,
+                                            'ticket_no':selectedchar+strPin,
                                             'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
                                             'deadline':widget.deadline
                                           });
@@ -480,12 +465,10 @@ class _TicketScreenState extends State<TicketScreen> {
                                           sendMail();
                                           Navigator.pop(context);
                                           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-                                              DashboardPage()), (Route<dynamic> route) => true);
+                                              HomeNavigator()), (Route<dynamic> route) => true);
                                           firebaseMessaging.subscribeToTopic(widget.ticket_id);
                                           
                                         }
-
-                                      },
                                     ),
                                     RaisedButton(
                                       color: Colors.red,

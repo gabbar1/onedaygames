@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/authentication/SignIn/logInProvider.dart';
 import 'package:oneday/authentication/Signup/RegisterProvider.dart';
 import 'package:oneday/Language/Language.dart';
+import 'package:oneday/dashBoard/leaderBoardProvider.dart';
 import 'package:oneday/sendMoney/sendMoneyProvider.dart';
 import 'package:oneday/test/TransactionProvider.dart';
 import 'Winner/winnerProvider.dart';
@@ -38,6 +39,7 @@ Future<void> main() async{
     ChangeNotifierProvider<WinnerProvider>(create: (_) => WinnerProvider()),
     ChangeNotifierProvider<TransactionProvider>(create: (_) => TransactionProvider()),
     ChangeNotifierProvider<MyLotteriesProvider>(create: (_) => MyLotteriesProvider()),
+    ChangeNotifierProvider<LeaderBoardProvider>(create: (_) => LeaderBoardProvider()),
   ],
       child: MaterialApp(
       debugShowCheckedModeBanner: false,

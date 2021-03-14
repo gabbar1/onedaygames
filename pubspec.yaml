@@ -52,6 +52,8 @@ dependencies:
   enough_mail: ^0.0.35
   step_progress_indicator: ^0.2.4+7
   webview_flutter: ^0.3.20+2
+  flutter_svg: ^0.19.3
+  convex_bottom_navigation: ^1.1.1
   flutter:
     sdk: flutter
 

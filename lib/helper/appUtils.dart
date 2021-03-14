@@ -9,4 +9,6 @@ class AppUtils {
   BuildContext context;
   //BuildContext mainContext=AppUtils().routeObserver.navigator.context;
   final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+
 }

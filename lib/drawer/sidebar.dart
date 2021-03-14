@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/AboutUs/aboutUs.dart';
@@ -177,11 +178,14 @@ class _SidebarMenuState extends State<SidebarMenu> {
         Row(children: [
           Container(
             height: 65,
-            width: 5,
+            width: 40,
             padding: EdgeInsets.only(left: 20),
-            child: Icon(Icons.account_balance_wallet),
+            child:  SvgPicture
+                .asset(
+                "assets/icons/wallet.svg"),
           ),
-          SizedBox(width: 50,),
+
+          SizedBox(width: 15,),
           Text(language.mybalance,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold)),
           Spacer(),
           FlatButton(
@@ -243,11 +247,16 @@ class _SidebarMenuState extends State<SidebarMenu> {
                   ),
                   _userWallet(),
                   Row(children: [
-                    Container(height: 65, width: 5,
+                    Container(
+                      height: 65,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.details_sharp),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/translation.svg"),
                     ),
-                    SizedBox(width: 50,),
+
+                    SizedBox(width: 15,),
                     Text(language.language,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold)),
                     Spacer(),
                     FlutterSwitch(
@@ -280,11 +289,15 @@ class _SidebarMenuState extends State<SidebarMenu> {
                   ],),
                   InkWell(child:
                   Row(children: [
-                    Container(height: 65, width: 5,
+                    Container(
+                      height: 65,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.details_sharp),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/kyc.svg"),
                     ),
-                    SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.kyc,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold)),
                     Spacer(),
                     FlatButton(
@@ -308,11 +321,15 @@ class _SidebarMenuState extends State<SidebarMenu> {
 
                   },),
                   InkWell(child: Row(children: [
-                    Container(height: 65, width: 5,
+                    Container(
+                      height: 65,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.child_friendly),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/tickets.svg"),
                     ),
-                    SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.mytickets,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold))
                   ],), onTap: () {
                     Navigator.push(context,
@@ -320,11 +337,15 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     );
                   },),
                   InkWell(child: Row(children: [
-                    Container(height: 65, width: 5,
+                    Container(
+                      height: 65,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.whatshot),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/winners.svg"),
                     ),
-                   SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.winnerlist,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold)),
                  ],),
                    onTap: (){
@@ -333,11 +354,15 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     );
                  },),
                   InkWell(child: Row(children: [
-                    Container(height: 65, width: 5,
+                    Container(
+                      height: 65,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.widgets),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/guide.svg"),
                     ),
-                    SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.howtoplay,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold))
 
                   ],),
@@ -351,20 +376,15 @@ class _SidebarMenuState extends State<SidebarMenu> {
                       );
                     },),
                   InkWell(child: Row(children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: 65,
-                          width: 5,
-                          padding: EdgeInsets.only(left: 20),
-                          child: Icon(Icons.forum),
-                        ),
-
-                      ],
+                    Container(
+                      height: 65,
+                      width: 40,
+                      padding: EdgeInsets.only(left: 20),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/privacy.svg"),
                     ),
-                    SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.policy,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold))
 
 
@@ -380,11 +400,13 @@ class _SidebarMenuState extends State<SidebarMenu> {
                   InkWell(child: Row(children: [
                     Container(
                       height: 65,
-                      width: 5,
+                      width: 40,
                       padding: EdgeInsets.only(left: 20),
-                      child: Icon(Icons.assistant),
+                      child:  SvgPicture
+                          .asset(
+                          "assets/icons/about.svg"),
                     ),
-                    SizedBox(width: 50,),
+                    SizedBox(width: 15,),
                     Text(language.aboutUs,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold))
                   ],),onTap: (){
                     Navigator.push(

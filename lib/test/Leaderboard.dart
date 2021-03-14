@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Model/number.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Winner/Winners.dart';
+import 'package:oneday/dashBoard/API.dart';
+import 'package:oneday/dashBoard/leaderBoardProvider.dart';
 import 'package:oneday/screen/payment/load_payment.dart';
+import 'package:provider/provider.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:oneday/Model/winner_price.dart';
@@ -50,10 +53,16 @@ class __LeaderboardState extends State<Leaderboard> {
   String balance ="Your balance";
   String you_won = "You Won";
   String no_ticket = "Number of tickets";
+
+  void afterBuildFunction(BuildContext context) {
+    var leader= Provider.of<LeaderBoardProvider>(context, listen: false);
+    leader.getLeaderBoard(ticket_type: widget.ticket_type,ticket_id: widget.ticket_id);
+  }
   @override
   void initState() {
     // TODO: implement initState
     transRef.child("Lottery").child(widget.ticket_type).child(widget.ticket_id).child("winner_count").once().then((DataSnapshot snapshot){
+
       if(snapshot!= null) {
         setState(() {
           // Map<dynamic, dynamic> values = snapshot.value;
@@ -119,10 +128,13 @@ class __LeaderboardState extends State<Leaderboard> {
       }
     });
     super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => afterBuildFunction(context));
   }
 
   @override
   Widget build(BuildContext context) {
+    var leader= Provider.of<LeaderBoardProvider>(context, listen: true);
     return Scaffold( appBar:
     AppBar(
       title: Text("Contest"),
@@ -187,7 +199,7 @@ class __LeaderboardState extends State<Leaderboard> {
                       );
                     }
                     else {
-                     
+
                       transRef.child("Bought_tickets").child(widget.phone).child(
                           widget.ticket_type)
                           .child(widget.ticket_id)
@@ -308,15 +320,15 @@ class __LeaderboardState extends State<Leaderboard> {
             ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount:winners.length,
+                itemCount:leader.leaderBoardList.length,
                 itemBuilder: (_,index){
                   if(index ==0){
                     return Container();
                   }
                   else{
-                    return  Card(child: Column(children: [Row(children: [Text(" #"+index.toString()+" price money "),Spacer(),Text(winners[index].winner_price.toString())],)
+                    return  Card(child: Column(children: [Row(children: [Text(" #"+index.toString()+" price money "),Spacer(),Text(leader.leaderBoardList[index].winner_price.toString())],)
                       ,Divider(),
-                      Row(children: [SizedBox(width: 10,),Text("Number of winners "+winners[index].no_of_winners.toString())],)],));
+                      Row(children: [SizedBox(width: 10,),Text("Number of winners "+leader.leaderBoardList[index].no_of_winners.toString())],)],));
                   }
 
                 }),

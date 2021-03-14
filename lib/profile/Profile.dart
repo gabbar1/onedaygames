@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications_platform_interface/src/notification_app_launch_details.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Winner/Winners.dart';
 import 'package:oneday/Language/Language.dart';
@@ -252,15 +253,19 @@ class MapScreenState extends State<Profile>
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              IconButton(
-                                  icon: Image.asset('assets/icons/wallet.png'),
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                          builder: (_) => WalletPage()),
-                                    );
-                                    walletData();
-                                  }),
+                              InkWell(child: Container(height: 30,width: 30,
+
+                                child: SvgPicture
+                                    .asset(
+                                    "assets/icons/wallet.svg"),
+                              ),onTap: (){
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => WalletPage()),
+                                );
+                                walletData();
+                              },),
+                              SizedBox(height: 5,),
                               Text(language.wallet,
                                   style: TextStyle(
                                       fontSize: 15,
@@ -274,9 +279,16 @@ class MapScreenState extends State<Profile>
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              IconButton(
-                                  icon: Icon(Icons.logout),
-                                  onPressed: () => AuthService().signOut()),
+                              InkWell(child: Container(height: 30,width: 30,
+
+                                child: SvgPicture
+                                    .asset(
+                                    "assets/icons/logout.svg"),
+                              ),onTap: (){
+                               AuthService().signOut();
+
+                              },),
+                              SizedBox(height: 5,),
                               Text(language.logout,
                                   style: TextStyle(
                                       fontSize: 15,
@@ -290,14 +302,18 @@ class MapScreenState extends State<Profile>
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () {
-                                 setState(() {
-                                   _status = false;
-                                 });
-                                },
-                              ),
+                              InkWell(child: Container(height: 30,width: 30,
+
+                                child: SvgPicture
+                                    .asset(
+                                    "assets/icons/edit.svg"),
+                              ),onTap: (){
+                                setState(() {
+                                  _status = false;
+                                });
+
+                              },),
+                              SizedBox(height: 5,),
                               Text(language.Edit,
                                   style: TextStyle(
                                       fontSize: 15,
