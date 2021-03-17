@@ -12,12 +12,14 @@ class NotificationProvider extends ChangeNotifier{
     transRef.child('notification').child(topic).once().then((DataSnapshot snapshot) {
       notificationList.clear();
       if(snapshot!= null){
-        print("------fgghfhf-------"+snapshot.hashCode.toString());
         Navigator.pop(context);
-        List<dynamic> notificationLists = snapshot.value;
+        Map<dynamic,dynamic> notificationLists = snapshot.value;
+        notificationLists.forEach((key, value) {
+          NotificationModel notificationModel = NotificationModel.fromJson(value);
+          notificationList.add(notificationModel);
+          notificationList.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.time).compareTo(DateFormat('yyyy-MM-dd').parse(a.time)));
+        });
         print(notificationLists.toString());
-        notificationList = notificationLists.map((e) => NotificationModel.fromJson(e)).toList();
-        notificationList.sort((a,b) => DateFormat('yyyy-MM-dd').parse(b.time).compareTo(DateFormat('yyyy-MM-dd').parse(a.time)));
         notifyListeners();
       }
     });

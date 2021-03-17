@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -41,7 +42,7 @@ class MapScreenState extends State<OtpVerification>
       //codeSent ?  AuthService().singInWithOPT(smsCode, verficationId) : verifyPhone(phoneNo);
     }
   }
-
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
   @override
   void initState() {
@@ -180,8 +181,8 @@ class MapScreenState extends State<OtpVerification>
                               return Center(child: CircularProgressIndicator(),);
                             });
                         login.signIn(context: context,otp: login.smsCode);
-
-
+                        firebaseMessaging.subscribeToTopic("new_ticket");
+                        firebaseMessaging.subscribeToTopic(login.phoneNo.replaceAll("+", ""));
                       },
                       child: Container(
                         width: 230,
