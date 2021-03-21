@@ -42,15 +42,25 @@ class MapScreenState extends State<Profile>
   String imageurl;
   bool _visible = false;
 
+  void afterBuildFunction(BuildContext context) {
+    var vm = Provider.of<API>(context, listen: false);
+    _nameController.text = vm.username;
+    _emailController.text = vm.email;
+    _pinCode.text = vm.pincode;
+    _state.text = vm.state;
 
+  }
   @override
   void initState() {
+    super.initState();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     uid = user.phoneNumber;
     Provider.of<API>(context, listen: false).userDetail(uid);
     Provider.of<Language>(context, listen: false).getLanguage(uid);
-    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => afterBuildFunction(context));
+
   }
 
   final DBRef = FirebaseDatabase.instance.reference();
@@ -121,15 +131,12 @@ class MapScreenState extends State<Profile>
   }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _profileKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
     print("---------------name----------------------"+vm.username);
-    _nameController.text = vm.username;
-    _emailController.text = vm.email;
-    _pinCode.text = vm.pincode;
-    _state.text = vm.state;
 
 
     return Scaffold(
@@ -370,7 +377,9 @@ class MapScreenState extends State<Profile>
         ),
       );
     } else {
-      return Container(
+      return Form(
+        key: _profileKey,
+        child: Container(
         child: Padding(
           padding: EdgeInsets.only(bottom: 25.0),
           child: new Column(
@@ -393,9 +402,10 @@ class MapScreenState extends State<Profile>
                       ),
                     ],
                   )),
+
               Padding(
                   padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 8.0),
-                  child: new TextField(
+                  child: new TextFormField(
                     controller: _nameController,
                     decoration: InputDecoration(hintText: language.enamep),
                     onChanged: (val) {
@@ -500,7 +510,7 @@ class MapScreenState extends State<Profile>
                           child: new TextField(
                             controller: _pinCode,
                             decoration:
-                                InputDecoration(hintText: language.epinc),
+                            InputDecoration(hintText: language.epinc),
                             onChanged: (val) {
                               this.pin = val;
                             },
@@ -526,7 +536,7 @@ class MapScreenState extends State<Profile>
             ],
           ),
         ),
-      );
+      ),);
     }
   }
 

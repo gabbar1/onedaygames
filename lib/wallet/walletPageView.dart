@@ -356,9 +356,10 @@ class _WalletPageState extends State<WalletPage> {
               Text(language.redeem,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
-              Container(
+              Expanded(child:  Container(
+                margin: EdgeInsets.all(10),
                   height: 25,
-                  width: 100,
+
                   decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.red[500],
@@ -372,7 +373,7 @@ class _WalletPageState extends State<WalletPage> {
                                 fontSize: 15, fontWeight: FontWeight.bold)),
                       );
                     },
-                  )),
+                  )),),
               SizedBox(
                 width: 20,
               )

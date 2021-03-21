@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/lottery.dart';
 import 'package:oneday/Model/notification.dart';
 import 'package:oneday/Model/number.dart';
@@ -158,7 +159,8 @@ class API extends ChangeNotifier{
     ticket_deadline1 = ((new_date.difference(DateTime.now()).inSeconds));
     return ticket_deadline1;
   }
-  Future<void> AfterTimeLeft(int remainingtime,BuildContext context,String deadlinetext,String resultdate,String winnerlist,String cancel,String uid,String type,String ticket_id,String limit_ticket,String total_amount1,String amount,String insufficient,String money_msg,String remain_1st,String remain_2nd,String admoney,String email,int price,int numberofshell,String winning_amount1,String added_amount1,String deadline,int index){
+  Future<void> AfterTimeLeft(String ticket,int remainingtime,BuildContext context,String deadlinetext,String resultdate,String winnerlist,String cancel,String uid,String type,String ticket_id,String limit_ticket,String total_amount1,String amount,String insufficient,String money_msg,String remain_1st,String remain_2nd,String admoney,String email,int price,int numberofshell,String winning_amount1,String added_amount1,String deadline,int index){
+
 
     if(remainingtime<=0){
       return showDialog<void>(
@@ -167,7 +169,7 @@ class API extends ChangeNotifier{
         // user must tap button!
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(' Ticket Closed ',
+            title: Text(ticket,
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context)
                         .textTheme
@@ -423,19 +425,19 @@ class API extends ChangeNotifier{
       }
     });
   }
-  userDetail(String uid){
-    transRef.child("Users").child(uid).once().then((DataSnapshot snapshot) {
+  Future<void > userDetail(String uid) async{
+    transRef.child("Users").child(uid).once().then((DataSnapshot snapshot) async {
       if (snapshot != null) {
         Map<dynamic, dynamic> values = snapshot.value;
-        num_of_game = values["num_of_game"].toString();
-        email = values["email"].toString();
-        username = values["name"].toString();
-        userprofile = values["profile"].toString();
-        user_ac = values["ac no"].toString();
-        phone = values["phone"].toString();
-        state = values["state"].toString();
-        pincode = values["pincode"].toString();
-
+        num_of_game = await values["num_of_game"].toString() ??0 ;
+        email =await values["email"].toString() ??0;
+        username = await values["name"].toString() ??0;
+        userprofile =await values["profile"].toString() ??0;
+        user_ac =await values["ac no"].toString() ??0;
+        phone = await values["phone"].toString() ??0;
+        state =await values["state"].toString() ??0;
+        pincode = await values["pincode"].toString() ??0;
+       // print("------UserDetail----"+user_ac);
         notifyListeners();
       }
     });

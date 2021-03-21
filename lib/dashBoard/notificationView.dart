@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/notification.dart';
 import 'package:oneday/dashBoard/notficationProvider.dart';
 import 'package:provider/provider.dart';
@@ -22,15 +23,16 @@ class _NotificationViewState extends State<NotificationView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    Provider.of<Language>(context, listen: false).getLanguage(widget.uid);
     WidgetsBinding.instance
         .addPostFrameCallback((_) => afterBuildFunction(context));
   }
   @override
   Widget build(BuildContext context) {
-
+    var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notification"),
+        title: Text(language.notification),
       ),
       body: SingleChildScrollView(child: Consumer<NotificationProvider>(builder: (context,notification,child){
         return ListView.builder(

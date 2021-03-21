@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Model/wallet.dart';
 import 'package:oneday/authentication/Signup/OtpVerification.dart';
+import 'package:oneday/dashBoard/homeNavigator.dart';
 import 'package:oneday/helper/constant.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
 
@@ -89,14 +90,19 @@ class RegisterProvider extends ChangeNotifier{
   }
   Future<void> signUp({String otp,BuildContext context}) async {
     try{
-      await FirebaseAuth.instance
-          .signInWithCredential(PhoneAuthProvider.getCredential(
+      await FirebaseAuth.instance.signInWithCredential(PhoneAuthProvider.getCredential(
         verificationId: verficationId,
         smsCode: otp,
       ));
-      updateDetail();
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-          DashboardPage()), (Route<dynamic> route) => false);
+
+      Future.delayed(Duration(seconds: 10), () {
+        updateDetail();
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+            HomeNavigator()), (Route<dynamic> route) => false);
+        // Navigator.of(context).pop();
+      }) ;
+
+
 
     } on Exception catch(e){
       Fluttertoast.showToast(msg: "Please enter valid otp");

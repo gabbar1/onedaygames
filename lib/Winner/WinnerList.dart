@@ -4,7 +4,9 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/user.dart';
+import 'package:provider/provider.dart';
 class WinnerList  extends StatefulWidget{
   @override
   _WinnerListPageState createState() =>_WinnerListPageState();
@@ -20,46 +22,17 @@ class _WinnerListPageState  extends State<WinnerList>{
   bool _showTickets = false;
   String userprofile,username;
   String phone;
-  String language;
-  String winners = "Winners";
-  String rank = "Rank";
-  String won_amount = "Amount Won";
-  bool switch2 = true;
+
 
 
   @override
   void initState() {
-    //this.uid="" ;
-    // this.phonenum ;
+    super.initState();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     this.uid = user.phoneNumber;
     phonenum = user.phoneNumber;
     transRef = FirebaseDatabase.instance.reference();
-    transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
-      if(snapshot!= null){
-        Map<dynamic, dynamic> values= snapshot.value;
-        var user = User1.fromJson(values);
-        setState(() {
-          language = user.language.toString();
-          switch2 = user.bool_lang;
-          if(switch2 == true){
-            winners = "Winners";
-            rank = "Rank";
-            won_amount = "Amount Won";
-          }
-          else if (switch2 == false){
-            winners = "विजेता";
-            rank = "पद";
-            won_amount = "जीती गई रकम";
-
-
-          }
-        });
-      }
-    });
-    super.initState();
-
   }
 
 
@@ -70,10 +43,10 @@ class _WinnerListPageState  extends State<WinnerList>{
   Widget build(BuildContext context) {
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
-
+    var language = Provider.of<Language>(context, listen: false);
     return  Scaffold(
       appBar: AppBar(backgroundColor: Colors.amber,
-        title: Text(winners,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),),
+        title: Text(language.winners,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),),
       body:
       FirebaseAnimatedList( // reverse: true,
         query: transRef.child('Winners').child(widget.ticket_type).child(widget.ticket_id),
@@ -135,17 +108,7 @@ class _WinnerListPageState  extends State<WinnerList>{
                   ),
 
                 ],), SizedBox(width: 100,),
-                 Container(
-                   height: 25,
-                     width: 50,
-                     decoration: BoxDecoration(
-                         border: Border.all(
-                           color: Colors.red[500],
-                         ),
-                         borderRadius: BorderRadius.all(Radius.circular(5))
-                     ),
-                     child: Center(child: Text(widget.ticket_type,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),)
-                 )],), SizedBox(height: 10,),],) ,
+                ],), SizedBox(height: 10,),],) ,
 
              ],
 
@@ -161,7 +124,7 @@ class _WinnerListPageState  extends State<WinnerList>{
   }
 
   Widget _buildTransactionItem1({Map transaction}){
-
+    var language = Provider.of<Language>(context, listen: false);
     return Padding(padding: EdgeInsets.all(10),
       child : Row(
         children: <Widget>[
@@ -172,13 +135,13 @@ class _WinnerListPageState  extends State<WinnerList>{
                 Column(children: [
                   Row(children: [
                     Column(children: [
-                      Text(rank,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black12),),
+                      Text(language.rank,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black12),),
                       SizedBox(height: 5,),
                       Text("#"+transaction["rank"].toString(),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
                     ],),
                     SizedBox(width: 250,),
                     Column(children: [
-                      Text(won_amount,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black12),),
+                      Text(language.won_amount,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black12),),
                       SizedBox(height: 5,),
                       Text("₹"+transaction["price"].toString(),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black12),),
                     ],)

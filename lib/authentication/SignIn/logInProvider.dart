@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oneday/authentication/SignIn/OtpVerification.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
+import 'package:oneday/dashBoard/homeNavigator.dart';
 
 class LoginProvider extends ChangeNotifier{
   bool codeSent = false;
@@ -58,9 +59,9 @@ class LoginProvider extends ChangeNotifier{
         verificationId: verficationId,
         smsCode: otp,
       ));
-      Future.delayed(Duration(seconds: 5), () {
+      Future.delayed(Duration(seconds: 10), () {
         Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-            DashboardPage()), (Route<dynamic> route) => false);
+            HomeNavigator()), (Route<dynamic> route) => false);
        // Navigator.of(context).pop();
       }) ;
       //Navigator.pop(context);

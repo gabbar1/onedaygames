@@ -1,3 +1,4 @@
+/*
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -248,8 +249,10 @@ class _AddMoneyPageState extends State<AddMoney> {
   void handlerPaymentError(PaymentFailureResponse response) {
 
 
- /*   Fluttertoast.showToast(
-        msg: 'Failure: ' + response.code.toString() + " - " + response.message);*/
+ */
+/*   Fluttertoast.showToast(
+        msg: 'Failure: ' + response.code.toString() + " - " + response.message);*//*
+
     Fluttertoast.showToast(msg: response.message.toString());
     var nowT = new DateTime.now();
 
@@ -273,4 +276,4 @@ class _AddMoneyPageState extends State<AddMoney> {
     Fluttertoast.showToast(msg: 'External Wallet: ' + response.walletName);
     Navigator.pop(context);
   }
-}
+}*/

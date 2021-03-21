@@ -1,4 +1,4 @@
-class Transaction {
+class UserTransaction {
   String amount;
   String email;
   String name;
@@ -7,7 +7,7 @@ class Transaction {
   String transactionId;
   String upi;
 
-  Transaction(
+  UserTransaction(
       {this.amount,
         this.email,
         this.name,
@@ -16,7 +16,7 @@ class Transaction {
         this.transactionId,
         this.upi});
 
-  Transaction.fromJson(Map<String, dynamic> json) {
+  UserTransaction.fromJson(Map<dynamic, dynamic> json) {
     amount = json['amount'];
     email = json['email'];
     name = json['name'];

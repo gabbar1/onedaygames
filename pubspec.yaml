@@ -40,7 +40,6 @@ dependencies:
   pin_code_fields: ^5.0.1
   firebase_messaging: ^7.0.3
   firebase_auth: ^0.18.1+2
-  razorpay_flutter: ^1.2.2
   fluttertoast: ^4.0.0
   progress_state_button: ^1.0.1
   flutter_switch: ^0.2.0
@@ -54,6 +53,7 @@ dependencies:
   webview_flutter: ^0.3.20+2
   flutter_svg: ^0.19.3
   convex_bottom_navigation: ^1.1.1
+  flutter_animated_dialog: ^1.1.0
   flutter:
     sdk: flutter
 

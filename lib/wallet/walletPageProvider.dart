@@ -15,11 +15,11 @@ import 'package:oneday/Language/Language.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
 import 'package:provider/provider.dart';
 
-class WalletPageProvider extends ChangeNotifier{
+class  WalletPageProvider extends ChangeNotifier{
   DatabaseReference transRef = FirebaseDatabase.instance.reference();
  String status = "No Request";
  List<UPIModel> upi = <UPIModel>[];
- String upiID,name;
+ String upiID,name,upiNo,todayLimit;
   checkStatus({String phoneNo,BuildContext context}){
     var language = Provider.of<Language>(context, listen: false);
     transRef.child("Redeem").child(phoneNo).once()
@@ -120,34 +120,27 @@ class WalletPageProvider extends ChangeNotifier{
     }
   }
 
- void transactionDetails() {
+ Future<void> transactionDetails() async{
     transRef.child("UPI").once().then((
         DataSnapshot snapshot) {
-
       var values= snapshot.value;
-      print("---------------"+values.toString());
+
+     print("---------------"+values.toString());
       values.forEach((key,value){
         if(value["status"]=="active"){
-          print("-------valuesssss--------"+value.toString());
+         // print("-------valuesssss--------"+value.toString());
           upiID =  value['upiId'].toString();
           name = value['name'].toString();
+          upiNo = key.toString();
+          todayLimit = value['today_transaction'].toString();
+
+
+          notifyListeners();
         }
       });
-/*      for(int i =0;i<values.length;i++){
 
-        print("---------------"+values[i].toString());
-if(values[i]["status"]=="active"){
-  print("---------------"+values[i]['status'].toString());
-  print("---------------"+values[i]['today_transaction'].toString());
-  print("---------------"+values[i]['day_limit'].toString());
-  upiID =  values[i]['upiId'].toString();
-  name = values[i]['upiId'].toString();
-  print("---------------"+values[i]['upiId'].toString());
-}
-
-      }*/
 
     });
-//notifyListeners();
+
   }
 }

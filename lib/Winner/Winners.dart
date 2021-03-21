@@ -27,19 +27,26 @@ class _WinnerPageState  extends State<Winner>{
   String result;
   String ticket_date;
   String type;
+  void afterBuildFunction(BuildContext context) {
 
-
-  @override
-  void initState() {
-    Provider.of<WinnerProvider>(context, listen: false).getdailylottery();
+    var type= Provider.of<WinnerProvider>(context, listen: false);
+    Provider.of<WinnerProvider>(context, listen: false).getDailyLottery(context: context);
     Provider.of<WinnerProvider>(context, listen: false).getweeklylottery();
     Provider.of<WinnerProvider>(context, listen: false).getmonthlylottery();
     Provider.of<WinnerProvider>(context, listen: false).getspaciallottery();
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     this.uid = user.phoneNumber;
     Provider.of<Language>(context, listen: false).getLanguage(uid);
-    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => afterBuildFunction(context));
+
   }
 
 

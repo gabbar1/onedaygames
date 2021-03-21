@@ -11,7 +11,7 @@ class NotificationProvider extends ChangeNotifier{
     onLoading(context: context,strMessage: "Loading");
     transRef.child('notification').child(topic).once().then((DataSnapshot snapshot) {
       notificationList.clear();
-      if(snapshot!= null){
+      if(snapshot.value!= null){
         Navigator.pop(context);
         Map<dynamic,dynamic> notificationLists = snapshot.value;
         notificationLists.forEach((key, value) {
@@ -21,6 +21,8 @@ class NotificationProvider extends ChangeNotifier{
         });
         print(notificationLists.toString());
         notifyListeners();
+      } else{
+        Navigator.pop(context);
       }
     });
 

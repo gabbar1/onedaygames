@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:467762317022:android:38418f8e262e4e49ae644f",
+        "mobilesdk_app_id": "1:467762317022:android:dac14a911039af35ae644f",
         "android_client_info": {
           "package_name": "com.boss.oneday"
         }
@@ -40,54 +40,10 @@
               "client_type": 3
             },
             {
-              "client_id": "467762317022-b89h67r38el3bjp17uv1vp7bjbb6i84n.apps.googleusercontent.com",
+              "client_id": "467762317022-a52fh9rkicb9v38ng6i7s8mabm5p8gic.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.helloworld"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:467762317022:android:77beeb0379f6c6f7ae644f",
-        "android_client_info": {
-          "package_name": "com.example.helloworld"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "467762317022-8or6oq722bl5d9hn5hs196uqgnqja2fi.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.helloworld",
-            "certificate_hash": "2b951cbb5587785243eaaf0149cb0401a91b6b1f"
-          }
-        },
-        {
-          "client_id": "467762317022-3hb6g0dc59v4egur9f41igo4njtoe4i9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCvoalVqorJBdApPAtf08pB6D12QoyNsl0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "467762317022-3hb6g0dc59v4egur9f41igo4njtoe4i9.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "467762317022-b89h67r38el3bjp17uv1vp7bjbb6i84n.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.helloworld"
+                "bundle_id": "com.example.onedaygames"
               }
             }
           ]

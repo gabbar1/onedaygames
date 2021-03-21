@@ -26,16 +26,24 @@ class _MyLotteriesPageState  extends State<MyLotteries>{
   String price_money = "Price Money";
   String result_date = "Result Date";
 
+  void afterBuildFunction(BuildContext context) {
+
+    Provider.of<MyLotteriesProvider>(context,listen: false).getMyTickets(uid: uid,context: context);
+
+  }
+
   @override
   void initState() {
     //this.uid="" ;
     // this.phonenum ;
+    super.initState();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
     this.uid = user.phoneNumber;
     phonenum = user.phoneNumber;
     transRef = FirebaseDatabase.instance.reference();
-    Provider.of<MyLotteriesProvider>(context,listen: false).getMyTickets(uid: uid);
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => afterBuildFunction(context));
     transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
       if(snapshot!= null){
         Map<dynamic, dynamic> values= snapshot.value;
@@ -62,7 +70,7 @@ class _MyLotteriesPageState  extends State<MyLotteries>{
       }
     });
     checkUser();
-    super.initState();
+
   }
 
   checkUser() {

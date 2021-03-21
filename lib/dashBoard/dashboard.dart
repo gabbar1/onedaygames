@@ -18,6 +18,7 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class _DashboardPageState extends State<DashboardPage> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
   final List<Message> messages = [];
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
@@ -40,6 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
     Provider.of<API>(context, listen: false).getWeeklyLottery(type:type.type );
     Provider.of<API>(context, listen: false).getMonthlyLottery(type:type.type );
     Provider.of<API>(context, listen: false).getSpecialLottery(type:type.type );
+    Provider.of<API>(context, listen: false).userDetail(uid);
 
   }
   @override
@@ -51,7 +53,7 @@ class _DashboardPageState extends State<DashboardPage> {
     super.initState();
     transRef = FirebaseDatabase.instance.reference();
     Provider.of<API>(context, listen: false).userWallet(uid);
-    Provider.of<API>(context, listen: false).userDetail(uid);
+
     Provider.of<Language>(context, listen: false).getLanguage(uid);
     WidgetsBinding.instance
        .addPostFrameCallback((_) => afterBuildFunction(context));
@@ -265,7 +267,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                     if (ftr.hasData) {
                                       if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                        return Text("Closed");
+                                        return Text(language.closed);
                                       } else {
                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
                                       }
@@ -298,6 +300,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   vm.comparetimeleft(
                                       vm.daily_ticket[snapshot].deadline);
                                   vm.AfterTimeLeft(
+                                      language.ticket,
                                       vm.comparetimeleft(
                                           vm.daily_ticket[snapshot].deadline),
                                       context,
@@ -460,7 +463,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                    if (ftr.hasData) {
                                      if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                       return Text("Closed");
+                                       return Text(language.closed);
                                      } else {
                                        return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
                                      }
@@ -493,6 +496,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                  vm.comparetimeleft(
                                      vm.monthly_ticket[snapshot].deadline);
                                  vm.AfterTimeLeft(
+                                     language.ticket,
                                      vm.comparetimeleft(
                                          vm.monthly_ticket[snapshot].deadline),
                                      context,
@@ -631,7 +635,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                    if (ftr.hasData) {
                                      if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                       return Text("Closed");
+                                       return Text(language.closed);
                                      } else {
                                        return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
                                      }
@@ -664,6 +668,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                  vm.comparetimeleft(
                                      vm.weekly_ticket[snapshot].deadline);
                                  vm.AfterTimeLeft(
+                                     language.ticket,
                                      vm.comparetimeleft(
                                          vm.weekly_ticket[snapshot].deadline),
                                      context,
@@ -803,7 +808,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                     if (ftr.hasData) {
                                       if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                        return Text("Closed");
+                                        return Text(language.closed);
                                       } else {
                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
                                       }
@@ -836,6 +841,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   vm.comparetimeleft(
                                       vm.special_ticket[snapshot].deadline);
                                   vm.AfterTimeLeft(
+                                      language.ticket,
                                       vm.comparetimeleft(
                                           vm.special_ticket[snapshot].deadline),
                                       context,
@@ -897,21 +903,21 @@ class _DashboardPageState extends State<DashboardPage> {
                 builder: (context) {
                   return Leaderboard(
                     phone: uid,
-                    amt: vm.daily_ticket[snapshot].amount.toString(),
+                    amt: vm.special_ticket[snapshot].amount.toString(),
                     email: vm.email,
-                    price: vm.daily_ticket[snapshot].price.toString(),
-                    typ: vm.daily_ticket[snapshot].name,
-                    ticket_type: vm.daily_ticket[snapshot].type.toString(),
+                    price: vm.special_ticket[snapshot].price.toString(),
+                    typ: vm.special_ticket[snapshot].name,
+                    ticket_type: vm.special_ticket[snapshot].type.toString(),
                     numberofsell:
-                    vm.daily_ticket[snapshot].numberofshell.toString(),
+                    vm.special_ticket[snapshot].numberofshell.toString(),
                     total_amount: int.parse(totalAmount),
                     added_amount: int.parse(addedAmount),
                     winning_amount: int.parse(winningAmount),
-                    ticket_id: vm.daily_ticket[snapshot].ticket_id,
-                    deadline: vm.daily_ticket[snapshot].deadline,
+                    ticket_id: vm.special_ticket[snapshot].ticket_id,
+                    deadline: vm.special_ticket[snapshot].deadline,
                     ticket_deadline:
-                    vm.comparetimeleft(vm.daily_ticket[snapshot].deadline),
-                    people: vm.daily_ticket[snapshot].price,
+                    vm.comparetimeleft(vm.special_ticket[snapshot].deadline),
+                    people: vm.special_ticket[snapshot].price,
                     index1: index,
                   );
                 },
@@ -993,6 +999,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   vm.comparetimeleft(
                                       vm.daily_ticket[snapshot].deadline);
                                   vm.AfterTimeLeft(
+                                     language.ticket,
                                       vm.comparetimeleft(
                                           vm.daily_ticket[snapshot].deadline),
                                       context,

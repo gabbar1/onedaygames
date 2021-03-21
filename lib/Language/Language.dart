@@ -107,6 +107,16 @@ class Language extends ChangeNotifier {
   String money_sent = "Money has been sent";
   String privacy = "Privacy Policy";
   String aboutUsDetail = "OneDay is an open platform where players can try their luck. It is 100% free & no hidden charges applied on any segment of the game.Winning numbers selection is carried out by 100% honest, impartial, non-discriminatory algorithm.It's run by 100% nonbeneficial & nonprofit organization. All the money is spent for the NGOs.";
+  String entry = "entry";
+  String winningPrice = "Winning Price";
+  String Contest = "Contest";
+  String no_of_winners = "Numbers of winners";
+  String amount = "Amount",upiLang ="UPI",trasLang = "TransactionID";
+  String notification ='Notification';
+  String minAdd = "Please note minimum 500 rs can be added";
+  String inValidTransaction = "This transaction ID is invalid";
+  String addRequest = "Thank you for request your money will be added within 3 hours";
+
   getLanguage(String uid){
     DatabaseReference transRef = FirebaseDatabase.instance.reference();
     transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
@@ -115,6 +125,20 @@ class Language extends ChangeNotifier {
         var user = User1.fromJson(values);
           status2 = user.bool_lang;
           if(status2 == true){
+            addRequest = "Thank you for request your money will be added within 3 hours";
+            inValidTransaction = "This transaction ID is invalid";
+            minAdd = "Please note minimum 500 rs can be added";
+            upiLang ="UPI";
+            trasLang = "TransactionID";
+            notification ='Notification';
+            no_ticket = "Number of tickets";
+            balance = "Your balance";
+            you_won = "You Won";
+            info = "Info";
+            no_of_winners = "Numbers of winners  ";
+            entry = "entry";
+            Contest = "Contest";
+            winningPrice = "Winning Price";
             received = "received";
             privacy = "Privacy Policy";
             daily = "Daily";
@@ -215,15 +239,36 @@ class Language extends ChangeNotifier {
             noRequest = "No Request";
             money_sent = "Money has been sent";
              aboutUsDetail = "OneDay is an open platform where players can try their luck. It is 100% free & no hidden charges applied on any segment of the game.Winning numbers selection is carried out by 100% honest, impartial, non-discriminatory algorithm.It's run by 100% nonbeneficial & nonprofit organization. All the money is spent for the NGOs.";
-
+             amount = "Amount";
           }
           else if (status2 == false){
+            addRequest = "अनुरोध के लिए धन्यवाद आपका पैसा 3 घंटे के भीतर जुड़ जाएगा";
+            inValidTransaction = "यह लेनदेन आईडी अमान्य है";
+            minAdd = "कृपया ध्यान दें न्यूनतम 500 rs जोड़े जा सकते हैं";
+            trasLang = "लेनदेन आईडी";
+            upiLang ="UPI";
+            amount = 'रकम';
+            search = "सम्पर्क खोजे";
+            user_nt_found ="उपयोगकर्ता नहीं मिला";
+            send_msg ="उपभोक्ता";
+            amnt_msg = "राशि दर्ज करें";
+            send = "भेजें";
+            not_money_msg = "आपके पास भेजने के लिए पर्याप्त धन नहीं है";
+            notification ='सूचनाएं';
+            no_ticket = "खरीदी हुई टिकटें";
+            you_won = "आपने जीता";
+            balance = "आपकी राशी";
+            info = "जानकारी";
+            no_of_winners = "विजेताओं की संख्या ";
+            entry = "प्रवेश शुल्क";
+            Contest = "प्रतियोगिता";
+            winningPrice = "इनाम";
             received = "प्राप्त किया";
             daily = "दैनिक";
             monthly = "मासिक";
             weekly = "साप्ताहिक";
             special = "विशेष";
-            closed = "बंद";
+            closed = "समापन";
             ticket="टिकट बंद";
             announcedate="घोषणा तिथि है ";
             winnerlist = "विजेता सूची पर जाएं";

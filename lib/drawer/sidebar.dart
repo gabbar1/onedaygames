@@ -43,24 +43,12 @@ class _SidebarMenuState extends State<SidebarMenu> {
   var  username;
   var  userwallet;
   var  user_ac;
-  String language="Eng";
-  String mybalance = "My Balance";
-  String kyc = "KYC";
-  String mytickets = "My Tickets";
-  String winnerlist ="Check Winners";
-  String howtoplay = "How to Play Oneday";
-  String policy = "Our Privacy Policy";
-  String aboutUs = "About Us";
-  String verify ="Verify";
-  String verified = "Verified";
-  String logout = "Logout";
-  bool status2 = true;
-  bool isSwitched = false;
+
 
 
   @override
   void initState() {
-
+    super.initState();
     this.uid='' ;
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
@@ -68,44 +56,7 @@ class _SidebarMenuState extends State<SidebarMenu> {
     Provider.of<Language>(context, listen: false).getLanguage(uid);
     Provider.of<API>(context, listen: false).userWallet(uid);
     Provider.of<API>(context, listen: false).userDetail(uid);
-    super.initState();
-    transRef = FirebaseDatabase.instance.reference();
-    transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
-      if(snapshot!= null){
-        Map<dynamic, dynamic> values= snapshot.value;
-        var user = User1.fromJson(values);
-        setState(() {
-          status2 = user.bool_lang;
-          language = user.language.toString();
-          if(status2 == true){
-            mybalance = "My Balance";
-            language = "Language";
-            kyc = "KYC";
-            mytickets = "My Tickets";
-            winnerlist = "Check Winners";
-            howtoplay = "How to Play Oneday";
-            policy = "Our Privacy Policy";
-            aboutUs = "About Us";
-             verify ="Verify";
-             verified = "Verified";
-             logout = "Logout";
-          }
-          else if (status2 == false){
-            mybalance = "मेरी राशी";
-            kyc = "केवाईसी";
-            mytickets = "मेरे टिकट";
-            winnerlist = "विजेता सूची में जाएं";
-            howtoplay = "वनडे कैसे खेलें";
-            policy = "हमारी गोपनीयता नीति";
-            aboutUs = "हमारे बारे में";
-             verify ="सत्यापित करें";
-             verified = "सत्यापित";
-             logout = "लॉग आउट";
-             language = "भाषा";
-          }
-        });
-      }
-    });
+  
 
 
   }
@@ -308,13 +259,14 @@ class _SidebarMenuState extends State<SidebarMenu> {
                       /*child:
                             Text("Verfiy",style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold,
                                 color: Colors.red ),),*/
-                      child: vm.user_ac == null ? Text(language.verify,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold,color: Colors.red),):Text(language.verified,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold,color: Colors.green)),
+                      child: vm.user_ac.contains("null")? Text(language.verify,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold,color: Colors.red),):Text(language.verified,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold,color: Colors.green)),
                       onPressed: null,
                     ),
                     SizedBox(width: 20,)
                   ],),
                   onTap: () {
-                    if (vm.user_ac == null){
+                    print("ontap-----------"+vm.user_ac);
+                    if (vm.user_ac.contains("null")){
                       Navigator.push(context, MaterialPageRoute(builder: (c) => KYC()),);
                     }
 
