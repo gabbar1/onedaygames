@@ -89,7 +89,7 @@ class _TicketScreenState extends State<TicketScreen> {
 
     final message = Message()
       ..from = Address(username)
-      ..recipients.add("msachin213@gmail.com")
+      ..recipients.add(to)
 
       ..subject = "You Bought ${widget.ticket_type} ticket on : ${DateTime.now()}"
       ..html = "<h3>THANK YOU FOR CHOOSING ONEDAY \n\n Your Ticket number is ${selectedchar+strPin} \n\n Result will be announce at ${widget.deadline}</h3>";
