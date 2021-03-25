@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Model/wallet.dart';
@@ -63,11 +64,11 @@ class RegisterProvider extends ChangeNotifier{
         codeSent: smsSent, codeAutoRetrievalTimeout: autoTimeout);
     notifyListeners();
   }
-  updateDetail(){
+ Future<void> updateDetail() async{
     final DBRef = FirebaseDatabase.instance.reference();
     Random random = new Random();
     int randomNumber = random.nextInt(8);
-    User1 user = User1(
+    User1 user = await User1(
         name: name,
         phone: phoneNo,
         email: email,
@@ -78,7 +79,7 @@ class RegisterProvider extends ChangeNotifier{
         language : 'Eng',
         bool_lang:true
     );
-    Wallet wallet = Wallet(
+    Wallet wallet = await Wallet(
         phone: phoneNo,
         total_amount: 0,
         winning_amount: 0,
@@ -86,26 +87,32 @@ class RegisterProvider extends ChangeNotifier{
     );
     DBRef.child("Wallet").child(phoneNo).set(wallet.toJson());
     DBRef.child("Users").child(phoneNo).set(user.toJson());
-
+   // Navigator.of(context).pop();
   }
   Future<void> signUp({String otp,BuildContext context}) async {
     try{
+      showDialog(context: context,
+          builder: (BuildContext context) {
+            return Center(child: CircularProgressIndicator(),);
+          });
       await FirebaseAuth.instance.signInWithCredential(PhoneAuthProvider.getCredential(
         verificationId: verficationId,
         smsCode: otp,
-      ));
+        //8160137998
+      )).then((value) =>  {
+       // Navigator.of(context).pop(),
+         updateDetail(),
+        Navigator.of(context).pop(),
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+              HomeNavigator()), (Route<dynamic> route) => false);
+        })
 
-      Future.delayed(Duration(seconds: 10), () {
-        updateDetail();
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-            HomeNavigator()), (Route<dynamic> route) => false);
-        // Navigator.of(context).pop();
-      }) ;
-
-
+      });
+     // updateDetail(context: context);
 
     } on Exception catch(e){
-      Fluttertoast.showToast(msg: "Please enter valid otp");
+      Fluttertoast.showToast(msg: e.toString());
         otp=null;
     }
 

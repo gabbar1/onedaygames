@@ -176,10 +176,6 @@ class MapScreenState extends State<OtpVerification>
                     Center(child: InkWell(
 
                       onTap:  () {
-                        showDialog(context: context,
-                            builder: (BuildContext context) {
-                              return Center(child: CircularProgressIndicator(),);
-                            });
                         login.signIn(context: context,otp: login.smsCode);
                         firebaseMessaging.subscribeToTopic("new_ticket");
                         firebaseMessaging.subscribeToTopic(login.phoneNo.replaceAll("+", ""));

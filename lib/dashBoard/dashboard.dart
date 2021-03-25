@@ -68,9 +68,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    var totalAmount = Provider.of<API>(context, listen: false).total_amount1;
-    var winningAmount = Provider.of<API>(context, listen: false).winning_amount1;
-    var num_of_game = Provider.of<API>(context, listen: false).num_of_game;
+    var totalAmount = Provider.of<API>(context, listen: false).total_amount1 ?? 0;
+    var winningAmount = Provider.of<API>(context, listen: false).winning_amount1 ?? 0;
+    var num_of_game = Provider.of<API>(context, listen: false).num_of_game ?? 0;
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
 

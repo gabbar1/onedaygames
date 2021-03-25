@@ -24,43 +24,6 @@ class MapScreenState extends State<LoginPage>
   String otp;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-/*  Future<User1> getuserDetail(String phone) async {
-    User1 user;
-    var snapshot = await DBRef.child("Users").once();
-    if (snapshot.value.toString().contains(phoneNo)) {
-      codeSent? Future.delayed(Duration(seconds: 5), () {
-        Navigator.of(context).pop();
-      }) : CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.amber)) ;
-      showDialog(context: context,
-          builder: (BuildContext context){
-            return Center(child: CircularProgressIndicator(),);
-          });
-      await loginAction();
-      Navigator.of(context).pop();
-    //  Fluttertoast.showToast(msg: "user found");
-      verifyPhone(phoneNo);
-      codeSent? Future.delayed(Duration(seconds: 5), () {
-        //Navigator.of(context).pop();
-      }) : CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Colors.amber)) ;
-      showDialog(context: context,
-          builder: (BuildContext context){
-            return Center(child: CircularProgressIndicator(),);
-          });
-      await loginAction();
-      Navigator.of(context).pop();
-      Fluttertoast.showToast(msg: verficationId.toString());
-      if(verficationId!=null){
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => OtpVerification(phone: phoneNo, verficationId: verficationId),)
-        );
-      }
-
-    }
-    else if(!snapshot.value.toString().contains(phoneNo)){
-      _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("User not found Please Register",style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),));
-
-    }
-  }*/
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override

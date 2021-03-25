@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_local_notifications_platform_interface/src/notification_app_launch_details.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -292,7 +293,10 @@ class MapScreenState extends State<Profile>
                                     .asset(
                                     "assets/icons/logout.svg"),
                               ),onTap: (){
-                               AuthService().signOut();
+                                SchedulerBinding.instance.addPostFrameCallback((_) {
+                                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+                                      AuthService().signOut()), (Route<dynamic> route) => false);
+                                });
 
                               },),
                               SizedBox(height: 5,),

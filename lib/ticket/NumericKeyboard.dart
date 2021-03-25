@@ -9,6 +9,7 @@ import 'package:mailer/smtp_server/hostinger.dart';
 import 'package:oneday/Model/number.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/dashBoard/homeNavigator.dart';
+import 'package:oneday/helper/appUtils.dart';
 import 'package:oneday/main.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
 import 'package:intl/intl.dart';
@@ -35,7 +36,6 @@ class _TicketScreenState extends State<TicketScreen> {
   String uid="" ;
   String name;
   String phone;
-  String to;
   String add;
   String lead;
   String peakup_date;
@@ -72,10 +72,10 @@ class _TicketScreenState extends State<TicketScreen> {
 
   sendMail()async{
 
-
     i=1;
     String username = "tickets@onedaygames.in";
     String password= "Onedaygames@2020";
+    var to;
     transRef.child("Users").child(widget.phone).once().then((DataSnapshot snapshot) {
       if(snapshot!= null){
         Map<dynamic, dynamic> values= snapshot.value;
@@ -86,10 +86,10 @@ class _TicketScreenState extends State<TicketScreen> {
       }
     });
     final smtpServer = hostinger(username,password);
-
+    print("------Email------------"+widget.email.toString());
     final message = Message()
       ..from = Address(username)
-      ..recipients.add(to)
+      ..recipients.add(widget.email)
 
       ..subject = "You Bought ${widget.ticket_type} ticket on : ${DateTime.now()}"
       ..html = "<h3>THANK YOU FOR CHOOSING ONEDAY \n\n Your Ticket number is ${selectedchar+strPin} \n\n Result will be announce at ${widget.deadline}</h3>";
@@ -186,7 +186,6 @@ class _TicketScreenState extends State<TicketScreen> {
     }else{
       amnt=0;
     }
-    //print('HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH'+name);
   }
   getAmount(int a) async {
 
@@ -203,6 +202,7 @@ class _TicketScreenState extends State<TicketScreen> {
   String selectedchar;
   @override
   Widget build(BuildContext context) {
+    print("---------------phone-------------"+widget.phone);
     return Scaffold(
         backgroundColor: Colors.amber,
         appBar: AppBar(title: Text(buy,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
@@ -316,7 +316,6 @@ class _TicketScreenState extends State<TicketScreen> {
 
                     }
                 ),
-
               ],
             ),
             Row(
@@ -324,9 +323,7 @@ class _TicketScreenState extends State<TicketScreen> {
               children: [
                 Container(
                   width: 60.0,
-                  child:
-
-                  MaterialButton(
+                  child: MaterialButton(
                       onPressed: (){
                         if(selectedchar == null){
 
@@ -405,9 +402,6 @@ class _TicketScreenState extends State<TicketScreen> {
                                       color: Colors.green,
                                       child: Text(buy_ticket,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold)),
                                       onPressed: () async {
-
-
-                                          // Fluttertoast.showToast(msg:"nss"+ widget.ticket_type.toString());
                                           cutAmount();
                                           var now = new DateTime.now();
                                           DBRef.child("Sold_tickets").child(widget.phone).push().set({
@@ -464,9 +458,38 @@ class _TicketScreenState extends State<TicketScreen> {
                                           });
                                           sendMail();
                                           Navigator.pop(context);
-                                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-                                              HomeNavigator()), (Route<dynamic> route) => true);
-                                          firebaseMessaging.subscribeToTopic(widget.ticket_id);
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              // return object of type Dialog
+                                              return AlertDialog(
+                                                title: new Text(
+                                                  "OneDay",
+                                                  style: TextStyle(fontWeight: FontWeight.w700),
+                                                ),
+                                                content:
+                                                new Text("Thank you for buying ticket", style: TextStyle(fontWeight: FontWeight.w500)),
+                                                actions: <Widget>[
+                                                  // usually buttons at the bottom of the dialog
+                                                  new FlatButton(
+                                                    child: new Text(
+                                                      "Ok",
+                                                      style: TextStyle(fontWeight: FontWeight.w700),
+                                                    ),
+                                                    onPressed: () {
+                                                      firebaseMessaging.subscribeToTopic(widget.ticket_id);
+                                                      Navigator.pop(context);
+                                                      Navigator.pop(context);
+                                                      /*Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+                                                          HomeNavigator()), (Route<dynamic> route) => true);*/
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+
+
                                           
                                         }
                                     ),
@@ -504,7 +527,6 @@ class _TicketScreenState extends State<TicketScreen> {
                     child: Icon(Icons.backspace_outlined,size: 35,color: Colors.white,) ,
                   ),
                 ),
-
               ],
             )
           ],

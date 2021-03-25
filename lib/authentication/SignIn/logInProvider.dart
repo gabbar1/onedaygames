@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oneday/authentication/SignIn/OtpVerification.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
@@ -54,19 +55,25 @@ class LoginProvider extends ChangeNotifier{
 
   Future<void> signIn({String otp, BuildContext context}) async {
     try{
+      showDialog(context: context,
+          builder: (BuildContext context) {
+            return Center(child: CircularProgressIndicator(),);
+          });
       await FirebaseAuth.instance
           .signInWithCredential(PhoneAuthProvider.getCredential(
         verificationId: verficationId,
         smsCode: otp,
-      ));
-      Future.delayed(Duration(seconds: 10), () {
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-            HomeNavigator()), (Route<dynamic> route) => false);
-       // Navigator.of(context).pop();
-      }) ;
+      )).then((value) => {
+        Navigator.of(context).pop(),
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+              HomeNavigator()), (Route<dynamic> route) => false);
+        })
+      });
+
       //Navigator.pop(context);
     } on Exception catch(e){
-      Fluttertoast.showToast(msg: "Please enter valid otp");
+      Fluttertoast.showToast(msg: e.toString());
         otp=null;
 
     }
