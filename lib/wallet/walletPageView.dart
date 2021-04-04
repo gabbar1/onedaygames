@@ -194,7 +194,7 @@ class _WalletPageState extends State<WalletPage> {
           ),
           Center(
             child: Text(language.totalamnt,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
           ),
           SizedBox(
             height: 5,
@@ -204,10 +204,7 @@ class _WalletPageState extends State<WalletPage> {
                 myBalance.total_amount1 == null
                     ? "₹ 0"
                     : "₹ " + myBalance.total_amount1,
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold)),
+                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
           ),
           FlatButton(
               color: Colors.green,
@@ -249,10 +246,7 @@ class _WalletPageState extends State<WalletPage> {
                     ),
                     Text(
                       language.addedmoney,
-                      style: GoogleFonts.barlowCondensed(
-                          textStyle: Theme.of(context).textTheme.headline5,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
+                      style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
                     IconButton(
@@ -335,7 +329,7 @@ class _WalletPageState extends State<WalletPage> {
                 width: 20,
               ),
               Text(language.transaction,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
               Icon(Icons.arrow_forward_ios_sharp),
               SizedBox(
@@ -368,8 +362,7 @@ class _WalletPageState extends State<WalletPage> {
               SizedBox(
                 width: 20,
               ),
-              Text(language.redeem,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+              Text(language.redeem, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
               Expanded(
                 child: Container(
@@ -489,7 +482,7 @@ class _WalletPageState extends State<WalletPage> {
                 width: 20,
               ),
               Text(language.sendmoney,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
               Icon(Icons.arrow_forward_ios_sharp),
               SizedBox(
@@ -519,7 +512,7 @@ class _WalletPageState extends State<WalletPage> {
                 width: 20,
               ),
               Text(language.Refer,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5, fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
               Icon(Icons.arrow_forward_ios_sharp),
               SizedBox(

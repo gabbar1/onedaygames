@@ -173,9 +173,7 @@ class MapScreenState extends State<Profile>
                           Visibility(
                             child: RaisedButton(
                               child: Text(language.upload,
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold)),
+                                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15, fontWeight: FontWeight.bold)),
                               color: Colors.yellow[600],
                               onPressed: () {
                                 _visible = false;
@@ -189,8 +187,7 @@ class MapScreenState extends State<Profile>
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
                               vm.username == null ? "My Name" : vm.username,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                              style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],
@@ -269,8 +266,7 @@ class MapScreenState extends State<Profile>
                           height: 5,
                         ),
                         Text(language.wallet,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))
+                            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold))
                       ],
                     ),
                   ),
@@ -298,8 +294,7 @@ class MapScreenState extends State<Profile>
                           height: 5,
                         ),
                         Text(language.logout,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
+                            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
@@ -322,8 +317,7 @@ class MapScreenState extends State<Profile>
                           height: 5,
                         ),
                         Text(language.Edit,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold))
+                            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold))
                       ],
                     ),
                   ),
@@ -332,37 +326,36 @@ class MapScreenState extends State<Profile>
             ),
           ),
           ListTile(
-            title: Text(language.Email,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            title: Text(language.Email,  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold)),
             subtitle: Text(
               vm.email == null ? "My Email" : vm.email,
-              style: TextStyle(fontSize: 12),
+              style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:18, ),
             ),
             leading: Icon(Icons.email),
           ),
           Divider(),
           ListTile(
             title: Text(language.phone,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                 style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold)),
             subtitle: new Text(uid,
                 style: GoogleFonts.barlowCondensed(
                   textStyle: Theme.of(context).textTheme.headline5,
-                  fontSize: 12,
+                  fontSize: 18,
                 )),
             leading: Icon(Icons.phone),
           ),
           Divider(),
           ListTile(
             title: Text(language.stt,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            subtitle: Text(vm.state == null ? "My State" : vm.state),
+                 style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold)),
+            subtitle: Text(vm.state == null ? "My State" : vm.state, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:18, ),),
             leading: Icon(Icons.location_city),
           ),
           Divider(),
           ListTile(
             title: Text(language.pinc,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            subtitle: new Text(vm.pincode == null ? "my Pincode" : vm.pincode),
+                 style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold)),
+            subtitle: new Text(vm.pincode == null ? "my Pincode" : vm.pincode, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:18, ),),
             leading: Icon(Icons.pin_drop),
           ),
         ],
@@ -376,11 +369,11 @@ class MapScreenState extends State<Profile>
               padding:
                   EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
               child: Text(language.namep,
-                  style: TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold))),
+                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:22,fontWeight: FontWeight.bold ),)),
           Padding(
               padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 8.0),
               child: new TextFormField(
+                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20 ),
                 controller: _nameController,
                 decoration: InputDecoration(hintText: language.enamep),
                 onChanged: (val) {
@@ -393,12 +386,12 @@ class MapScreenState extends State<Profile>
                   EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
               child: Text(
                 language.Email,
-                style:
-                    TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:22,fontWeight: FontWeight.bold )
               )),
           Padding(
               padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 2.0),
               child: new TextField(
+                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20),
                 controller: _emailController,
                 decoration: InputDecoration(hintText: language.eEmail),
                 onChanged: (val) {
@@ -410,7 +403,7 @@ class MapScreenState extends State<Profile>
             padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
             child: Text(
               language.phone,
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+               style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:22, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
@@ -419,7 +412,7 @@ class MapScreenState extends State<Profile>
               uid,
               style: GoogleFonts.barlowCondensed(
                 textStyle: Theme.of(context).textTheme.headline5,
-                fontSize: 12,
+                fontSize: 20,
               ),
             ),
           ),
@@ -427,23 +420,23 @@ class MapScreenState extends State<Profile>
               padding:
                   EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
               child: new Row(
-                mainAxisSize: MainAxisSize.max,
+
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Container(
                     child: new Text(
                       language.pinc,
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:22,fontWeight: FontWeight.bold )
                     ),
                   ),
+                  Spacer(),
                   Container(
                     child: new Text(
                       language.stt,
-                      style: TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:22,fontWeight: FontWeight.bold )
                     ),
                   ),
+                  SizedBox(width: 123,)
                 ],
               )),
           Padding(
@@ -456,6 +449,7 @@ class MapScreenState extends State<Profile>
                     child: Padding(
                       padding: EdgeInsets.only(right: 10.0),
                       child: new TextField(
+                        style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20 ),
                         controller: _pinCode,
                         decoration:
                             InputDecoration(hintText: language.epinc),
@@ -469,6 +463,7 @@ class MapScreenState extends State<Profile>
                   ),
                   Flexible(
                     child: new TextField(
+                      style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20 ),
                       controller: _state,
                       decoration:
                           InputDecoration(hintText: language.estt),
@@ -522,8 +517,7 @@ class MapScreenState extends State<Profile>
               child: Container(
                   child: new RaisedButton(
                 child: new Text(language.save,
-                    style:
-                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20 ),),
                 textColor: Colors.white,
                 color: Colors.green,
                 onPressed: () {
@@ -545,8 +539,7 @@ class MapScreenState extends State<Profile>
               child: Container(
                   child: new RaisedButton(
                 child: new Text(language.cancel,
-                    style:
-                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20 ),),
                 textColor: Colors.white,
                 color: Colors.red,
                 onPressed: () {

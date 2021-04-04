@@ -107,7 +107,7 @@ class _SidebarMenuState extends State<SidebarMenu> {
             ),
           ),
           Text(vm.username.toString() == null ?"   " + "My Name":"   "+ vm.username.toString(),
-             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20)),
+              style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20,fontWeight: FontWeight.bold)),
           Spacer(),
           Icon(Icons.arrow_forward_ios, size: 20,
             color: Colors.amber,),

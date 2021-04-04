@@ -87,8 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
           centerTitle: true,
           title: Text(
             "OneDay",
-            style: GoogleFonts.barlowCondensed(
-                textStyle: Theme.of(context).textTheme.headline5),
+            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline3),
           ),
           actions: [
             IconButton(
@@ -171,7 +170,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   language.daily,
                   style: GoogleFonts.barlowCondensed(
                       textStyle: Theme.of(context).textTheme.headline5,
-                      fontSize: 15),
+                      fontSize: 20),
                 ),
               ),
               Tab(
@@ -179,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   language.weekly,
                   style: GoogleFonts.barlowCondensed(
                       textStyle: Theme.of(context).textTheme.headline5,
-                      fontSize: 15),
+                      fontSize: 20),
                 ),
               ),
               Tab(
@@ -187,7 +186,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   language.monthly,
                   style: GoogleFonts.barlowCondensed(
                       textStyle: Theme.of(context).textTheme.headline5,
-                      fontSize: 15),
+                      fontSize: 20),
                 ),
               ),
               Tab(
@@ -195,7 +194,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   language.special,
                   style: GoogleFonts.barlowCondensed(
                       textStyle: Theme.of(context).textTheme.headline5,
-                      fontSize: 15),
+                      fontSize: 20),
                 ),
               ),
             ],
@@ -259,12 +258,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: <Widget>[
                           Row(
                             children: [
-                              Text("ONE DAY",
-                                  style: GoogleFonts.barlowCondensed(
-                                      textStyle:
-                                      Theme.of(context).textTheme.headline5,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.bold)),
+                              Text("ONE DAY", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold)),
                               Spacer(),
                               FutureBuilder(
                                   future: (vm.getremainingtime(
@@ -273,12 +267,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                     //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                     if (ftr.hasData) {
                                       if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                        return Text(language.closed);
+                                        return Text(language.closed, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       } else {
-                                        return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
+                                        return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       }
                                     } else {
-                                      return Text("Loading...");
+                                      return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                     }
                                   }),
                             ],
@@ -292,15 +286,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                 language.leaderboard,
                                 style: GoogleFonts.barlowCondensed(
                                     textStyle:
-                                    Theme.of(context).textTheme.headline5,
+                                    Theme.of(context).textTheme.headline4,
                                     fontSize: 20,
                                     color: Colors.amber,
                                     fontWeight: FontWeight.bold),
                               ),
                               Spacer(),
                               RaisedButton(
-                                child: Text(vm.daily_ticket[snapshot].amount
-                                    .toString()),
+                                child: Text(vm.daily_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold)),
                                 color: Colors.green,
                                 onPressed: () {
                                   vm.comparetimeleft(
@@ -368,7 +361,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 10,
+                                     fontSize:16,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
                             ],
@@ -463,7 +456,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
-                                       fontSize: 10,
+                                      fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
                                FutureBuilder(
@@ -473,12 +466,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                      //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                      if (ftr.hasData) {
                                        if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                         return Text(language.closed);
+                                         return Text(language.closed, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        } else {
-                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
+                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        }
                                      } else {
-                                       return Text("Loading...");
+                                       return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
                              ],
@@ -550,7 +543,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
-                                       fontSize: 10,
+                                      fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
                              ],
@@ -640,7 +633,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
-                                       fontSize: 10,
+                                      fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
                                FutureBuilder(
@@ -650,12 +643,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                      //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                      if (ftr.hasData) {
                                        if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                         return Text(language.closed);
+                                         return Text(language.closed, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        } else {
-                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
+                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        }
                                      } else {
-                                       return Text("Loading...");
+                                       return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
                              ],
@@ -726,7 +719,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
-                                       fontSize: 10,
+                                      fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
                              ],
@@ -818,7 +811,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 10,
+                                       fontSize:16,
                                         fontWeight: FontWeight.bold)),
                                 Spacer(),
                                 FutureBuilder(
@@ -828,12 +821,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                       //  print("--------deadline----"+vm.ticket_deadline1.toString());
                                       if (ftr.hasData) {
                                         if ((((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")).contains("-")) {
-                                          return Text(language.closed);
+                                          return Text(language.closed, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                         } else {
-                                          return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"));
+                                          return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                         }
                                       } else {
-                                        return Text("Loading...");
+                                        return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       }
                                     }),
                               ],
@@ -905,7 +898,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                     style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 10,
+                                       fontSize:16,
                                         fontWeight: FontWeight.bold)),
                                 Spacer(),
                               ],
@@ -988,7 +981,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                           Theme.of(context).textTheme.headline5,
-                                      fontSize: 10,
+                                     fontSize:16,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
                               /*Consumer<API>(builder: (context, API, child) {
@@ -1062,7 +1055,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                           Theme.of(context).textTheme.headline5,
-                                      fontSize: 10,
+                                     fontSize:16,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
                             ],
