@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Model/user.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/wallet/walletPageView.dart';
@@ -104,7 +105,11 @@ class _KYCState extends State<KYC> {
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text(account_detl),
+        title: Text(account_detl,style: GoogleFonts.barlowCondensed(
+            textStyle:
+            Theme.of(context).textTheme.headline5,
+            fontSize:20,
+            fontWeight: FontWeight.bold)),
 
       ),
       body: SingleChildScrollView(
@@ -165,9 +170,11 @@ class _KYCState extends State<KYC> {
                 child:
                 new Text(
                   act_no,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold)
                 ),
               ),
               Padding(
@@ -175,6 +182,11 @@ class _KYCState extends State<KYC> {
                     left: 25.0, right: 25.0, top: 2.0),
                 child:
                 new TextField(
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle:
+                      Theme.of(context).textTheme.headline5,
+                      fontSize:16,
+                      fontWeight: FontWeight.bold),
                   obscureText: true,
                   decoration:  InputDecoration(
                       hintText: p_act_no),
@@ -189,9 +201,11 @@ class _KYCState extends State<KYC> {
                 child:
                 new Text(
                   cact_no,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold)
                 ),
               ),
               Padding(
@@ -199,7 +213,11 @@ class _KYCState extends State<KYC> {
                     left: 25.0, right: 25.0, top: 2.0),
                 child:
                 new TextField(
-
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold),
                   decoration:  InputDecoration(
                       hintText: p_cact_no),
                   onChanged: (val){
@@ -212,8 +230,10 @@ class _KYCState extends State<KYC> {
                     left: 25.0, right: 25.0, top: 25.0),
                 child:
                 Text(ifsc_no,
-                  style: TextStyle(
-                      fontSize: 16.0,
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle:
+                      Theme.of(context).textTheme.headline5,
+                      fontSize:16,
                       fontWeight: FontWeight.bold),
                 ),
               ),
@@ -222,7 +242,11 @@ class _KYCState extends State<KYC> {
                     left: 25.0, right: 25.0, top: 8.0),
                 child:
                 new TextField(
-
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold),
                   decoration:  InputDecoration(
 
                       hintText: p_ifsc_no),
@@ -240,9 +264,11 @@ class _KYCState extends State<KYC> {
 
                 new Text(
                   name_ac,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold),
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold),
                 ),
               ),
               Padding(
@@ -250,6 +276,11 @@ class _KYCState extends State<KYC> {
                     left: 25.0, right: 25.0, top: 2.0),
 
                 child: new TextField(
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle:
+                        Theme.of(context).textTheme.headline5,
+                        fontSize:16,
+                        fontWeight: FontWeight.bold),
                   decoration:  InputDecoration(
                       hintText: p_name),
                   keyboardType: TextInputType.emailAddress,
@@ -259,7 +290,6 @@ class _KYCState extends State<KYC> {
                   },
                 ),
               ),
-
               SizedBox(height: 10,),
               Center(child: InkWell(
 
@@ -298,6 +328,12 @@ class _KYCState extends State<KYC> {
                   color: Colors.green,
                   child: Text(
                     submit,
+
+                      style: GoogleFonts.barlowCondensed(
+                          textStyle:
+                          Theme.of(context).textTheme.headline5,
+                          fontSize:16,
+                          fontWeight: FontWeight.bold)
 
                   ),
                 ),

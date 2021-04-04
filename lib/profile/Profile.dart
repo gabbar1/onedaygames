@@ -162,6 +162,7 @@ class MapScreenState extends State<Profile>
                 print(uid);
               },
               child: ListView(
+                padding: EdgeInsets.only(bottom: 50),
                 children: <Widget>[
                   Container(
                       width: MediaQuery.of(context).size.width,
@@ -249,6 +250,7 @@ class MapScreenState extends State<Profile>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
+                  SizedBox(width: 10,),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -270,6 +272,7 @@ class MapScreenState extends State<Profile>
                       ],
                     ),
                   ),
+                  Spacer(),
                   GestureDetector(onTap: () {
                     AuthService().signOut();
                     SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -298,6 +301,7 @@ class MapScreenState extends State<Profile>
                       ],
                     ),
                   ),
+                  Spacer(),
                   GestureDetector(onTap: () {
                     setState(() {
                       _status = false;
@@ -321,6 +325,7 @@ class MapScreenState extends State<Profile>
                       ],
                     ),
                   ),
+                  SizedBox(width: 10,)
                 ],
               ),
             ),
