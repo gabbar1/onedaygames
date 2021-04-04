@@ -22,21 +22,7 @@ class UserTransactionProvider extends ChangeNotifier {
 
         });
       }
-      if(values!=null){
-        values.forEach((key, values) {
-          UserTransactionModel lottery =  UserTransactionModel(
-              email: values["email"],
-              amount: values["amount"].toString(),
-              name: values["name"],
-              status: values["status"],
-              time: values["time"],
-              transactionId: values["transactionId"],
-              upi: values["upi"].toString()
-          );
-          transaction.add(lottery);
 
-        });
-      }
     });
   }
 

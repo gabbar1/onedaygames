@@ -44,80 +44,176 @@ class  WalletPageProvider extends ChangeNotifier{
     });
   }
 
-  sendRedeemRequest({BuildContext context,GlobalKey<ScaffoldState> scaffoldKey,String uid}){
+  sendRedeemRequest({BuildContext context,String uid,var redeemAmount,message}){
     var vm = Provider.of<API>(context, listen: false);
     var language = Provider.of<Language>(context, listen: false);
-    if( vm.winning_amount1 == "null" ||vm.winning_amount1==0.toString()){
-     // scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.insufficient,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold,color: Colors.amber)),));
-      final snackBar =
-      SnackBar(content: Text(language.insufficient,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold,color: Colors.amber)));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    else {
+    transRef.child("Redeem").child(uid).once()
+        .then((DataSnapshot snapshot) {
+      //status= snapshot.value("status");
+      var val =  Status.fromJson(snapshot.value);
+      print("0000000000000000000000000000000000000000000000"+val.status.toString());
+      if (val.status==0){
 
-      return showDialog<void>(
-        context: context,
-        barrierDismissible: true, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-              backgroundColor: Colors.white,
-              title: Center(child:Text(language.redeem,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold))),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text( vm.winning_amount1 == null ?language.wiining_msg+" : ₹ 0" : "₹ "+vm.winning_amount1,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),
-                  Divider(),
-                  Center(child:  Row(children: [
-                    FlatButton(onPressed: (){
-                      transRef.child("Users").child(uid).once()
-                          .then((DataSnapshot snapshot) {
-                        //  Map<dynamic, dynamic> values= snapshot.value;
-                        var user = User1.fromJson(snapshot.value);
-                        if (user.user_ac == null) {
-                          Fluttertoast.showToast(msg: language.kyc);
-                          Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (_) =>  KYC(cls: "WalletPage()",)
-                              ));
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            // return object of type Dialog
+            return AlertDialog(
+              title: new Text(
+                "OneDay",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+              content:
+              new Text(language.pending, style: TextStyle(fontWeight: FontWeight.w500)),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text(
+                    "Ok",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+      else if (val.status==2){
+        status = language.process;
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            // return object of type Dialog
+            return AlertDialog(
+              title: new Text(
+                "OneDay",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+              content:
+              new Text(language.pending, style: TextStyle(fontWeight: FontWeight.w500)),
+              actions: <Widget>[
+                // usually buttons at the bottom of the dialog
+                new FlatButton(
+                  child: new Text(
+                    "Ok",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
+      else{
+        return showDialog<void>(
+          context: context,
+          barrierDismissible: true, // user must tap button!
+          builder: (BuildContext context) {
+            return AlertDialog(
+                backgroundColor: Colors.white,
+                title: Center(child:Text(language.redeem,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold))),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text( redeemAmount == null ?language.wiining_msg+" : ₹ 0" : "₹ "+redeemAmount,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),
+                    Divider(),
+                    Center(child:  Row(children: [
+                      FlatButton(onPressed: (){
+                        transRef.child("Users").child(uid).once()
+                            .then((DataSnapshot snapshot) {
+                          //  Map<dynamic, dynamic> values= snapshot.value;
+                          var user = User1.fromJson(snapshot.value);
+                          if (user.user_ac == null) {
+                            Fluttertoast.showToast(msg: language.kyc);
+                            Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (_) =>  KYC(cls: "WalletPage()",)
+                                ));
 
-                        }else{
-                          var now = new DateTime.now();
-                          transRef.child("Redeem").child(uid).update({
-                            'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
-                            'redeem_amount':vm.winning_amount1,
-                            'phone':uid,
-                            'ac_no':user.user_ac.toString(),
-                            'user_name':user.user_ac_name.toString(),
-                            'user_ifsc':user.ifsc.toString(),
-                            'status':0
+                          }else{
+                            var now = new DateTime.now();
+                            transRef.child("Redeem").child(uid).update({
+                              'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
+                              'redeem_amount':redeemAmount,
+                              'phone':uid,
+                              'ac_no':user.user_ac.toString(),
+                              'user_name':user.user_ac_name.toString(),
+                              'user_ifsc':user.ifsc.toString(),
+                              'status':0
 
-                          });
-                          transRef.child("Wallet").child(uid).update({
-                            'winning_amount':0
-                          });
-                          Navigator.pop(context);
+                            });
+                            transRef.child("Wallet").child(uid).update({
+                              'winning_amount':int.parse(vm.winning_amount1) - int.parse(redeemAmount) == null ? 0 : int.parse(vm.winning_amount1) - int.parse(redeemAmount),
+                              'total_amount':int.parse(vm.total_amount1) - int.parse(redeemAmount) == null ? 0 : int.parse(vm.total_amount1) - int.parse(redeemAmount),
+                            });
+                            transRef.child("User_Transaction").child(uid).push().set({
+                              'time':DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').format(now),
+                              'amount':redeemAmount,
+                              'phone':uid,
+                              'status':"W",
+                              'email':vm.email,
+                              'name':vm.name
+                            });
+                            Navigator.pop(context);
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                // return object of type Dialog
+                                return AlertDialog(
+                                  title: new Text(
+                                    "OneDay",
+                                    style: TextStyle(fontWeight: FontWeight.w700),
+                                  ),
+                                  content:
+                                  new Text(message, style: TextStyle(fontWeight: FontWeight.w500)),
+                                  actions: <Widget>[
+                                    // usually buttons at the bottom of the dialog
+                                    new FlatButton(
+                                      child: new Text(
+                                        "Ok",
+                                        style: TextStyle(fontWeight: FontWeight.w700),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
 
-                        }
-
-                      
-
-                      });
+                          }
 
 
 
-                    }, child: Text(language.confirm,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),color: Colors.green,),
-                    SizedBox(width: 50,),
-                    FlatButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, child: Text(language.cancel,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),color: Colors.red,)
-                  ],),)
+                        });
 
-                ],)
 
-          );
-        },
-      );
-    }
+
+                      }, child: Text(language.confirm,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),color: Colors.green,),
+                      SizedBox(width: 50,),
+                      FlatButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, child: Text(language.cancel,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 10,fontWeight: FontWeight.bold)),color: Colors.red,)
+                    ],),)
+
+                  ],)
+
+            );
+          },
+        );
+      }
+      notifyListeners();
+    });
+
+
   }
 
  Future<void> transactionDetails() async{

@@ -1,49 +1,41 @@
 {
   "project_info": {
-    "project_number": "467762317022",
-    "firebase_url": "https://helloflutter-bd2ed.firebaseio.com",
-    "project_id": "helloflutter-bd2ed",
-    "storage_bucket": "helloflutter-bd2ed.appspot.com"
+    "project_number": "1086897691021",
+    "firebase_url": "https://onedaygames-tickets-default-rtdb.firebaseio.com",
+    "project_id": "onedaygames-tickets",
+    "storage_bucket": "onedaygames-tickets.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:467762317022:android:dac14a911039af35ae644f",
+        "mobilesdk_app_id": "1:1086897691021:android:946bef4a01a17ec08c85c4",
         "android_client_info": {
           "package_name": "com.boss.oneday"
         }
       },
       "oauth_client": [
         {
-          "client_id": "467762317022-nujq3n18rk4l8rv76sglbtfs2b3fdga8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.boss.oneday",
-            "certificate_hash": "ebf573cce432efea3a49cf3effb8183616924076"
-          }
-        },
-        {
-          "client_id": "467762317022-3hb6g0dc59v4egur9f41igo4njtoe4i9.apps.googleusercontent.com",
+          "client_id": "1086897691021-ulnsti7vljajesutrin59ccd0r3nonuc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCvoalVqorJBdApPAtf08pB6D12QoyNsl0"
+          "current_key": "AIzaSyAv6VBhljruJqCeQIo5Cc4aNwI0nqW8Cy0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "467762317022-3hb6g0dc59v4egur9f41igo4njtoe4i9.apps.googleusercontent.com",
+              "client_id": "1086897691021-ulnsti7vljajesutrin59ccd0r3nonuc.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "467762317022-a52fh9rkicb9v38ng6i7s8mabm5p8gic.apps.googleusercontent.com",
+              "client_id": "1086897691021-hu0ci56ct9nt9ot8ig3gafn1qour3ne7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.onedaygames"
+                "bundle_id": "com.boss.oneday"
               }
             }
           ]

@@ -100,6 +100,7 @@ class Language extends ChangeNotifier {
   String time_left = "time left : ";
   String leaderboard = "Check leaderboard";
   String pending = "Pending";
+  String pendingMoney = "You have ongoing withdrawal request";
   String received = "received";
   String process = "Process";
   String noRequest = "No Request";
@@ -116,6 +117,11 @@ class Language extends ChangeNotifier {
   String minAdd = "Please note minimum 500 rs can be added";
   String inValidTransaction = "This transaction ID is invalid";
   String addRequest = "Thank you for request your money will be added within 3 hours";
+  String withdraw = "withdrawal";
+  String maxAdd = "You have only " ;
+  String maxxAddPost_text = " INR available for  withdraw ";
+  var redeemMessage = "Thank you for withdrawal request, Your money will be added in your bank account within 2 working days.";
+  var minRedeem = "Please note minimum 500 rs can be withdrawn";
 
   getLanguage(String uid){
     DatabaseReference transRef = FirebaseDatabase.instance.reference();
@@ -125,6 +131,12 @@ class Language extends ChangeNotifier {
         var user = User1.fromJson(values);
           status2 = user.bool_lang;
           if(status2 == true){
+            pendingMoney = "You have ongoing withdrawal request";
+            minRedeem = "Please note minimum 500 rs can be withdrawn";
+            withdraw = "withdrawal";
+             redeemMessage = "Thank you for withdrawal request, Your money will be added in your bank account within 2 working days.";
+             maxAdd = "You have only " ;
+             maxxAddPost_text = " INR available for  withdraw ";
             addRequest = "Thank you for request your money will be added within 3 hours";
             inValidTransaction = "This transaction ID is invalid";
             minAdd = "Please note minimum 500 rs can be added";
@@ -242,6 +254,12 @@ class Language extends ChangeNotifier {
              amount = "Amount";
           }
           else if (status2 == false){
+            pendingMoney = "आपके पास निकासी का अनुरोध जारी है";
+            minRedeem = "कृपया ध्यान दें कि न्यूनतम 500 रुपये निकाले जा सकते हैं";
+            withdraw = "निकासी";
+            redeemMessage = "निकासी अनुरोध के लिए धन्यवाद, आपका पैसा आपके बैंक खाते में 2 कार्य दिवसों में जुड़ जाएगा।";
+             maxAdd = "आपके पास रिडीम करने के लिए केवल " ;
+             maxxAddPost_text = " रूपए  हैं  ";
             addRequest = "अनुरोध के लिए धन्यवाद आपका पैसा 3 घंटे के भीतर जुड़ जाएगा";
             inValidTransaction = "यह लेनदेन आईडी अमान्य है";
             minAdd = "कृपया ध्यान दें न्यूनतम 500 rs जोड़े जा सकते हैं";

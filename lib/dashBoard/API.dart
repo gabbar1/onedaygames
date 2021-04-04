@@ -1,26 +1,19 @@
 import 'dart:convert';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/lottery.dart';
 import 'package:oneday/Model/notification.dart';
 import 'package:oneday/Model/number.dart';
 import 'package:oneday/Model/wallet.dart';
 import 'package:oneday/Model/winner_price.dart';
 import 'package:oneday/Winner/Winners.dart';
-import 'package:oneday/helper/appUtils.dart';
 import 'package:oneday/helper/constant.dart';
-import 'package:oneday/screen/payment/load_payment.dart';
 import 'package:oneday/test/Send_money_avidence.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
 import '../test/Leaderboard.dart';
 import '../ticket/NumericKeyboard.dart';
 
@@ -50,10 +43,8 @@ class API extends ChangeNotifier{
     onLoading(context: context,strMessage: "Loading");
     transRef.child('Lottery').child("daily").once().then((DataSnapshot snapshot) {
 
-      print("------------Waiting-----------");
       daily_ticket.clear();
       if(snapshot!= null){
-        print("------fgghfhf-------"+snapshot.hashCode.toString());
         Navigator.pop(context);
         Map<dynamic, dynamic> lotteryList = snapshot.value;
         lotteryList.forEach((key,value) {
@@ -70,11 +61,8 @@ class API extends ChangeNotifier{
 
   }
 
-  Future<void >getWeeklyLottery({String type}) async{
-
+  Future<void >getWeeklyLottery({BuildContext context}) async{
     transRef.child('Lottery').child("weekly").once().then((DataSnapshot snapshot) {
-      // onLoading(context: AppUtils().routeObserver.navigator.context,strMessage: "Loading");
-      print("------------Waiting-----------");
       weekly_ticket.clear();
       if(snapshot!= null){
         Map<dynamic, dynamic> lotteryList = snapshot.value;
@@ -92,8 +80,7 @@ class API extends ChangeNotifier{
 
   }
 
-  Future<void >getMonthlyLottery({String type}) async{
-
+  Future<void >getMonthlyLottery({BuildContext context}) async{
     transRef.child('Lottery').child("monthly").once().then((DataSnapshot snapshot) {
       monthly_ticket.clear();
       if(snapshot!= null){
@@ -111,7 +98,8 @@ class API extends ChangeNotifier{
     });
 
   }
-  Future<void >getSpecialLottery({String type}) async{
+  Future<void >getSpecialLottery({BuildContext context}) async{
+
     transRef.child('Lottery').child("special").once().then((DataSnapshot snapshot) {
       special_ticket.clear();
       if(snapshot!= null){

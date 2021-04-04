@@ -26,14 +26,14 @@ class WinnerProvider extends ChangeNotifier{
 
 
   Future<void >getDailyLottery({BuildContext context}) async{
-    onLoading(context: context,strMessage: "Loading");
+
     transRef.child('Lottery').child("daily").once().then((DataSnapshot snapshot) {
 
       print("------------Waiting-----------");
       daily_ticket.clear();
       if(snapshot!= null){
         print("------fgghfhf-------"+snapshot.hashCode.toString());
-        Navigator.pop(context);
+
         Map<dynamic, dynamic> lotteryList = snapshot.value;
         lotteryList.forEach((key,value) {
           Lottery sold = Lottery.fromJson(value);

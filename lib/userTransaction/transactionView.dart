@@ -67,15 +67,13 @@ class _TransactionViewState extends State<TransactionView> {
                           Text((tm.transaction[snapshot].time.toString()),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue))
                         ],),
                       Spacer(),
-                      if(tm.transaction[snapshot].status.toString()=="Y")
-                        Text(language.success,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),)
-                      else if(tm.transaction[snapshot].status.toString()=="N")
-                        Text(language.failed,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.red))
-                      else if(tm.transaction[snapshot].status.toString()=="S")
-                          Text(language.sent,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),)
+                      if(tm.transaction[snapshot].status.toString()=="Y")Text(language.success,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green),)
+                      else if(tm.transaction[snapshot].status.toString()=="N")Text(language.failed,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.red))
+                      else if(tm.transaction[snapshot].status.toString()=="S")Text(language.sent,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),)
                         else if(tm.transaction[snapshot].status.toString()=="T") Text(language.purchased,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.orange))
                           else if(tm.transaction[snapshot].status.toString()=="P") Text(language.pending,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.deepPurple))
                             else if(tm.transaction[snapshot].status.toString()=="R") Text(language.received,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.deepPurple))
+                            else if(tm.transaction[snapshot].status.toString()=="W") Text(language.withdraw,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.deepPurple))
 
                     ],
                   ),

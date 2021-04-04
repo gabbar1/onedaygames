@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:oneday/authentication/SignIn/OtpVerification.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
 import 'package:oneday/dashBoard/homeNavigator.dart';
 
 class LoginProvider extends ChangeNotifier{
@@ -65,10 +64,11 @@ class LoginProvider extends ChangeNotifier{
         smsCode: otp,
       )).then((value) => {
         Navigator.of(context).pop(),
-        SchedulerBinding.instance.addPostFrameCallback((_) {
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-              HomeNavigator()), (Route<dynamic> route) => false);
-        })
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+      HomeNavigator()), (Route<dynamic> route) => false);
+      })
+
       });
 
       //Navigator.pop(context);

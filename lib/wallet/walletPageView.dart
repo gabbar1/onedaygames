@@ -4,10 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Language/Language.dart';
+import 'package:oneday/Model/redeem_status.dart';
+import 'package:oneday/helper/smartRefresher.dart';
+import 'package:oneday/userTransaction/RedeemDialogue.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/sendMoney/sendmoney.dart';
 import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
 import 'package:oneday/wallet/walletPageProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:share/share.dart';
 import 'package:show_more_text_popup/show_more_text_popup.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -27,15 +31,15 @@ class _WalletPageState extends State<WalletPage> {
   String phonenum;
   String status = "No request";
   String user_ac_name, user_ifsc, user_ac;
-
+  RefreshController refreshController;
   void afterBuildFunction(BuildContext context) {
-
     Provider.of<API>(context, listen: false).userWallet(uid);
-
   }
+
   @override
   void initState() {
     super.initState();
+    refreshController = RefreshController(initialRefresh: false);
     this.uid = '';
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User user = auth.currentUser;
@@ -49,7 +53,6 @@ class _WalletPageState extends State<WalletPage> {
       Provider.of<WalletPageProvider>(context, listen: false)
           .checkStatus(phoneNo: uid, context: context);
     });
-
   }
 
   @override
@@ -63,117 +66,127 @@ class _WalletPageState extends State<WalletPage> {
   Widget build(BuildContext context) {
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
-   // vm.userWallet(uid);
-    return Consumer<API>(builder: (context, vm, child) {
-      return Scaffold(
-
-          backgroundColor: Colors.amber,
-          appBar: AppBar(
+    // vm.userWallet(uid);
+    return Consumer<API>(
+      builder: (context, vm, child) {
+        return Scaffold(
             backgroundColor: Colors.amber,
-            title: Text(language.wallet,
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold)),
-          ),
-          body:ListView(
-            children: [
-              Container(
-                height: 340,
-                child: Card(
-                  margin: EdgeInsets.symmetric(
-                    vertical: 5.0,
-                    horizontal: 10.0,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      topLeft: Radius.circular(10),
+            appBar: AppBar(
+              backgroundColor: Colors.amber,
+              title: Text(language.wallet,
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ),
+            body: SmartRefresher(
+              controller: refreshController,
+              onRefresh: () {
+                refreshController.refreshCompleted();
+                Provider.of<API>(context, listen: false).userWallet(uid);
+                Provider.of<API>(context, listen: false).userDetail(uid);
+                Provider.of<WalletPageProvider>(context, listen: false)
+                    .checkStatus(phoneNo: uid, context: context);
+              },
+              child: ListView(
+                children: [
+                  Container(
+                    height: 340,
+                    child: Card(
+                      margin: EdgeInsets.symmetric(
+                        vertical: 5.0,
+                        horizontal: 10.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(10),
+                          topRight: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                          topLeft: Radius.circular(10),
+                        ),
+                      ),
+                      child: Column(
+                        children: [_mybalance(), _details()],
+                      ),
+                      color: Colors.white,
                     ),
                   ),
-                  child: Column(
-                    children: [_mybalance(), _details()],
+                  Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 5.0,
+                      horizontal: 10.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                      ),
+                    ),
+                    child: _transaction(),
+                    color: Colors.white,
                   ),
-                  color: Colors.white,
-                ),
+                  Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 5.0,
+                      horizontal: 10.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                      ),
+                    ),
+                    child: _redeem(),
+                    color: Colors.white,
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 5.0,
+                      horizontal: 10.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                      ),
+                    ),
+                    child: _sendmoeny(),
+                    color: Colors.white,
+                  ),
+                  Card(
+                    margin: EdgeInsets.symmetric(
+                      vertical: 5.0,
+                      horizontal: 10.0,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        topLeft: Radius.circular(10),
+                      ),
+                    ),
+                    child: _refer(),
+                    color: Colors.white,
+                  )
+                ],
               ),
-              Card(
-                margin: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 10.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    topLeft: Radius.circular(10),
-                  ),
-                ),
-                child: _transaction(),
-                color: Colors.white,
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 10.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    topLeft: Radius.circular(10),
-                  ),
-                ),
-                child: _redeem(),
-                color: Colors.white,
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 10.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    topLeft: Radius.circular(10),
-                  ),
-                ),
-                child: _sendmoeny(),
-                color: Colors.white,
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(
-                  vertical: 5.0,
-                  horizontal: 10.0,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    topLeft: Radius.circular(10),
-                  ),
-                ),
-                child: _refer(),
-                color: Colors.white,
-              )
-            ],
-          ));
-    },);
+            ));
+      },
+    );
   }
 
   Widget _mybalance() {
-
     var language = Provider.of<Language>(context, listen: false);
     var vm = Provider.of<API>(context, listen: false);
     vm.userWallet(uid);
-    return Consumer<API>(builder: (context,myBalance,child){
+    return Consumer<API>(builder: (context, myBalance, child) {
       return Column(
         children: [
           SizedBox(
@@ -188,10 +201,12 @@ class _WalletPageState extends State<WalletPage> {
           ),
           Center(
             child: Text(
-                myBalance.total_amount1 == null ? "₹ 0" : "₹ " + myBalance.total_amount1,
+                myBalance.total_amount1 == null
+                    ? "₹ 0"
+                    : "₹ " + myBalance.total_amount1,
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold)),
           ),
           FlatButton(
@@ -236,7 +251,7 @@ class _WalletPageState extends State<WalletPage> {
                       language.addedmoney,
                       style: GoogleFonts.barlowCondensed(
                           textStyle: Theme.of(context).textTheme.headline5,
-                          fontSize: 10,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
@@ -258,7 +273,7 @@ class _WalletPageState extends State<WalletPage> {
                         : "  ₹ " + vm.added_amount1,
                     style: GoogleFonts.barlowCondensed(
                         textStyle: Theme.of(context).textTheme.headline5,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold)),
                 Divider(
                   thickness: 2,
@@ -272,7 +287,7 @@ class _WalletPageState extends State<WalletPage> {
                       language.winning,
                       style: GoogleFonts.barlowCondensed(
                           textStyle: Theme.of(context).textTheme.headline5,
-                          fontSize: 10,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold),
                     ),
                     Spacer(),
@@ -294,7 +309,7 @@ class _WalletPageState extends State<WalletPage> {
                         : "  ₹ " + vm.winning_amount1,
                     style: GoogleFonts.barlowCondensed(
                         textStyle: Theme.of(context).textTheme.headline5,
-                        fontSize: 10,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold)),
                 Divider(
                   thickness: 2,
@@ -356,24 +371,25 @@ class _WalletPageState extends State<WalletPage> {
               Text(language.redeem,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
               Spacer(),
-              Expanded(child:  Container(
-                margin: EdgeInsets.all(10),
-                  height: 25,
-
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red[500],
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(5))),
-                  child: Consumer<WalletPageProvider>(
-                    builder: (context, statusLang, child) {
-                      return Center(
-                        child: Text(statusLang.status,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold)),
-                      );
-                    },
-                  )),),
+              Expanded(
+                child: Container(
+                    margin: EdgeInsets.all(10),
+                    height: 25,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.red[500],
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                    child: Consumer<WalletPageProvider>(
+                      builder: (context, statusLang, child) {
+                        return Center(
+                          child: Text(statusLang.status,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold)),
+                        );
+                      },
+                    )),
+              ),
               SizedBox(
                 width: 20,
               )
@@ -382,8 +398,80 @@ class _WalletPageState extends State<WalletPage> {
         ),
       ),
       onTap: () {
-        wm.sendRedeemRequest(
-            context: context, scaffoldKey: scaffoldKey, uid: uid);
+        var language = Provider.of<Language>(context, listen: false);
+        transRef.child("Redeem").child(uid).once()
+            .then((DataSnapshot snapshot) {
+          //status= snapshot.value("status");
+          var val =  Status.fromJson(snapshot.value);
+          print("0000000000000000000000000000000000000000000000"+val.status.toString());
+          if (val.status==0){
+
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                // return object of type Dialog
+                return AlertDialog(
+                  title: new Text(
+                    "OneDay",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  content:
+                  new Text(language.pendingMoney, style: TextStyle(fontWeight: FontWeight.w500)),
+                  actions: <Widget>[
+                    // usually buttons at the bottom of the dialog
+                    new FlatButton(
+                      child: new Text(
+                        "Ok",
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+          else if (val.status==2){
+            status = language.process;
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                // return object of type Dialog
+                return AlertDialog(
+                  title: new Text(
+                    "OneDay",
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                  content:
+                  new Text(language.pendingMoney, style: TextStyle(fontWeight: FontWeight.w500)),
+                  actions: <Widget>[
+                    // usually buttons at the bottom of the dialog
+                    new FlatButton(
+                      child: new Text(
+                        "Ok",
+                        style: TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+         else{
+            Navigator.push(context,
+                MaterialPageRoute(
+                  ///builder: (context) => LoginPage(),
+                  builder: (context) => RedeemDialogue(title:"Redeem",amount: vm.winning_amount1,amountLlang: language.amount,addMoneyLang: language.addmoney,maxAdd: language.maxAdd,maxxAddPost_text: language.maxxAddPost_text,uid: uid,message: language.redeemMessage,minRedeem: language.minRedeem,),));
+          }
+        });
+
+
+
       },
     );
   }
