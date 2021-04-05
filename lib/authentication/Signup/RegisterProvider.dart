@@ -101,9 +101,10 @@ class RegisterProvider extends ChangeNotifier{
         //8160137998
       )).then((value) =>  {
        // Navigator.of(context).pop(),
-         updateDetail(),
+
         Navigator.of(context).pop(),
         WidgetsBinding.instance.addPostFrameCallback((_) {
+          updateDetail();
           Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
               HomeNavigator()), (Route<dynamic> route) => false);
         })

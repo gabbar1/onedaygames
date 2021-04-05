@@ -417,14 +417,14 @@ class API extends ChangeNotifier{
     transRef.child("Users").child(uid).once().then((DataSnapshot snapshot) async {
       if (snapshot != null) {
         Map<dynamic, dynamic> values = snapshot.value;
-        num_of_game = await values["num_of_game"].toString() ??0 ;
-        email =await values["email"].toString() ??0;
-        username = await values["name"].toString() ??0;
-        userprofile =await values["profile"].toString() ??0;
-        user_ac =await values["ac no"].toString() ??0;
-        phone = await values["phone"].toString() ??0;
-        state =await values["state"].toString() ??0;
-        pincode = await values["pincode"].toString() ??0;
+        num_of_game = await values["num_of_game"].toString()  ;
+        email =await values["email"].toString() ;
+        username = await values["name"].toString() ;
+        userprofile =await values["profile"].toString() ;
+        user_ac =await values["ac no"].toString() ;
+        phone = await values["phone"].toString() ;
+        state =await values["state"].toString() ;
+        pincode = await values["pincode"].toString() ;
        // print("------UserDetail----"+user_ac);
         notifyListeners();
       }

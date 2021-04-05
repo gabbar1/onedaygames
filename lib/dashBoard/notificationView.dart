@@ -63,26 +63,24 @@ class _NotificationViewState extends State<NotificationView> {
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(5),
-                    child: Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(notification.notificationList[snapshot].title,
-                              style: GoogleFonts.barlowCondensed(
-                                  textStyle:
-                                  Theme.of(context).textTheme.headline5,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold)),
-                          Divider(thickness: 2,),
-                          Text(notification.notificationList[snapshot].body,
-                              style: GoogleFonts.barlowCondensed(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(notification.notificationList[snapshot].title,
+                            style: GoogleFonts.barlowCondensed(
                                 textStyle:
                                 Theme.of(context).textTheme.headline5,
-                                fontSize: 12,
-                              )),
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold)),
+                        Divider(thickness: 2,),
+                        Text(notification.notificationList[snapshot].body,
+                            style: GoogleFonts.barlowCondensed(
+                              textStyle:
+                              Theme.of(context).textTheme.headline5,
+                              fontSize: 12,
+                            )),
 
-                        ],
-                      ),
+                      ],
                     ),
                   ),
                 ),
