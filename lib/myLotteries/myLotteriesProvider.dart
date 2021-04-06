@@ -12,7 +12,7 @@ class MyLotteriesProvider extends ChangeNotifier {
     transRef = FirebaseDatabase.instance.reference();
 
     transRef.child("Sold_tickets").child(uid).once().then((DataSnapshot snapshot){
-
+  soldTickets.clear();
       if(snapshot!= null){
         Navigator.pop(context);
         Map<dynamic, dynamic> soldList = snapshot.value;
@@ -21,7 +21,6 @@ class MyLotteriesProvider extends ChangeNotifier {
           soldTickets.add(sold);
          // print(sold.amount.toString());
           soldTickets.sort((a,b) => DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').parse(b.time).compareTo(DateFormat('EEEE, d MMM, yyyy,h:mm:ss a').parse(a.time)));
-
         });
         notifyListeners();
       }

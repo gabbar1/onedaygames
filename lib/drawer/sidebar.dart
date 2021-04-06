@@ -211,19 +211,20 @@ class _SidebarMenuState extends State<SidebarMenu> {
                     Text(language.language,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15,fontWeight: FontWeight.bold)),
                     Spacer(),
                     FlutterSwitch(
-
-                      toggleSize: 45.0,
+                      width: MediaQuery.of(context).size.width/10,
+                      height: 20,
+                      toggleSize: 25.0,
                       value: language.status2,
                       borderRadius: 30.0,
                       padding: 1.0,
                       toggleColor: Color.fromRGBO(225, 225, 225, 1),
                       switchBorder: Border.all(
                         color: Colors.amber,
-                        width: 1.0,
+                        width: 0.5,
                       ),
                       toggleBorder: Border.all(
                         color: Color.fromRGBO(2, 107, 206, 1),
-                        width: 2.0,
+                        width: 1.0,
                       ),
                       activeColor: Colors.amber,
                       inactiveColor: Colors.black38,

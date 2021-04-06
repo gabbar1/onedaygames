@@ -101,11 +101,11 @@ class _DashboardPageState extends State<DashboardPage> {
                     return AlertDialog(
                         backgroundColor: Colors.amber[200],
                         title: Center(
-                            child: Text(language.info,
+                            child: Text(language.info.toUpperCase(),
                                 style: GoogleFonts.barlowCondensed(
                                     textStyle: Theme.of(context)
                                         .textTheme
-                                        .headline5))),
+                                        .headline5,fontWeight: FontWeight.bold))),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -113,17 +113,17 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ? " : ₹ 0"
                                 : language.balance +
                                 " : ₹ " +
-                                totalAmount.toString()),
+                                totalAmount.toString(),style: GoogleFonts.barlowCondensed(fontSize: 15,fontWeight: FontWeight.bold)),
                             Divider(),
                             Text(winningAmount == null
-                                ? " : 0"
+                                ? " : ₹ 0"
                                 : language.you_won +
-                                " : " +
-                                winningAmount.toString()),
+                                " : ₹ " +
+                                winningAmount.toString(),style: GoogleFonts.barlowCondensed(fontSize: 15,fontWeight: FontWeight.bold)),
                             Divider(),
                             Text(num_of_game == null
                                 ? language.no_ticket + " : 0"
-                                : language.no_ticket + " : " + vm.num_of_game),
+                                : language.no_ticket + " : " + vm.num_of_game,style: GoogleFonts.barlowCondensed(fontSize: 15,fontWeight: FontWeight.bold)),
                           ],
                         ));
                   },

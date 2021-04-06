@@ -81,14 +81,14 @@ class _MyLotteriesPageState  extends State<MyLotteries>{
         children: <Widget>[
           Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text((soldTicketsModel.ticketNo)== null ? "₹" : ticke_no+"  "+soldTicketsModel.ticketNo.toString(),
-                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.black)),
-
+              Text((soldTicketsModel.ticketNo)== null ? "₹" : ticke_no.toUpperCase()+"  "+soldTicketsModel.ticketNo.toString().toUpperCase(),
+                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 25,fontWeight: FontWeight.bold,color: Colors.black)),
+              SizedBox(height: 2,),
               Text((soldTicketsModel.price)== null ? "0" :price_money+" "+ soldTicketsModel.price.toString(),
-                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.purple)),
-
-              Text(result_date+" "+(soldTicketsModel.deadline).toString(),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.green)),
-
+                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey)),
+              SizedBox(height: 2,),
+              Text(result_date+" "+(soldTicketsModel.deadline).toString(),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.grey)),
+              SizedBox(height: 10,),
               Text((soldTicketsModel.time).toString(),style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue))
             ],),
           Spacer(),
