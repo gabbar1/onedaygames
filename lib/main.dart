@@ -13,12 +13,12 @@ import 'package:oneday/dashBoard/notficationProvider.dart';
 import 'package:oneday/sendMoney/sendMoneyProvider.dart';
 import 'package:oneday/test/TransactionProvider.dart';
 import 'Winner/winnerProvider.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
 import 'package:oneday/ticket/ticketProvider.dart';
 import 'package:oneday/wallet/walletPageProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
 
+import 'dashBoard/API.dart';
 import 'myLotteries/myLotteriesProvider.dart';
 import 'services/authservice.dart';
 import 'userTransaction/userTransactionProvider.dart';

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Model/user.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/wallet/walletPageView.dart';
+import 'package:oneday/dashBoard/dashboard.dart';
+import 'package:oneday/wallet/walletPageView.dart';
 class KYC extends StatefulWidget {
   KYC({this.cls});
   String cls;

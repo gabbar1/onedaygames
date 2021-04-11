@@ -4,8 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/authentication/SignIn/OtpVerification.dart';
 import 'package:oneday/dashBoard/homeNavigator.dart';
+import 'package:provider/provider.dart';
 
 class LoginProvider extends ChangeNotifier{
   bool codeSent = false;
@@ -29,7 +32,7 @@ class LoginProvider extends ChangeNotifier{
     };
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNo,
-        timeout: const Duration(seconds: 30),
+        timeout: const Duration(seconds: 60),
         verificationCompleted: verified,
         verificationFailed: verificationFailed,
         codeSent: smsSent, codeAutoRetrievalTimeout: autoTimeout);
@@ -39,6 +42,7 @@ class LoginProvider extends ChangeNotifier{
   checkUserDetails(
       {GlobalKey<ScaffoldState> scaffoldKey, BuildContext context}) async{
     final DBRef = FirebaseDatabase.instance.reference();
+    var language = Provider.of<Language>(context, listen: false);
     var snapshot = await DBRef.child("Users").once();
     if(snapshot.value.toString().contains(phoneNo)){
       verifyPhone(phoneNo);
@@ -48,7 +52,7 @@ class LoginProvider extends ChangeNotifier{
           }));
     }
     else{
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("User not found Please Register",style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),));
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.userreg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),backgroundColor: Colors.amber,));
     }
   }
 

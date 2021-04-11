@@ -12,7 +12,7 @@ import 'package:oneday/Model/redeem_status.dart';
 import 'package:oneday/Model/upiModel.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Language/Language.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
+import 'package:oneday/dashBoard/API.dart';
 import 'package:provider/provider.dart';
 
 class  WalletPageProvider extends ChangeNotifier{

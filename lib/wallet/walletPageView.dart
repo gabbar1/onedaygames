@@ -7,8 +7,8 @@ import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/redeem_status.dart';
 import 'package:oneday/helper/smartRefresher.dart';
 import 'package:oneday/userTransaction/RedeemDialogue.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/sendMoney/sendmoney.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
+import  'package:oneday/sendMoney/sendmoney.dart';
+import 'package:oneday/dashBoard/API.dart';
 import 'package:oneday/wallet/walletPageProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -459,7 +459,7 @@ class _WalletPageState extends State<WalletPage> {
             Navigator.push(context,
                 MaterialPageRoute(
                   ///builder: (context) => LoginPage(),
-                  builder: (context) => RedeemDialogue(title:"Redeem",amount: vm.winning_amount1,amountLlang: language.amount,addMoneyLang: language.addmoney,maxAdd: language.maxAdd,maxxAddPost_text: language.maxxAddPost_text,uid: uid,message: language.redeemMessage,minRedeem: language.minRedeem,),));
+                  builder: (context) => RedeemDialogue(title:"Redeem",amount: vm.winning_amount1,amountLlang: language.amount,addMoneyLang: language.redeemmoney,maxAdd: language.maxAdd,maxxAddPost_text: language.maxxAddPost_text,uid: uid,message: language.redeemMessage,minRedeem: language.minRedeem,),));
           }
         });
 

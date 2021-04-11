@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/authentication/SignIn/logInProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -29,12 +30,13 @@ class MapScreenState extends State<LoginPage>
   @override
   Widget build(BuildContext context) {
     var login = Provider.of<LoginProvider>(context,listen: false);
+    var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Login",style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
+        title: Text(language.Loginmsg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
       ),
       body: SingleChildScrollView(
         child:
@@ -69,6 +71,7 @@ class MapScreenState extends State<LoginPage>
 
   Widget _phonedetails(){
     var login = Provider.of<LoginProvider>(context,listen: false);
+    var language = Provider.of<Language>(context, listen: false);
     return Visibility(
       child:
       Padding(
@@ -83,8 +86,8 @@ class MapScreenState extends State<LoginPage>
                 padding: EdgeInsets.only(
                     left: 25.0, right: 25.0, top: 25.0),
                 child:
-                Text("Phone",
-                  style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+                Text(language.phnno,
+                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,),
                 ),
               ),
               Padding(
@@ -96,6 +99,7 @@ class MapScreenState extends State<LoginPage>
                   decoration: const InputDecoration(
 
                       hintText: "Enter Mobile Number"),
+                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,),
                   keyboardType: TextInputType.phone,
                   onChanged: (val){
                     login.phoneNo = "+91"+(val);
@@ -104,7 +108,7 @@ class MapScreenState extends State<LoginPage>
 
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(height: 30,),
               Center(child: InkWell(
 
                 onTap: () {
@@ -124,7 +128,7 @@ class MapScreenState extends State<LoginPage>
                   alignment: Alignment.center,
                   color: Colors.green,
                   child: Text(
-                    'LOGIN',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
+                    'LOGIN',style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)
 
                   ),
                 ),

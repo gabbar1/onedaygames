@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Model/wallet.dart';
 import 'package:oneday/helper/constant.dart';
@@ -44,12 +45,12 @@ class MapScreenState extends State<OtpVerification>
 
   @override
   Widget build(BuildContext context) {
-
+    var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Register & win",style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+        title: Text(language.regmsg,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -88,6 +89,7 @@ class MapScreenState extends State<OtpVerification>
 
   Widget _phoneDetails(){
     var register = Provider.of<RegisterProvider>(context,listen: false);
+    var language = Provider.of<Language>(context, listen: false);
     return Container(
       color: Colors.white,
       child: Padding(
@@ -112,7 +114,7 @@ class MapScreenState extends State<OtpVerification>
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
-                              Text("OTP Sent to" + register.phoneNo.replaceAll("+91", " "),
+                              Text(language.otpsentto + register.phoneNo.replaceAll("+91", " "),
                                   style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
                               ),
                             ],

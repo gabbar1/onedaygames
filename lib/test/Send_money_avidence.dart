@@ -130,7 +130,7 @@ class _Money_AvidencePageState extends State<Money_Avidence> {
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                     Spacer(),
-                    Text("₹ " + total_amount.toString(),
+                    Text(language.rupeesymbol + total_amount.toString(),
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
                     SizedBox(
@@ -176,7 +176,7 @@ class _Money_AvidencePageState extends State<Money_Avidence> {
                                 border: Border.all(color: Colors.black)
                             ),
                             child: Center(
-                              child: Text("Name"),
+                              child: Text(language.namep),
                             ),
                           ),),
                           Container(
@@ -188,7 +188,7 @@ class _Money_AvidencePageState extends State<Money_Avidence> {
                             height: 30,
 
                             child: Center(
-                              child: Text("UPI ID"),
+                              child: Text(language.upiLang),
                             ),
                           )
                         ]),

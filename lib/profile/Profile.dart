@@ -9,11 +9,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Language/Language.dart';
 import 'package:oneday/screen/StartPage.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/wallet/walletPageView.dart';
+import 'package:oneday/wallet/walletPageView.dart';
 import 'package:oneday/services/authservice.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
+import 'package:oneday/dashBoard/API.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../screen/app_properties.dart';
@@ -45,6 +45,7 @@ class MapScreenState extends State<Profile>
 
   void afterBuildFunction(BuildContext context) {
     var vm = Provider.of<API>(context, listen: false);
+
     _nameController.text = vm.username;
     _emailController.text = vm.email;
     _pinCode.text = vm.pincode;
@@ -79,6 +80,7 @@ class MapScreenState extends State<Profile>
   }
 
   Future uploadPic(BuildContext context1) async {
+    var language = Provider.of<Language>(context, listen: false);
     StorageReference firebaseStorage =
         FirebaseStorage.instance.ref().child(uid);
     StorageUploadTask uploadTask = firebaseStorage.child(uid).putFile(_image);
@@ -95,12 +97,13 @@ class MapScreenState extends State<Profile>
         imageurl = downloadUrl;
         print(imageurl);
         _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text("Profile Updated...",
+          content: Text(language.profileupdated,
               style: GoogleFonts.barlowCondensed(
                   textStyle: Theme.of(context).textTheme.headline5,
                   fontSize: 10,
-                  fontWeight: FontWeight.bold)),
+                  fontWeight: FontWeight.bold)),backgroundColor: Colors.amber,
         ));
+
       });
     }
   }
@@ -144,12 +147,10 @@ class MapScreenState extends State<Profile>
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.amber,
         title: Text(language.profile,
-            style: GoogleFonts.barlowCondensed(
-                textStyle: Theme.of(context).textTheme.headline5,
-                fontSize: 20,
-                fontWeight: FontWeight.bold)),
+            style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)),
       ),
       body: Consumer<API>(
         builder: (context, vm, child) {

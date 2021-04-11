@@ -108,7 +108,7 @@ class Language extends ChangeNotifier {
   String money_sent = "Money has been sent";
   String privacy = "Privacy Policy";
   String aboutUsDetail = "OneDay is an open platform where players can try their luck. It is 100% free & no hidden charges applied on any segment of the game.Winning numbers selection is carried out by 100% honest, impartial, non-discriminatory algorithm.It's run by 100% nonbeneficial & nonprofit organization. All the money is spent for the NGOs.";
-  String entry = "entry";
+  String entry = "Entry";
   String winningPrice = "Winning Price";
   String Contest = "Contest";
   String no_of_winners = "Numbers of winners";
@@ -122,7 +122,21 @@ class Language extends ChangeNotifier {
   String maxxAddPost_text = " INR available for  withdraw ";
   var redeemMessage = "Thank you for withdrawal request, Your money will be added in your bank account within 2 working days.";
   var minRedeem = "Please note minimum 500 rs can be withdrawn";
-
+  String reg =  "User already exist!! Please proceed to Login";
+  String selwin =  "Select Winner";
+  String oneday = "ONE DAY";
+  String loading= "Loading....";
+  String userreg="User not found in the system. Please register yourself first!";
+  String redeemmoney="Withdraw";
+  String Loginmsg="Login & Start Playing";
+  String otpsentto="OTP Sent to ";
+  String profileupdated="Profile Updated...";
+  String regmsg="Register & Proceed to Login";
+  String phnno="Phone Number";
+  String login="LOGIN";
+  String rupeesymbol="₹ ";
+  String register='REGISTER';
+  String welcomemsg="Welcome to One Day";
   getLanguage(String uid){
     DatabaseReference transRef = FirebaseDatabase.instance.reference();
     transRef.child("Users").child(uid).once().then((DataSnapshot snapshot){
@@ -131,16 +145,33 @@ class Language extends ChangeNotifier {
         var user = User1.fromJson(values);
           status2 = user.bool_lang;
           if(status2 == true){
-            pendingMoney = "You have ongoing withdrawal request";
-            minRedeem = "Please note minimum 500 rs can be withdrawn";
+            //need to
+           reg =  "User already exist please login";
+           selwin = "Select Winner";
+           oneday="ONE DAY";
+           loading="Loading....";
+           userreg="User not found in the system. Please register yourself first!";
+           redeemmoney="Withdraw";
+           Loginmsg="Login & Start Playing";
+           otpsentto="OTP Sent to ";
+           profileupdated="Profile Updated...";
+           regmsg="Register & Proceed to Login";
+           phnno="Phone Number";
+           login="LOGIN";
+           rupeesymbol="₹ ";
+           register="REGISTER";
+           welcomemsg="Welcome to OneDay";
+            //need to
+            pendingMoney = "Your previous withdrawal request is pending to be processed. Please wait for it's clearance";
+            minRedeem = "Please note: You will have to withdraw at least 500 INR";
             withdraw = "withdrawal";
-             redeemMessage = "Thank you for withdrawal request, Your money will be added in your bank account within 2 working days.";
+             redeemMessage = "Thank you for the withdrawal request, Your money will be transferred to your bank account within 2 working days.";
              maxAdd = "You have only " ;
-             maxxAddPost_text = " INR available for  withdraw ";
-            addRequest = "Thank you for request your money will be added within 3 hours";
+             maxxAddPost_text = " INR available for withdrawal ";
+            addRequest = "Thank you for your request to add money, your money will be added within 3 hours";
             inValidTransaction = "This transaction ID is invalid";
-            minAdd = "Please note minimum 500 rs can be added";
-            upiLang ="UPI";
+            minAdd = "Please note: You will have to add at least 200 INR";
+            upiLang ="UPI ID";
             trasLang = "TransactionID";
             notification ='Notification';
             no_ticket = "Number of tickets";
@@ -162,8 +193,8 @@ class Language extends ChangeNotifier {
             announcedate = "Announcement date is ";
             winnerlist="Go to Winner list";
             cancel = "Cancel";
-            limit_ticket = "Sorry You can not buy more than 5 tickets";
-            money_msg =  "You have Insufficient Amount to buy this Ticket";
+            limit_ticket = "Sorry! You can not buy more than 5 tickets for the same contest";
+            money_msg =  "You have Insufficient Amount in your account to buy this Ticket";
             insufficient =' Insufficient Money ';
             remain_1st = "You Needed  ";
             remain_2nd = " to play";
@@ -199,15 +230,15 @@ class Language extends ChangeNotifier {
             addmoney = "ADD CASH";
             addedmoney = "AMOUNT ADDED";
             winning = "WINNING";
-            transaction = "My Recent Transaction";
-            redeem = "Redeem Price";
+            transaction = "My Recent Transactions";
+            redeem = "Withdraw Money";
             wallet = "My wallet";
             sendmoney = "Send Money";
             Refer = "Refer to your friend";
             admoney_msg = "Money added by you that you can use to join contests, but can't withdraw";
-            wiining_msg = "Money that you can withdraw or re-use to join any contests";
+            wiining_msg = "Money that you can withdraw to bank account or re-use to join various contests";
             total_winning_msg = "Your winning balance";
-            insufficientToRedeem= "Insufficient Amount to redeem";
+            insufficientToRedeem= "Insufficient Amount to withdraw";
             completeKyc = "Please complete your KYC";
             confirm = "Confirm";
             add_cash = "Add Cash";
@@ -254,11 +285,26 @@ class Language extends ChangeNotifier {
              amount = "Amount";
           }
           else if (status2 == false){
-            pendingMoney = "आपके पास निकासी का अनुरोध जारी है";
-            minRedeem = "कृपया ध्यान दें कि न्यूनतम 500 रुपये निकाले जा सकते हैं";
+            selwin =  "Select Winner";
+            loading= "Loading....";
+            reg ="User already exist please login";
+            oneday="ONE DAY";
+            userreg="User not found in the system. Please register yourself first!";
+            otpsentto="OTP Sent to ";
+            profileupdated="Profile Updated...";
+            regmsg="Register & Proceed to Login";
+            login="LOGIN";
+            Loginmsg="लॉगिन करें और खेलना शुरू करें";
+            redeemmoney="निकाले";
+            phnno="Phone Number";
+            register="REGISTER";
+            welcomemsg="Welcome to OneDay";
+            rupeesymbol="₹ ";
+            pendingMoney = "आपका पिछला निकासी अनुरोध संसाधित होने के लिए लंबित है। कृपया इसके क्लियर होने का इंतज़ार करें";
+            minRedeem = "कृपया ध्यान दें: आपको कम से कम 500 रुपये निकालने होंगे";
             withdraw = "निकासी";
             redeemMessage = "निकासी अनुरोध के लिए धन्यवाद, आपका पैसा आपके बैंक खाते में 2 कार्य दिवसों में जुड़ जाएगा।";
-             maxAdd = "आपके पास रिडीम करने के लिए केवल " ;
+             maxAdd = "आपके पास निकालने के लिए केवल " ;
              maxxAddPost_text = " रूपए  हैं  ";
             addRequest = "अनुरोध के लिए धन्यवाद आपका पैसा 3 घंटे के भीतर जुड़ जाएगा";
             inValidTransaction = "यह लेनदेन आईडी अमान्य है";
@@ -291,9 +337,9 @@ class Language extends ChangeNotifier {
             announcedate="घोषणा तिथि है ";
             winnerlist = "विजेता सूची पर जाएं";
             cancel = "रद्द करें";
-            limit_ticket = "क्षमा करें आप 5 से अधिक टिकट नहीं खरीद सकते";
+            limit_ticket = "क्षमा करें आप एक ही प्रतियोगिता में 5 से अधिक टिकट नहीं खरीद सकते";
             money_msg = "इस टिकट को खरीदने के लिए आपके पास अपर्याप्त राशि है";
-            insufficient =' अपर्याप्त रशी ';
+            insufficient =' अपर्याप्त राशि ';
             remain_1st = "आपको खेलने के लिए ";
             remain_2nd = " की आवश्यकता है";
             admoney = 'पैसे जोड़ें';
@@ -329,11 +375,11 @@ class Language extends ChangeNotifier {
             addedmoney = "जूडी राशी";
             winning = "जीती हुयी राशी";
             transaction= "मेरा हाल का लेन-देन";
-            redeem= "रिडीम प्राइस";
+            redeem= "पैसा निकाले";
             wallet = "मेरा बटुआ";
             sendmoney = "पैसा भेजें";
             Refer = "अपने दोस्त को साझा करें";
-            admoney_msg = "आपके द्वारा जोड़ा गया धन, जिसका उपयोग आप प्रतियोगिता में शामिल होने के लिए कर सकते हैं, लेकिन वापस नहीं ले सकते";
+            admoney_msg = "आपके द्वारा जोड़ा गया धन, जिसका उपयोग आप प्रतियोगिता में शामिल होने के लिए कर सकते हैं, लेकिन वापस नहीं निकाल सकते";
             wiining_msg = "पैसा जो आप बैंक में निकाल सकते हैं या किसी प्रतियोगिता में शामिल होने के लिए फिर से उपयोग कर सकते हैं";
             total_winning_msg = "आपी जीती हुयी राशी";
             insufficientToRedeem = "निकालने के लिए अपर्याप्त राशि";
@@ -342,7 +388,7 @@ class Language extends ChangeNotifier {
             add_cash = "पैसा जमा करे";
             current_balance = "वर्तमान राशि";
             input_hint = "कृपया कुछ राशि दर्ज करें";
-            add = "जोड़ें ";
+            add = "जमा करो";
             search = "सम्पर्क खोजे";
             user_nt_found ="उपयोगकर्ता नहीं मिला";
             send_msg ="उपभोक्ता";

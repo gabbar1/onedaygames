@@ -7,12 +7,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/Model/user.dart';
 import 'package:oneday/Model/wallet.dart';
 import 'package:oneday/authentication/Signup/OtpVerification.dart';
 import 'package:oneday/dashBoard/homeNavigator.dart';
 import 'package:oneday/helper/constant.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
+import 'package:oneday/dashBoard/dashboard.dart';
+import 'package:provider/provider.dart';
 
 class RegisterProvider extends ChangeNotifier{
   String phoneNo,verficationId,smsCode,mob,email,password,name;
@@ -21,6 +24,8 @@ class RegisterProvider extends ChangeNotifier{
 
 
   checkUserDetails({GlobalKey<ScaffoldState> scaffoldKey, BuildContext context}) async{
+
+    var language = Provider.of<Language>(context,listen:false);
     final DBRef = FirebaseDatabase.instance.reference();
     var snapshot = await DBRef.child("Users").once();
     if (!snapshot.value.toString().contains(phoneNo)){
@@ -31,7 +36,7 @@ class RegisterProvider extends ChangeNotifier{
           }));
     }
     else{
-      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("User already exist please login",style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),));
+      scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.reg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),backgroundColor: Colors.amber,));
     }
     notifyListeners();
   }
@@ -58,7 +63,7 @@ class RegisterProvider extends ChangeNotifier{
     };
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: phoneNo,
-        timeout: const Duration(seconds: 30),
+        timeout: const Duration(seconds: 60),
         verificationCompleted: verified,
         verificationFailed: verificationFailed,
         codeSent: smsSent, codeAutoRetrievalTimeout: autoTimeout);

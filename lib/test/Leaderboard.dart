@@ -111,7 +111,7 @@ class __LeaderboardState extends State<Leaderboard> {
     var language = Provider.of<Language>(context, listen: true);
     return Scaffold(
       appBar: AppBar(
-        title: Text(language.Contest),
+        title: Text(language.Contest, style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,) ,),
       ),
       body: Column(
         children: [
@@ -127,7 +127,7 @@ class __LeaderboardState extends State<Leaderboard> {
                   SizedBox(
                     width: 20,
                   ),
-                  Text(language.winningPrice),
+                  Text(language.winningPrice,style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4)),
                   Spacer(),
                   Text(
                     language.entry,

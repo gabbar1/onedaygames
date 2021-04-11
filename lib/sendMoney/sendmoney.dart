@@ -73,7 +73,7 @@ class _SendMoneyPageState  extends State<SendMoney>{
                 onPressed: (){
 
               if(sendVm.receiverPhone==null || sendVm.receiverPhone == uid.replaceAll("+91", "")){
-                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.user_nt_found,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),));
+                _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.user_nt_found,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),backgroundColor: Colors.amber,));
               }{
                 print("-------------"+sendVm.receiverPhone);
                 sendVm.receiversPhone(rPhone:sendVm.receiverPhone,sPhone: uid);

@@ -36,13 +36,13 @@ class _HomeNavigatorState extends State<HomeNavigator> {
           tabs: [
             TabData(
                 icon: SvgPicture.asset("assets/icons/home.svg"),
-                title: "home"),
+                title: "HOME"),
             TabData(
                 icon: SvgPicture.asset("assets/icons/winners.svg"),
-                title: "winner"),
+                title: "WINNER"),
             TabData(
                 icon: SvgPicture.asset("assets/icons/profile.svg"),
-                title: "profile"),
+                title: "PROFILE"),
           ],
           onTabChangedListener: (position) {
             setState(() {

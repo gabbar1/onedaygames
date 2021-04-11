@@ -11,7 +11,7 @@ import 'package:oneday/Model/user.dart';
 import 'package:oneday/dashBoard/homeNavigator.dart';
 import 'package:oneday/helper/appUtils.dart';
 import 'package:oneday/main.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/dashboard.dart';
+import 'package:oneday/dashBoard/dashboard.dart';
 import 'package:intl/intl.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server/gmail.dart';
@@ -431,7 +431,7 @@ class _TicketScreenState extends State<TicketScreen> {
                                                     .headline5,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold)),
-                                        // Text('You Needed '+(transaction["Amount"] - int.parse(amount1)).toString()+" ₹ to play"),
+
                                       ],
                                     ),
                                   ),
@@ -489,6 +489,20 @@ class _TicketScreenState extends State<TicketScreen> {
                                                 int.parse(widget.numberofsell) +
                                                     1
                                           });
+                                          if(widget.added_amount< int.parse(widget.amt) ){
+                                             int remain_amount = int.parse(widget.amt)- widget.added_amount;
+                                             DBRef.child("Wallet")
+                                                 .child(widget.phone)
+                                                 .update({
+                                               'added_amount': 0,
+                                               'total_amount': widget.total_amount - int.parse(widget.amt),
+                                               'winning_amount': widget.winning_amount - remain_amount,
+                                               'time': DateFormat(
+                                                   'EEEE, d MMM, yyyy,h:mm:ss a')
+                                                   .format(now),
+                                             });
+
+                                          } else
                                           if (widget.added_amount == 0 ||
                                               widget.added_amount == null) {
                                             DBRef.child("Wallet")

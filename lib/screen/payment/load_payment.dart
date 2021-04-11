@@ -179,7 +179,7 @@ class _AddMoneyPageState extends State<AddMoney> {
         Container(
           height: 60,color: Colors.white,
           width: queryData.size.width,
-          child: Row(children: [  SizedBox(width: 20,)  ,  CircleAvatar(radius: 20, child:Image.asset("assets/icons/wallet.png")),SizedBox(width: 10,),Text(current_balance,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),SizedBox(width: queryData.size.width/2.4,),Text("₹ "+total_amount.toString(),style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold))],),
+          child: Row(children: [  SizedBox(width: 20,)  ,  CircleAvatar(radius: 20, child:Image.asset("assets/icons/wallet.png")),SizedBox(width: 10,),Text(current_balance,style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),SizedBox(width: queryData.size.width/2.4,),Text(language.rupeesymbol+total_amount.toString(),style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold))],),
         ),
         SizedBox(height: 20,),
         Container(

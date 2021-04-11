@@ -12,7 +12,7 @@ import 'package:oneday/dashBoard/notificationView.dart';
 import 'package:oneday/drawer/sidebar.dart';
 import 'package:oneday/helper/smartRefresher.dart';
 import 'package:oneday/profile/Profile.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
+import 'package:oneday/dashBoard/API.dart';
 import 'package:oneday/test/Leaderboard.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -87,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
           centerTitle: true,
           title: Text(
             "OneDay",
-            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline3),
+            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4),
           ),
           actions: [
             IconButton(
@@ -123,7 +123,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             Divider(),
                             Text(num_of_game == null
                                 ? language.no_ticket + " : 0"
-                                : language.no_ticket + " : " + vm.num_of_game,style: GoogleFonts.barlowCondensed(fontSize: 15,fontWeight: FontWeight.bold)),
+                                : language.no_ticket + " : "+  vm.num_of_game,style: GoogleFonts.barlowCondensed(fontSize: 15,fontWeight: FontWeight.bold)),
                           ],
                         ));
                   },
@@ -258,7 +258,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: <Widget>[
                           Row(
                             children: [
-                              Text("ONE DAY", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold)),
+                              Text(language.oneday, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold)),
                               Spacer(),
                               FutureBuilder(
                                   future: (vm.getremainingtime(
@@ -272,7 +272,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       }
                                     } else {
-                                      return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
+                                      return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                     }
                                   }),
                             ],
@@ -293,7 +293,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               Spacer(),
                               RaisedButton(
-                                child: Text(vm.daily_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold)),
+                                child: Text("₹ "+vm.daily_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:23, fontWeight: FontWeight.bold)),
                                 color: Colors.green,
                                 onPressed: () {
                                   vm.comparetimeleft(
@@ -452,7 +452,7 @@ class _DashboardPageState extends State<DashboardPage> {
                          children: <Widget>[
                            Row(
                              children: [
-                               Text("ONE DAY",
+                               Text(language.oneday,
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
@@ -471,7 +471,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                          return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        }
                                      } else {
-                                       return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
+                                       return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
                              ],
@@ -629,7 +629,7 @@ class _DashboardPageState extends State<DashboardPage> {
                          children: <Widget>[
                            Row(
                              children: [
-                               Text("ONE DAY",
+                               Text(language.oneday,
                                    style: GoogleFonts.barlowCondensed(
                                        textStyle:
                                        Theme.of(context).textTheme.headline5,
@@ -648,7 +648,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                          return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                        }
                                      } else {
-                                       return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
+                                       return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
                              ],
@@ -807,7 +807,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           children: <Widget>[
                             Row(
                               children: [
-                                Text("ONE DAY",
+                                Text(language.oneday,
                                     style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
@@ -826,7 +826,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           return Text(((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0"), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                         }
                                       } else {
-                                        return Text("Loading...", style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
+                                        return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       }
                                     }),
                               ],
@@ -977,7 +977,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         children: <Widget>[
                           Row(
                             children: [
-                              Text("ONE DAY",
+                              Text(language.oneday,
                                   style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                           Theme.of(context).textTheme.headline5,

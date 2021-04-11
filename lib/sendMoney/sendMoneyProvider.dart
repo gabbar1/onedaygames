@@ -407,7 +407,7 @@ sendLang: language.sendmoney,
                                 content: Text(language.money_sent,
                                     style: TextStyle(
                                         fontSize: 15,
-                                        fontWeight: FontWeight.bold)),
+                                        fontWeight: FontWeight.bold)),backgroundColor: Colors.amber,
                               ));
                               sendNotification(
                                   subject: "Hey " +

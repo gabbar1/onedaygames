@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/authentication/SignIn/logInProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -55,11 +56,12 @@ class MapScreenState extends State<OtpVerification>
 
   @override
   Widget build(BuildContext context) {
+    var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Login & Play",style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
+        title: Text(language.Loginmsg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
 
       ),
       body: SingleChildScrollView(
@@ -118,6 +120,7 @@ class MapScreenState extends State<OtpVerification>
 
   Widget _phonedetails(){
     var login = Provider.of<LoginProvider>(context,listen: false);
+    var language = Provider.of<Language>(context, listen: false);
     return Container(
       color: Colors.white,
       child: Padding(
@@ -143,8 +146,8 @@ class MapScreenState extends State<OtpVerification>
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                new Text("OTP Sent to " + login.phoneNo.replaceAll("+91", " "),
-                                    style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
+                                new Text(language.otpsentto + login.phoneNo.replaceAll("+91", " ",),
+                                    style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)
                                 ),
                               ],
                             ),
@@ -186,7 +189,7 @@ class MapScreenState extends State<OtpVerification>
                         alignment: Alignment.center,
                         color: Colors.green,
                         child: Text(
-                          'LOGIN',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
+                          'LOGIN',style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)
 
                         ),
                       ),

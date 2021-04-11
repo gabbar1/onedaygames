@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/authentication/SignIn/loginpage.dart';
 import 'package:oneday/authentication/Signup/RegisterPage.dart';
 
@@ -12,9 +13,9 @@ class StartPage extends StatelessWidget {
     return Scaffold(
       //resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.cyan,
-      body: Column(
+      body: ListView(
         children: <Widget>[
-          new Stack(
+           Stack(
             alignment: Alignment.topLeft,
             children: <Widget>[
               Image.asset(
@@ -34,59 +35,53 @@ class StartPage extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            child:
-            Container (
+          Container(
+            margin: EdgeInsets.only(left: 30,right: 30),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              child: Container(
 
-              margin: EdgeInsets.only(bottom: 10),
-              width: MediaQuery.of(context).size.width,
-              child: Column(children: [
-                Spacer(),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  child: Container(
+                width: 350,
+                padding: EdgeInsets.symmetric(vertical: 13),
 
-                    width: 350,
-                    padding: EdgeInsets.symmetric(vertical: 13),
+                alignment: Alignment.center,
+                color: Colors.amber,
 
-                    alignment: Alignment.center,
-                    color: Colors.amber,
+                child: Text(
+                    'LOGIN',style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)
 
-                    child: Text(
-                      'LOGIN',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
-
-                    ),
-                  ),
                 ),
-                SizedBox(height: 5,),
-                InkWell(
-
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (context) => RegisterPage()));
-                  },
-                  child: Container(
-
-                    width: 350,
-                    padding: EdgeInsets.symmetric(vertical: 13),
-
-                    alignment: Alignment.center,
-                    color: Colors.amber,
-
-                    child: Text(
-                      'REGISTER',style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)
-
-                    ),
-                  ),
-                ),
-                SizedBox(height: 80,)
-
-              ],),
-            )
+              ),
+            ),
           ),
+          SizedBox(height: 10,),
+          Container(
+            margin: EdgeInsets.only(left: 30,right: 30),
+            child: InkWell(
+
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => RegisterPage()));
+              },
+              child: Container(
+
+                width: 350,
+                padding: EdgeInsets.symmetric(vertical: 13),
+
+                alignment: Alignment.center,
+                color: Colors.amber,
+
+                child: Text(
+                    'REGISTER',style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)
+
+                ),
+              ),
+            ),
+          ),
+
 
           //new Container(
         ],

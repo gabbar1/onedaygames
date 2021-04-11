@@ -37,7 +37,7 @@ class _NotificationViewState extends State<NotificationView> {
     var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text(language.notification),
+        title: Text(language.notification,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,) ,),
       ),
       body: Consumer<NotificationProvider>(builder: (context,notification,child){
         return SmartRefresher(controller: refreshController,child:  ListView.builder(

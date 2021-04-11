@@ -13,13 +13,13 @@ import 'package:oneday/PrivacyPolicy/privacypolicy.dart';
 import 'package:oneday/Winner/Winners.dart';
 import 'package:oneday/Language/Language.dart';
 import 'package:oneday/helper/constant.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/myLotteries/MyLotteries.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/profile/Profile.dart';
+import 'package:oneday/myLotteries/MyLotteries.dart';
+import 'package:oneday/profile/Profile.dart';
 import 'package:oneday/screen/StartPage.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/wallet/walletPageView.dart';
+import 'package:oneday/wallet/walletPageView.dart';
 import 'package:oneday/services/authservice.dart';
 import 'package:oneday/main.dart';
-import 'file:///E:/Client/hello_world/hello_world/oneday/lib/dashBoard/API.dart';
+import 'package:oneday/dashBoard/API.dart';
 import 'package:provider/provider.dart';
 
 

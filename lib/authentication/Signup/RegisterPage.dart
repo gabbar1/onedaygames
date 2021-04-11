@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oneday/Language/Language.dart';
 import 'package:oneday/authentication/Signup/RegisterProvider.dart';
 import 'package:oneday/utils/validator.dart';
 import 'package:provider/provider.dart';
@@ -19,12 +20,13 @@ class MapScreenState extends State<RegisterPage>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    var language = Provider.of<Language>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Color(0xffF9F9F9),
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Register & win",style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+        title: Text(language.regmsg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -56,6 +58,7 @@ class MapScreenState extends State<RegisterPage>
 
   Widget _phoneDetails() {
     var register = Provider.of<RegisterProvider>(context,listen: false);
+    var language = Provider.of<Language>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(25),
       child: Form(autovalidate: _autoValidate, key: _formKey,
@@ -63,18 +66,19 @@ class MapScreenState extends State<RegisterPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text('Name', style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
+              Text('Name', style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,),
               ),
               TextFormField(
                 validator: validateName,
                 decoration: const InputDecoration(
                     hintText: "Enter Name"),
+                  style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,),
                 onChanged: (val){
                   register.name = val;
                 },
               ),
               SizedBox(height: 16,),
-              Text("Phone", style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+              Text(language.phnno, style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,),),
               TextFormField(
                 validator: validateMobile,
                 inputFormatters: [
@@ -82,26 +86,30 @@ class MapScreenState extends State<RegisterPage>
                 ],
                 decoration: const InputDecoration(
                   hintText: "Enter Mobile Number"),
+                style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,),
                 keyboardType: TextInputType.phone,
                 onChanged: (val) {
                   register.phoneNo = "+91"+(val);
                 },
               ),
               SizedBox(height: 16,),
-              Text('Email', style:TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+              Text('Email', style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),
               TextFormField(
                 validator: validateEmail,
                 decoration: const InputDecoration(
                     hintText: "Enter Email ID"),
+                style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,),
                 keyboardType: TextInputType.emailAddress,
                 onChanged: (val){
                   register.email = val;
                 },
               ),
-              SizedBox(height: 16,),
+              SizedBox(height: 30,),
               SizedBox(width: double.infinity,
                 child: RaisedButton(color: Colors.green,
-                  child: Text('Register', style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),),
+                    padding: EdgeInsets.symmetric(vertical: 13),
+
+                  child: Text(language.register, style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,),),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();

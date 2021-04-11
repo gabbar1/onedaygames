@@ -36,6 +36,7 @@ class _WinnerListPageState extends State<WinnerList> {
 
   @override
   Widget build(BuildContext context) {
+
     MediaQueryData queryData;
     queryData = MediaQuery.of(context);
     var language = Provider.of<Language>(context, listen: false);
@@ -81,6 +82,7 @@ class _WinnerListPageState extends State<WinnerList> {
   }
 
   Widget _buildTransactionItem({Map transaction}) {
+    var language = Provider.of<Language>(context, listen: false);
     return Padding(
       padding: EdgeInsets.all(10),
       child:  Row(
@@ -120,7 +122,7 @@ class _WinnerListPageState extends State<WinnerList> {
                   AsyncSnapshot<Event> event) {
                 if (!event.hasData)
                   return username == null
-                      ? Text("Name",
+                      ? Text(language.namep,
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold))

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1086897691021-9cbdfjc8ravi2n6ln7r81rj8mlov72kj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boss.oneday",
+            "certificate_hash": "29549b1b3202200373cb9e6ccbb9c576e8a0b9e7"
+          }
+        },
+        {
           "client_id": "1086897691021-ulnsti7vljajesutrin59ccd0r3nonuc.apps.googleusercontent.com",
           "client_type": 3
         }

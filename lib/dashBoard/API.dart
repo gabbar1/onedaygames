@@ -40,12 +40,12 @@ class API extends ChangeNotifier{
   String type;
 
   Future<void >getDailyLottery({BuildContext context}) async{
-    onLoading(context: context,strMessage: "Loading");
+  //  onLoading(context: context,strMessage: "Loading");
     transRef.child('Lottery').child("daily").once().then((DataSnapshot snapshot) {
 
       daily_ticket.clear();
       if(snapshot!= null){
-        Navigator.pop(context);
+     //   Navigator.pop(context);
         Map<dynamic, dynamic> lotteryList = snapshot.value;
         lotteryList.forEach((key,value) {
           Lottery sold = Lottery.fromJson(value);
@@ -239,6 +239,8 @@ class API extends ChangeNotifier{
         if (numbers.number == null) {
           numbers.number = 0;
         }
+
+        //TODO  Need to implement alert
         Fluttertoast.showToast(
             msg: numbers.number.toString());
         if (numbers.number >= 5) {

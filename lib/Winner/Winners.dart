@@ -77,7 +77,7 @@ class _WinnerPageState  extends State<Winner>{
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(language.winners,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline3,)),
+            title: Text(language.winners,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)),
             backgroundColor: Colors.amber,
             bottom: TabBar(
               isScrollable: true,
@@ -157,6 +157,8 @@ class _WinnerPageState  extends State<Winner>{
                         bottomLeft: Radius.circular(10),
                         topLeft: Radius.circular(10),),
                     ),
+                      elevation: 99.99,
+                      shadowColor: Colors.cyanAccent,
                     child: Padding(
 
                       padding: EdgeInsets.all(5),
@@ -171,13 +173,13 @@ class _WinnerPageState  extends State<Winner>{
                                   Text(vm.daily_ticket[snapshot].name,style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold)),
                                   Spacer(),
                                   Text(vm.daily_ticket[snapshot].result_date.toString(),style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold))
                                 ],),
                                 Divider(thickness: 1,),
@@ -192,25 +194,28 @@ class _WinnerPageState  extends State<Winner>{
                                             return Text(language.Result_Announced,style: GoogleFonts.barlowCondensed(
                                                 textStyle:
                                                 Theme.of(context).textTheme.headline5,
-                                                fontSize: 20,
+                                                fontSize: 22,
+                                                color: Colors.blueAccent,
                                                 fontWeight: FontWeight.bold));
                                           } else {
                                             return Text(language.time_left+((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")+ "hrs",style: GoogleFonts.barlowCondensed(
                                                 textStyle:
                                                 Theme.of(context).textTheme.headline5,
-                                                fontSize: 20,
+                                                fontSize: 22,
+                                                color: Colors.blueAccent,
                                                 fontWeight: FontWeight.bold));
                                           }
                                         } else {
-                                          return Text("Loading...");
+                                          return Text(language.loading);
                                         }
                                       }),
                                   Divider(thickness: 1,),
                                   Spacer(),
                                   Text(vm.daily_ticket[snapshot].type,style: GoogleFonts.barlowCondensed(
                                       textStyle:
-                                      Theme.of(context).textTheme.headline5,
-                                      fontSize: 20,
+                                      Theme.of(context).textTheme.headline4,
+                                      fontSize: 22,
+                                      color: Colors.blueAccent,
                                       fontWeight: FontWeight.bold)),
                                 ],),
                                 Divider(thickness: 1,),
@@ -241,7 +246,7 @@ class _WinnerPageState  extends State<Winner>{
                                   Text((vm.daily_ticket[snapshot].price).toString(),style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 16,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold)),
                                   Spacer(),
                                 ],),
@@ -390,7 +395,7 @@ class _WinnerPageState  extends State<Winner>{
                                         fontWeight: FontWeight.bold));
                                         }
                                       } else {
-                                        return Text("Loading...");
+                                        return Text(language.loading);
                                       }
                                     }),
                                 Divider(thickness: 1,),
@@ -577,7 +582,7 @@ class _WinnerPageState  extends State<Winner>{
                                         fontWeight: FontWeight.bold));
                                         }
                                       } else {
-                                        return Text("Loading...");
+                                        return Text(language.loading);
                                       }
                                     }),
                                 Divider(thickness: 1,),
@@ -764,7 +769,7 @@ class _WinnerPageState  extends State<Winner>{
                                         fontWeight: FontWeight.bold));
                                         }
                                       } else {
-                                        return Text("Loading...");
+                                        return Text(language.loading);
                                       }
                                     }),
                                 Divider(thickness: 1,),
