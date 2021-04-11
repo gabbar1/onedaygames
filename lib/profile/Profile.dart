@@ -150,7 +150,7 @@ class MapScreenState extends State<Profile>
         centerTitle: true,
         backgroundColor: Colors.amber,
         title: Text(language.profile,
-            style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)),
+            style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline3,)),
       ),
       body: Consumer<API>(
         builder: (context, vm, child) {
@@ -230,7 +230,7 @@ class MapScreenState extends State<Profile>
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(top: 10),
+            padding: EdgeInsets.only(top: 15),
             margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -246,12 +246,12 @@ class MapScreenState extends State<Profile>
                       spreadRadius: 0.5,
                       offset: Offset(0, 1)),
                 ]),
-            height: 80,
+            height: 85,
             child: Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  SizedBox(width: 10,),
+                  SizedBox(width: 40,),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -303,6 +303,7 @@ class MapScreenState extends State<Profile>
                     ),
                   ),
                   Spacer(),
+                  SizedBox(width: 20,),
                   GestureDetector(onTap: () {
                     setState(() {
                       _status = false;
@@ -326,7 +327,7 @@ class MapScreenState extends State<Profile>
                       ],
                     ),
                   ),
-                  SizedBox(width: 10,)
+                  SizedBox(width: 50,)
                 ],
               ),
             ),

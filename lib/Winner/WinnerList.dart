@@ -44,7 +44,7 @@ class _WinnerListPageState extends State<WinnerList> {
       appBar: AppBar(
         backgroundColor: Colors.amber,
         title: Text(language.winners,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5)),
       ),
       body: FirebaseAnimatedList(
         // reverse: true,
@@ -57,8 +57,9 @@ class _WinnerListPageState extends State<WinnerList> {
           Map transaction = snapshot.value;
           return Container(
             child: Card(
-              margin: EdgeInsets.all(10),
-              elevation: 5,
+              margin: EdgeInsets.all(5),
+              elevation: 50,
+              shadowColor: Colors.lightBlueAccent,
               child: Column(
                 children: [
                   _buildTransactionItem(transaction: transaction),
@@ -66,14 +67,14 @@ class _WinnerListPageState extends State<WinnerList> {
                     child: Center(
                       child: _buildTransactionItem1(transaction: transaction),
                     ),
-                    height: queryData.size.height / 10,
+                    height: queryData.size.height / 8,
                     width: queryData.size.width,
-                    color: Colors.blue[100],
+                    color: Colors.amberAccent,
                   )
                 ],
               ),
             ),
-            height: 200,
+            height: 180,
 
           );
         },
@@ -128,16 +129,18 @@ class _WinnerListPageState extends State<WinnerList> {
                           fontWeight: FontWeight.bold))
                       : Text(username,
                       style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 25,
                           fontWeight: FontWeight.bold));
                 Map<dynamic, dynamic> data =
                     event.data.snapshot.value;
                 username = data['name'].toString();
                 return new Text(
                     data["name"].toString().toUpperCase(),
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold));
+                    style: GoogleFonts.barlowCondensed(
+                        textStyle: Theme.of(context).textTheme.headline5,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87));
               }),
         ],
       ),
@@ -157,20 +160,20 @@ class _WinnerListPageState extends State<WinnerList> {
                 language.rank,
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black12),
+                    fontSize: 20,
+                    //fontWeight: FontWeight.bold,
+                    color: Colors.black87),
               ),
               SizedBox(
-                height: 5,
+                height: 1,
               ),
               Text(
                 "#" + transaction["rank"].toString(),
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 15,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.black87),
               ),
             ],
           ),
@@ -181,24 +184,24 @@ class _WinnerListPageState extends State<WinnerList> {
                 language.won_amount,
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black12),
+                    fontSize: 20,
+                    //fontWeight: FontWeight.bold,
+                    color: Colors.black87),
               ),
               SizedBox(
-                height: 5,
+                height: 1,
               ),
               Text(
                 "₹" + transaction["price"].toString(),
                 style: GoogleFonts.barlowCondensed(
                     textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 15,
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black12),
+                    color: Colors.black87),
               ),
             ],
           ),
-          SizedBox(width: 10,)
+          SizedBox(width: 15,)
         ],
       ),
     );
