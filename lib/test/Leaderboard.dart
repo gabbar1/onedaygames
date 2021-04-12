@@ -120,18 +120,18 @@ class __LeaderboardState extends State<Leaderboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 20,
+                height: 25,
               ),
               Row(
                 children: [
                   SizedBox(
                     width: 20,
                   ),
-                  Text(language.winningPrice,style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4)),
+                  Text(language.winningPrice,style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize: 23, fontWeight: FontWeight.bold)),
                   Spacer(),
                   Text(
-                    language.entry,
-                    style: TextStyle(color: Colors.black54),
+                    language.entry
+                      ,style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,fontWeight: FontWeight.bold,fontSize: 23),
                   ),
                   SizedBox(
                     width: 20,
@@ -143,7 +143,7 @@ class __LeaderboardState extends State<Leaderboard> {
                   SizedBox(
                     width: 20,
                   ),
-                  Text(widget.price),
+                  Text(language.rupeesymbol+widget.price, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold, color: Colors.amber)),
                   Spacer(),
                   FlatButton(
                       color: Colors.green,
@@ -340,15 +340,19 @@ class __LeaderboardState extends State<Leaderboard> {
                           });
                         }
                       },
-                      child: (Text(
+                      child: (Text(language.rupeesymbol+
                         widget.amt,
-                        style: TextStyle(color: Colors.white),
+                          style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold),
                       ))),
                   SizedBox(
                     width: 10,
-                  )
-                ],
+
+                  ),
+
+                  ],
+
               ),
+              SizedBox(height: 10,),
               Container(
                 child: StepProgressIndicator(
                   totalSteps: 1,
@@ -368,15 +372,16 @@ class __LeaderboardState extends State<Leaderboard> {
                     end: Alignment.bottomRight,
                     colors: [Colors.white, Colors.white],
                   ),
+
                 ),
+
                 width: 395,
               ),
+              SizedBox(height: 15),
               Divider(
-                thickness: 2,
+                thickness: 2,color: Colors.black54
               ),
-              Divider(
-                thickness: 2,
-              ),
+
               ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
@@ -387,19 +392,22 @@ class __LeaderboardState extends State<Leaderboard> {
                     } else {
                       return Card(
                         margin: EdgeInsets.all(10),
+                          elevation: 24,
+                          shadowColor: Colors.lightBlue,
+                          //color: Colors.green,
                           child: Column(
                         children: [
                           SizedBox(height: 10,),
                           Row(
                             children: [
                               SizedBox(width: 10,),
-                              Text(" #" + index.toString() + " "+language.price_money),
+                              Text(" #" + index.toString() + " "+language.price_money,style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold, color: Colors.amber),),
                               Spacer(),
-                              Text(leader.leaderBoardList[index].winner_price.toString()),
+                              Text(leader.leaderBoardList[index].winner_price.toString(),style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:17, fontWeight: FontWeight.bold)),
                               SizedBox(width: 10,)
                             ],
                           ),
-                          Divider(),
+                          Divider(color: Colors.black54,),
                           Row(
                             children: [
                               SizedBox(
@@ -407,7 +415,7 @@ class __LeaderboardState extends State<Leaderboard> {
                               ),
                               Text(language.no_of_winners +
                                   leader.leaderBoardList[index].no_of_winners
-                                      .toString())
+                                      .toString(),style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:15, fontWeight: FontWeight.bold, color: Colors.black),),
                             ],
                           ),
                           SizedBox(height: 10,)
@@ -416,7 +424,7 @@ class __LeaderboardState extends State<Leaderboard> {
                     }
                   }),
               Divider(
-                thickness: 2,
+                thickness: 2, color: Colors.black54,
               )
             ],
           ))

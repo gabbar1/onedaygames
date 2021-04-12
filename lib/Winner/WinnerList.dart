@@ -67,7 +67,7 @@ class _WinnerListPageState extends State<WinnerList> {
                     child: Center(
                       child: _buildTransactionItem1(transaction: transaction),
                     ),
-                    height: queryData.size.height / 8,
+                    height: queryData.size.height / 7,
                     width: queryData.size.width,
                     color: Colors.amberAccent,
                   )
@@ -154,52 +154,56 @@ class _WinnerListPageState extends State<WinnerList> {
       child: Row(
         children: [
           SizedBox(width: 10,),
-          Column(
-            children: [
-              Text(
-                language.rank,
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 20,
-                    //fontWeight: FontWeight.bold,
-                    color: Colors.black87),
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Text(
-                "#" + transaction["rank"].toString(),
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87),
-              ),
-            ],
+          Container(
+            child: Column(
+              children: [
+                Text(
+                  language.rank,
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 20,
+                      //fontWeight: FontWeight.bold,
+                      color: Colors.black87),
+                ),
+                SizedBox(
+                  height: 1,
+                ),
+                Text(
+                  "#" + transaction["rank"].toString(),
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87),
+                ),
+              ],
+            ),
           ),
           Spacer(),
-          Column(
-            children: [
-              Text(
-                language.won_amount,
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 20,
-                    //fontWeight: FontWeight.bold,
-                    color: Colors.black87),
-              ),
-              SizedBox(
-                height: 1,
-              ),
-              Text(
-                "₹" + transaction["price"].toString(),
-                style: GoogleFonts.barlowCondensed(
-                    textStyle: Theme.of(context).textTheme.headline5,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  language.won_amount,
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 20,
+                      //fontWeight: FontWeight.bold,
+                      color: Colors.black87),
+                ),
+                SizedBox(
+                  height: 1,
+                ),
+                Text(
+                  "₹" + transaction["price"].toString(),
+                  style: GoogleFonts.barlowCondensed(
+                      textStyle: Theme.of(context).textTheme.headline5,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87),
+                ),
+              ],
+            ),
           ),
           SizedBox(width: 15,)
         ],

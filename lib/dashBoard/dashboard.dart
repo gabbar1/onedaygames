@@ -247,6 +247,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   topLeft: Radius.circular(10),
                 ),
               ),
+              elevation: 50, shadowColor: Colors.lightBlue,
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: Row(
@@ -278,7 +279,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                           Divider(
-                            thickness: 1,
+                            thickness: 1,color: Colors.black54,
                           ),
                           Row(
                             children: [
@@ -293,7 +294,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                               Spacer(),
                               RaisedButton(
-                                child: Text("₹ "+vm.daily_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:23, fontWeight: FontWeight.bold)),
+                                child: Text(language.rupeesymbol+vm.daily_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold)),
                                 color: Colors.green,
                                 onPressed: () {
                                   vm.comparetimeleft(
@@ -330,7 +331,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       index);
                                 },
                               )
-                            ],
+                              ,SizedBox(width: 5,),],
                           ),
                           StepProgressIndicator(
                             totalSteps: vm.daily_ticket[snapshot].people,
@@ -353,7 +354,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                           ),
                           Divider(
-                            thickness: 1,
+                            thickness: 1,color: Colors.black54,
                           ),
                           Row(
                             children: [
@@ -364,7 +365,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                      fontSize:16,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
-                            ],
+                              SizedBox(width: 5,),],
                           ),
                         ],
                       ),
@@ -423,7 +424,7 @@ class _DashboardPageState extends State<DashboardPage> {
        child: ListView.builder(
          itemCount: vm.monthly_ticket.length,
            shrinkWrap: true,
-         reverse: true,
+         //reverse: true,
          itemBuilder: (context, snapshot) {
            // print("-------------------------------------" +
            //      vm.monthly_ticket[snapshot].name);
@@ -439,8 +440,9 @@ class _DashboardPageState extends State<DashboardPage> {
                    topRight: Radius.circular(10),
                    bottomLeft: Radius.circular(10),
                    topLeft: Radius.circular(10),
-                 ),
-               ),
+                ),
+              ),
+elevation: 50, shadowColor: Colors.lightBlue,
                child: Padding(
                  padding: EdgeInsets.all(5),
                  child: Row(
@@ -474,10 +476,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                        return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
+                               //SizedBox(width: 5,),
                              ],
                            ),
                            Divider(
-                             thickness: 1,
+                             thickness: 1,color: Colors.black54,
                            ),
                            Row(
                              children: [
@@ -492,8 +495,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                ),
                                Spacer(),
                                RaisedButton(
-                                 child: Text(vm.monthly_ticket[snapshot].amount
-                                     .toString()),
+                                 child: Text(language.rupeesymbol+vm.monthly_ticket[snapshot].amount.toString(), style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold)),
                                  color: Colors.green,
                                  onPressed: () {
                                    vm.comparetimeleft(
@@ -533,7 +535,7 @@ class _DashboardPageState extends State<DashboardPage> {
                              ],
                            ),
                            Divider(
-                             thickness: 1,
+                             thickness: 1,color: Colors.black54,
                            ),
                            Row(
                              children: [
@@ -546,7 +548,8 @@ class _DashboardPageState extends State<DashboardPage> {
                                       fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
-                             ],
+                               //SizedBox(width: 5,),
+             ],
                            ),
                          ],
                        ),
@@ -601,7 +604,7 @@ class _DashboardPageState extends State<DashboardPage> {
      Provider.of<API>(context, listen: false).getWeeklyLottery(context: context );},
      child: ListView.builder(
          itemCount: vm.weekly_ticket.length,
-         reverse: true,
+         //reverse: true,
          shrinkWrap: true,
          itemBuilder: (context, snapshot) {
            return InkWell(
@@ -616,8 +619,9 @@ class _DashboardPageState extends State<DashboardPage> {
                    topRight: Radius.circular(10),
                    bottomLeft: Radius.circular(10),
                    topLeft: Radius.circular(10),
-                 ),
-               ),
+                ),
+              ),
+              elevation: 50, shadowColor: Colors.lightBlue,
                child: Padding(
                  padding: EdgeInsets.all(5),
                  child: Row(
@@ -651,10 +655,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                        return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                      }
                                    }),
-                             ],
+                       SizedBox(width: 5,),],
                            ),
                            Divider(
-                             thickness: 1,
+                             thickness: 1,color: Colors.black54,
                            ),
                            Row(
                              children: [
@@ -669,8 +673,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                ),
                                Spacer(),
                                RaisedButton(
-                                 child: Text(vm.weekly_ticket[snapshot].amount
-                                     .toString()),
+                                 child: Text(language.rupeesymbol+vm.weekly_ticket[snapshot].amount.toString(),style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold)),
                                  color: Colors.green,
                                  onPressed: () {
                                    vm.comparetimeleft(
@@ -710,7 +713,7 @@ class _DashboardPageState extends State<DashboardPage> {
                              ],
                            ),
                            Divider(
-                             thickness: 1,
+                             thickness: 1,color: Colors.black54,
                            ),
                            Row(
                              children: [
@@ -722,7 +725,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                       fontSize:16,
                                        fontWeight: FontWeight.bold)),
                                Spacer(),
-                             ],
+                               SizedBox(width: 5,),],
                            ),
                          ],
                        ),
@@ -779,7 +782,7 @@ class _DashboardPageState extends State<DashboardPage> {
         Provider.of<API>(context, listen: false).getSpecialLottery(context: context );},
         child: ListView.builder(
           itemCount: vm.special_ticket.length,
-          reverse: true,
+          //reverse: true,
             shrinkWrap: true,
           itemBuilder: (context, snapshot) {
             return InkWell(
@@ -794,8 +797,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     topRight: Radius.circular(10),
                     bottomLeft: Radius.circular(10),
                     topLeft: Radius.circular(10),
-                  ),
                 ),
+              ),
+elevation: 50, shadowColor: Colors.lightBlue,
                 child: Padding(
                   padding: EdgeInsets.all(5),
                   child: Row(
@@ -829,10 +833,10 @@ class _DashboardPageState extends State<DashboardPage> {
                                         return Text(language.loading, style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:16, fontWeight: FontWeight.bold));
                                       }
                                     }),
-                              ],
+                                SizedBox(width: 5,),],
                             ),
                             Divider(
-                              thickness: 1,
+                              thickness: 1,color: Colors.black54,
                             ),
                             Row(
                               children: [
@@ -847,8 +851,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                                 Spacer(),
                                 RaisedButton(
-                                  child: Text(vm.special_ticket[snapshot].amount
-                                      .toString()),
+                                  child: Text(language.rupeesymbol+vm.special_ticket[snapshot].amount.toString(),style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,fontSize:20, fontWeight: FontWeight.bold)),
                                   color: Colors.green,
                                   onPressed: () {
                                     vm.comparetimeleft(
@@ -888,20 +891,19 @@ class _DashboardPageState extends State<DashboardPage> {
                               ],
                             ),
                             Divider(
-                              thickness: 1,
+                              thickness: 1,color: Colors.black54,
                             ),
                             Row(
                               children: [
                                 Text(
-                                    (vm.special_ticket[snapshot].price)
-                                        .toString(),
+                                    (vm.special_ticket[snapshot].price).toString(),
                                     style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
                                        fontSize:16,
                                         fontWeight: FontWeight.bold)),
                                 Spacer(),
-                              ],
+                                SizedBox(width: 5,),],
                             ),
                           ],
                         ),
@@ -966,6 +968,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   topLeft: Radius.circular(10),
                 ),
               ),
+elevation: 50, shadowColor: Colors.lightBlue,
               child: Padding(
                 padding: EdgeInsets.all(5),
                 child: Row(
@@ -991,7 +994,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                           Divider(
-                            thickness: 1,
+                            thickness: 1,color: Colors.black54,
                           ),
                           Row(
                             children: [
@@ -1047,7 +1050,7 @@ class _DashboardPageState extends State<DashboardPage> {
                             ],
                           ),
                           Divider(
-                            thickness: 1,
+                            thickness: 1,color: Colors.black54,
                           ),
                           Row(
                             children: [
@@ -1058,7 +1061,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                      fontSize:16,
                                       fontWeight: FontWeight.bold)),
                               Spacer(),
-                            ],
+                              SizedBox(width: 5,),],
                           ),
                         ],
                       ),

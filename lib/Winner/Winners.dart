@@ -176,16 +176,16 @@ class _WinnerPageState  extends State<Winner>{
                                   Text(vm.daily_ticket[snapshot].name,style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.amberAccent)),
+                                      )),
                                   Spacer(),
                                   Text(vm.daily_ticket[snapshot].result_date.toString(),style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.amberAccent))
+                                      ))
                                   ,SizedBox(width: 5,),],),
                                 Divider(thickness: 1,color: Colors.black54,),
                                 Row(children: [
@@ -200,15 +200,15 @@ class _WinnerPageState  extends State<Winner>{
                                             return Text(language.Result_Announced,style: GoogleFonts.barlowCondensed(
                                                 textStyle:
                                                 Theme.of(context).textTheme.headline5,
-                                                fontSize: 22,
-                                                color: Colors.blueAccent,
+                                                fontSize: 20,
+                                                color: Colors.amber,
                                                 fontWeight: FontWeight.bold));
                                           } else {
                                             return Text(language.time_left+((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")+ "hrs",style: GoogleFonts.barlowCondensed(
                                                 textStyle:
                                                 Theme.of(context).textTheme.headline5,
-                                                fontSize: 22,
-                                                color: Colors.blueAccent,
+                                                fontSize: 20,
+                                                color: Colors.amber,
                                                 fontWeight: FontWeight.bold));
                                           }
                                         } else {
@@ -220,8 +220,8 @@ class _WinnerPageState  extends State<Winner>{
                                   Text(vm.daily_ticket[snapshot].type,style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline4,
-                                      fontSize: 22,
-                                      color: Colors.blueAccent,
+                                      fontSize: 20,
+                                      color: Colors.amber,
                                       fontWeight: FontWeight.bold)),
                                   SizedBox(width: 5,),],),
                                 Divider(thickness: 1,color: Colors.black54,),
@@ -252,9 +252,9 @@ class _WinnerPageState  extends State<Winner>{
                                   Text((vm.daily_ticket[snapshot].price).toString(),style: GoogleFonts.barlowCondensed(
                                       textStyle:
                                       Theme.of(context).textTheme.headline5,
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      backgroundColor: Colors.amberAccent)),
+                                      )),
                                   Spacer(),
                                 ],),
                               ],),
@@ -285,7 +285,7 @@ class _WinnerPageState  extends State<Winner>{
                               title: Text(language.not_announced_msg+' ',style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold)),
                               content: SingleChildScrollView(
                                 child: ListBody(
@@ -301,7 +301,7 @@ class _WinnerPageState  extends State<Winner>{
                                   child: Center(child: Text(language.ok,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold))),
                                   onPressed: () {
                                     Navigator.of(context).pop();
@@ -375,16 +375,16 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.monthly_ticket[snapshot].name,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                                 Text(vm.monthly_ticket[snapshot].result_date.toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent))
+                                    ))
                                 ,SizedBox(width: 5,), ],),
                               Divider(thickness: 1,color: Colors.black54,),
                               Row(children: [
@@ -399,16 +399,16 @@ class _WinnerPageState  extends State<Winner>{
                                           return Text(language.Result_Announced,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                              color: Colors.blueAccent));
+                                              color: Colors.amber));
                                         } else {
                                           return Text(language.time_left+((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")+ "hrs",style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                              color: Colors.blueAccent));
+                                              color: Colors.amber));
                                         }
                                       } else {
                                         return Text(language.loading);
@@ -419,9 +419,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.monthly_ticket[snapshot].type,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                    color: Colors.blueAccent,
+                                    color: Colors.amber,
                                 ),
                                 ),
                                 SizedBox(width: 5,),],),
@@ -453,9 +453,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text((vm.monthly_ticket[snapshot].price).toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                                 ],),
                             ],),
@@ -488,7 +488,7 @@ class _WinnerPageState  extends State<Winner>{
                                         Theme.of(context).textTheme.headline5,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                backgroundColor: Colors.amberAccent)),
+                                )),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
@@ -576,16 +576,16 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.weekly_ticket[snapshot].name,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                                 Text(vm.weekly_ticket[snapshot].result_date.toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent))
+                                    ))
                               ,SizedBox(width: 5,),],),
                               Divider(thickness: 1,color: Colors.black54,),
                               Row(children: [
@@ -600,16 +600,16 @@ class _WinnerPageState  extends State<Winner>{
                                           return Text(language.Result_Announced,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                              color: Colors.blueAccent));
+                                              color: Colors.amber));
                                         } else {
                                           return Text(language.time_left+((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")+ "hrs",style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                          color: Colors.blueAccent,
+                                          color: Colors.amber,
                                               ));
                                         }
                                       } else {
@@ -621,9 +621,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.weekly_ticket[snapshot].type,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                    color: Colors.blueAccent,
+                                    color: Colors.amber,
                                     )),
                                 SizedBox(width: 5,),],),
                               Divider(thickness: 1,color: Colors.black54,),
@@ -654,9 +654,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text((vm.weekly_ticket[snapshot].price).toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                                 ],),
                               ],),
@@ -776,16 +776,16 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.special_ticket[snapshot].name,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                                 Text(vm.special_ticket[snapshot].result_date.toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent),
+                                    ),
                                 )
                               ,SizedBox(width: 5,),],),
                               Divider(thickness: 1,color: Colors.black54,),
@@ -801,17 +801,17 @@ class _WinnerPageState  extends State<Winner>{
                                           return Text(language.Result_Announced,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                              color: Colors.blueAccent,
+                                              color: Colors.amber,
                                           ));
                                         } else {
                                           return Text(language.time_left+((vm.ticket_deadline1 / 3600).truncate().toString().padLeft(2,"0") + ":"+(((vm.ticket_deadline1 / 60).truncate() % 60).toString()).padLeft(2,"0")+":"+((vm.ticket_deadline1 % 60).toString())).padLeft(2,"0")+ "hrs",style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                              color: Colors.blueAccent));
+                                              color: Colors.amber));
                                         }
                                       } else {
                                         return Text(language.loading);
@@ -822,9 +822,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text(vm.special_ticket[snapshot].type,style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 22,
+                                        fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                color: Colors.blueAccent)),
+                                color: Colors.amber)),
                                 SizedBox(width: 5,),],),
                               Divider(thickness: 1,color: Colors.black54,),
                               StepProgressIndicator(
@@ -854,9 +854,9 @@ class _WinnerPageState  extends State<Winner>{
                                 Text((vm.special_ticket[snapshot].price).toString(),style: GoogleFonts.barlowCondensed(
                                         textStyle:
                                         Theme.of(context).textTheme.headline5,
-                                        fontSize: 18,
+                                        fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                    backgroundColor: Colors.amberAccent)),
+                                    )),
                                 Spacer(),
                               ],),
                             ],),

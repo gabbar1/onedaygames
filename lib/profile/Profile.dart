@@ -150,7 +150,7 @@ class MapScreenState extends State<Profile>
         centerTitle: true,
         backgroundColor: Colors.amber,
         title: Text(language.profile,
-            style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline3,)),
+            style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline4,)),
       ),
       body: Consumer<API>(
         builder: (context, vm, child) {
@@ -169,30 +169,33 @@ class MapScreenState extends State<Profile>
                       width: MediaQuery.of(context).size.width,
                       height: 200,
                       color: Colors.amber,
-                      child: Column(
-                        children: [
-                          _profile(),
-                          Visibility(
-                            child: RaisedButton(
-                              child: Text(language.upload,
-                                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15, fontWeight: FontWeight.bold)),
-                              color: Colors.yellow[600],
-                              onPressed: () {
-                                _visible = false;
-                                uploadPic(context)
-                                    .then((value) => {vm.userDetail(uid)});
-                              },
+                      child: Expanded(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10,),
+                            _profile(),
+                            Visibility(
+                              child: RaisedButton(
+                                child: Text(language.upload,
+                                    style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15, fontWeight: FontWeight.bold)),
+                                color: Colors.yellow[600],
+                                onPressed: () {
+                                  _visible = false;
+                                  uploadPic(context)
+                                      .then((value) => {vm.userDetail(uid)});
+                                },
+                              ),
+                              visible: _visible,
                             ),
-                            visible: _visible,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              vm.username == null ? "My Name" : vm.username,
-                              style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                vm.username == null ? "My Name" : vm.username,
+                                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )),
                   SingleChildScrollView(
                     child: Container(
@@ -252,29 +255,33 @@ class MapScreenState extends State<Profile>
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   SizedBox(width: 40,),
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => WalletPage()),
                       );
                     },
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          height: 30,
-                          width: 30,
-                          child: SvgPicture.asset("assets/icons/wallet.svg"),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(language.wallet,
-                            style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold))
-                      ],
+                    child: Container(
+
+
+                      child: Column(
+                        children: <Widget>[
+                          Container(
+                            height: 30,
+                            width: 30,
+                            child: SvgPicture.asset("assets/icons/wallet.svg"),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(language.wallet,
+                              style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:20, fontWeight: FontWeight.bold))
+                        ],
+                      ),
                     ),
                   ),
                   Spacer(),
-                  GestureDetector(onTap: () {
+                  InkWell(onTap: () {
                     AuthService().signOut();
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.pushAndRemoveUntil(
@@ -286,13 +293,10 @@ class MapScreenState extends State<Profile>
                   },
                     child: Column(
                       children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            child: SvgPicture.asset("assets/icons/logout.svg"),
-                          ),
-
+                        Container(
+                          height: 30,
+                          width: 30,
+                          child: SvgPicture.asset("assets/icons/logout.svg"),
                         ),
                         SizedBox(
                           height: 5,
@@ -304,20 +308,17 @@ class MapScreenState extends State<Profile>
                   ),
                   Spacer(),
                   SizedBox(width: 20,),
-                  GestureDetector(onTap: () {
+                  InkWell(onTap: () {
                     setState(() {
                       _status = false;
                     });
                   },
                     child: Column(
                       children: <Widget>[
-                        InkWell(
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            child: SvgPicture.asset("assets/icons/edit.svg"),
-                          ),
-
+                        Container(
+                          height: 30,
+                          width: 30,
+                          child: SvgPicture.asset("assets/icons/edit.svg"),
                         ),
                         SizedBox(
                           height: 5,
