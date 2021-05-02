@@ -84,6 +84,7 @@ class MapScreenState extends State<RegisterPage>
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
                 ],
+                maxLength: 10,
                 decoration: const InputDecoration(
                   hintText: "Enter Mobile Number"),
                 style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline6,),

@@ -106,13 +106,12 @@ class RegisterProvider extends ChangeNotifier{
         //8160137998
       )).then((value) =>  {
        // Navigator.of(context).pop(),
-
-        Navigator.of(context).pop(),
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          updateDetail();
-          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
-              HomeNavigator()), (Route<dynamic> route) => false);
-        })
+        if(FirebaseAuth.instance.onAuthStateChanged.isEmpty != null){
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+                HomeNavigator()), (Route<dynamic> route) => false);
+          })
+        }
 
 
       });

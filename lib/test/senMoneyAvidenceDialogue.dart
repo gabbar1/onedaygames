@@ -173,7 +173,7 @@ class SendMoneyEvidenceDialogue_State extends State<SendMoneyEvidenceDialogue> {
                               ),
                               SizedBox(height: 25,),
                               Center(child: InkWell(child: Container(decoration: BoxDecoration(
-                                color: Colors.amber[700],
+                                color: Colors.amberAccent,
                                 borderRadius: BorderRadius.circular(10),
                               ),width: MediaQuery.of(context).size.width/2.5,height: 50,child: Center(child: Text(widget.addMoneyLang),),),onTap: (){
 

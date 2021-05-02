@@ -162,7 +162,7 @@ class MapScreenState extends State<OtpVerification>
                             new Flexible(
 
                               child: new TextField(
-
+                                maxLength: 6,
                                 decoration: const InputDecoration(
 
                                     hintText: "Enter OTP"),

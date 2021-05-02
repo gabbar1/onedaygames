@@ -45,11 +45,13 @@ class LoginProvider extends ChangeNotifier{
     var language = Provider.of<Language>(context, listen: false);
     var snapshot = await DBRef.child("Users").once();
     if(snapshot.value.toString().contains(phoneNo)){
-      verifyPhone(phoneNo);
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return OtpVerification();
-          }));
+      verifyPhone(phoneNo).whenComplete((){
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return OtpVerification();
+            }));
+      });
+
     }
     else{
       scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(language.userreg,style:GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,)),backgroundColor: Colors.amber,));
@@ -67,12 +69,29 @@ class LoginProvider extends ChangeNotifier{
         verificationId: verficationId,
         smsCode: otp,
       )).then((value) => {
-        Navigator.of(context).pop(),
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+       // Navigator.of(context).pop(),
+        if(FirebaseAuth.instance.onAuthStateChanged.isEmpty != null){
+            WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
       HomeNavigator()), (Route<dynamic> route) => false);
       })
-
+        }
+      /*  StreamBuilder( stream: FirebaseAuth.instance.onAuthStateChanged,builder:(BuildContext context,spanshot){
+          if(spanshot.hasData){
+            print("-------------------------logedin");
+            print(spanshot.data);
+            return HomeNavigator();
+          }else{
+            print("-------------------------logedinNot");
+            print(spanshot.data);
+            return Text("Loading");
+          }
+        },),*/
+    /*  WidgetsBinding.instance.addPostFrameCallback((_) {
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>
+      HomeNavigator()), (Route<dynamic> route) => false);
+      })
+*/
       });
 
       //Navigator.pop(context);

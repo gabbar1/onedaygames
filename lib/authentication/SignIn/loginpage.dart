@@ -95,7 +95,7 @@ class MapScreenState extends State<LoginPage>
                     left: 25.0, right: 25.0, top: 8.0),
                 child:
                 new TextField(
-
+                  maxLength: 10,
                   decoration: const InputDecoration(
 
                       hintText: "Enter Mobile Number"),

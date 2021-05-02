@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_local_notifications_platform_interface/src/notification_app_launch_details.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:oneday/Language/Language.dart';
@@ -169,33 +168,31 @@ class MapScreenState extends State<Profile>
                       width: MediaQuery.of(context).size.width,
                       height: 200,
                       color: Colors.amber,
-                      child: Expanded(
-                        child: Column(
-                          children: [
-                            SizedBox(height: 10,),
-                            _profile(),
-                            Visibility(
-                              child: RaisedButton(
-                                child: Text(language.upload,
-                                    style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15, fontWeight: FontWeight.bold)),
-                                color: Colors.yellow[600],
-                                onPressed: () {
-                                  _visible = false;
-                                  uploadPic(context)
-                                      .then((value) => {vm.userDetail(uid)});
-                                },
-                              ),
-                              visible: _visible,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10,),
+                          _profile(),
+                          Visibility(
+                            child: RaisedButton(
+                              child: Text(language.upload,
+                                  style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:15, fontWeight: FontWeight.bold)),
+                              color: Colors.yellow[600],
+                              onPressed: () {
+                                _visible = false;
+                                uploadPic(context)
+                                    .then((value) => {vm.userDetail(uid)});
+                              },
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                vm.username == null ? "My Name" : vm.username,
-                                style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold),
-                              ),
+                            visible: _visible,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              vm.username == null ? "My Name" : vm.username,
+                              style: GoogleFonts.barlowCondensed(textStyle: Theme.of(context).textTheme.headline5,fontSize:30, fontWeight: FontWeight.bold),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       )),
                   SingleChildScrollView(
                     child: Container(

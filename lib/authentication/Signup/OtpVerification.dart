@@ -128,6 +128,7 @@ class MapScreenState extends State<OtpVerification>
                         children: <Widget>[
                           Flexible(
                             child: TextField(
+                              maxLength: 6,
                               decoration: const InputDecoration(
                                   hintText: "Enter OTP"),
                               keyboardType: TextInputType.phone,

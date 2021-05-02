@@ -97,7 +97,7 @@ class RedeemDialogue_State extends State<RedeemDialogue> {
                                 child: InkWell(
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: Colors.amber[700],
+                                      color: Colors.amberAccent,
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     width:

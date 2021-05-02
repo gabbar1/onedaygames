@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ import 'package:oneday/ticket/ticketProvider.dart';
 import 'package:oneday/wallet/walletPageProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:splashscreen/splashscreen.dart';
-
 import 'dashBoard/API.dart';
 import 'myLotteries/myLotteriesProvider.dart';
 import 'services/authservice.dart';
@@ -65,8 +63,11 @@ class _MyAppState extends State<MyApp> {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
   @override
   void initState() {
+    super.initState();
+
     var android = new AndroidInitializationSettings('mipmap/ic_launcher');
     var ios = new IOSInitializationSettings();
     var platform = new InitializationSettings(android: android, iOS: ios);
@@ -90,7 +91,9 @@ class _MyAppState extends State<MyApp> {
     _firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, badge: true, alert: true));
 
-    super.initState();
+
+
+
   }
   showNotification({var title,body}) async {
 print("0000000000000000"+title.toString());
@@ -107,6 +110,7 @@ print("0000000000000000"+title.toString());
 
   @override
   Widget build(BuildContext context) {
+
     return new SplashScreen(seconds: 1,
       navigateAfterSeconds:  AuthService().handleAuth(),
       title: new Text('Welcome to OneDay',
