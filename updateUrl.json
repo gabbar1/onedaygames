@@ -1,0 +1,12 @@
+{
+  "Code": 0,
+  "Msg": "",
+  "UpdateStatus": 2,
+  "VersionCode": 3,
+  "VersionName": "1.0.2",
+  "UploadTime": "2018-07-10 17:28:41",
+  "ModifyContent": "\r\n1. Optimize the api interface. \r\n2, add a demo demonstration. \r\n3. Added custom update service API interface. \r\n4. Optimize the update prompt interface.",
+  "DownloadUrl": "https://onedaygames.in/apk/app.apk",
+  "ApkSize": 4096,
+  "ApkMd5": "E4B79A36EFB9F17DF7E3BB161F9BCFD8"
+}
